@@ -65,15 +65,15 @@ class Backup extends Command
       'role_menu' => [
         'role_menu',
       ],
-      // 'siswa_tagihan' => [
-      //   'siswa_tagihan',
-      // ],
-      // 'categories' => [
-      //   'categories',
-      // ],
-      // 'histories' => [
-      //   'histories',
-      // ],
+      'jenis_kendaraans' => [
+        'jenis_kendaraans',
+      ],
+      'posisis' => [
+        'posisis',
+      ],
+      'karyawans' => [
+        'karyawans',
+      ],
       // 'kelas' => [
       //   'kelas',
       // ],

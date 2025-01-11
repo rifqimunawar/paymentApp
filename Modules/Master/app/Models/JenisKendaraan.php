@@ -4,19 +4,13 @@ namespace Modules\Master\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-// use Modules\Master\Database\Factories\JenisKendaraanFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Jenis_Kendaraan extends Model
+
+class JenisKendaraan extends Model
 {
-    use HasFactory;
+  use HasFactory, SoftDeletes;
 
-    /**
-     * The attributes that are mass assignable.
-     */
-    protected $fillable = [];
+  protected $guarded = [];
 
-    // protected static function newFactory(): JenisKendaraanFactory
-    // {
-    //     // return JenisKendaraanFactory::new();
-    // }
 }

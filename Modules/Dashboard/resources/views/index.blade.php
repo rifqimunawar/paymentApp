@@ -85,6 +85,7 @@
                     <div id="interactive-chart" class="h-300px"></div>
                 </div>
             </div>
+            <p>{{ $imagickStatus }}</p>
             <!-- END panel -->
         </div>
     </div>

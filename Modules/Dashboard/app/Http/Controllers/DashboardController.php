@@ -11,7 +11,10 @@ class DashboardController extends Controller
 
   public function index()
   {
-    Fungsi::hakAkses('/');
-    return view('dashboard::index');
+    $imagickStatus = extension_loaded('imagick')
+      ? "Imagick extension is installed and enabled!"
+      : "Imagick extension is not enabled.";
+
+    return view('dashboard::index', compact('imagickStatus'));
   }
 }

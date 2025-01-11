@@ -4,5 +4,6 @@
     "Auth": true,
     "Dashboard": true,
     "Profile": true,
-    "Master": true
+    "Master": true,
+    "Register": true
 }
