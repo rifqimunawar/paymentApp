@@ -101,53 +101,13 @@ class RoleMenuTableSeeder extends Seeder
             ),
             10 => 
             array (
-                'id' => 35,
-                'role_id' => 2,
-                'menu_id' => 9,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            11 => 
-            array (
-                'id' => 36,
-                'role_id' => 2,
-                'menu_id' => 10,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            12 => 
-            array (
-                'id' => 37,
-                'role_id' => 2,
-                'menu_id' => 11,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            13 => 
-            array (
                 'id' => 38,
                 'role_id' => 2,
                 'menu_id' => 12,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            14 => 
-            array (
-                'id' => 39,
-                'role_id' => 2,
-                'menu_id' => 13,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            15 => 
-            array (
-                'id' => 40,
-                'role_id' => 2,
-                'menu_id' => 14,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            16 => 
+            11 => 
             array (
                 'id' => 41,
                 'role_id' => 2,
@@ -155,15 +115,7 @@ class RoleMenuTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            17 => 
-            array (
-                'id' => 42,
-                'role_id' => 2,
-                'menu_id' => 16,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            18 => 
+            12 => 
             array (
                 'id' => 43,
                 'role_id' => 2,
@@ -171,11 +123,67 @@ class RoleMenuTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            19 => 
+            13 => 
             array (
                 'id' => 44,
                 'role_id' => 2,
                 'menu_id' => 18,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            14 => 
+            array (
+                'id' => 47,
+                'role_id' => 2,
+                'menu_id' => 21,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            15 => 
+            array (
+                'id' => 48,
+                'role_id' => 2,
+                'menu_id' => 22,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            16 => 
+            array (
+                'id' => 49,
+                'role_id' => 2,
+                'menu_id' => 19,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            17 => 
+            array (
+                'id' => 50,
+                'role_id' => 2,
+                'menu_id' => 20,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            18 => 
+            array (
+                'id' => 51,
+                'role_id' => 2,
+                'menu_id' => 23,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            19 => 
+            array (
+                'id' => 52,
+                'role_id' => 2,
+                'menu_id' => 24,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            20 => 
+            array (
+                'id' => 53,
+                'role_id' => 2,
+                'menu_id' => 25,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),

@@ -5,5 +5,7 @@
     "Dashboard": true,
     "Profile": true,
     "Master": true,
-    "Register": true
+    "Register": true,
+    "Tagihan": true,
+    "Ronda": true
 }

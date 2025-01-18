@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Master\Http\Controllers\JenisKendaraanController;
 use Modules\Master\Http\Controllers\KaryawanController;
+use Modules\Master\Http\Controllers\PeriodeController;
 use Modules\Master\Http\Controllers\PosisiController;
 use Modules\Master\Http\Controllers\WargaController;
 
@@ -60,4 +61,14 @@ Route::prefix('master')->middleware('auth')->group(function () {
   Route::get('/warga/{id}', [WargaController::class, 'edit'])->name('warga.edit');
   Route::get('/warga/{id}/view', [WargaController::class, 'view'])->name('warga.view');
   Route::delete('/warga/{id}/del', [WargaController::class, 'destroy'])->name('warga.destroy');
+
+  Route::get('/periode', [PeriodeController::class, 'index'])->name('periode.index');
+  Route::get('/periode/create', [PeriodeController::class, 'create'])->name('periode.create');
+  Route::get('/periode/export', [PeriodeController::class, 'export'])->name('periode.export');
+  Route::get('/periode/pdf', [PeriodeController::class, 'pdf'])->name('periode.pdf');
+  Route::get('/periode/print', [PeriodeController::class, 'print'])->name('periode.print');
+  Route::post('/periode/store', [PeriodeController::class, 'store'])->name('periode.store');
+  Route::get('/periode/{id}', [PeriodeController::class, 'edit'])->name('periode.edit');
+  Route::get('/periode/{id}/view', [PeriodeController::class, 'view'])->name('periode.view');
+  Route::delete('/periode/{id}/del', [PeriodeController::class, 'destroy'])->name('periode.destroy');
 });

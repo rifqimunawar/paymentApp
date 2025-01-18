@@ -22,5 +22,9 @@ class DatabaseSeeder extends Seeder
       $this->call(PosisisTableSeeder::class);
         $this->call(KaryawansTableSeeder::class);
         $this->call(WargasTableSeeder::class);
+        $this->call(PeriodesTableSeeder::class);
+        $this->call(UmumsTableSeeder::class);
+        $this->call(PamsTableSeeder::class);
+        $this->call(RondasTableSeeder::class);
     }
 }

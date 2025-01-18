@@ -1,6 +1,6 @@
 @php
-    $getWebName = App\Helpers\GetSettings::getNamaWeb();
-    $getLogo = App\Helpers\GetSettings::getLogo();
+  $getWebName = App\Helpers\GetSettings::getNamaWeb();
+  $getLogo = App\Helpers\GetSettings::getLogo();
 @endphp
 <meta charset="utf-8" />
 <title>{{ $getWebName }} | @yield('title')</title>
@@ -18,7 +18,7 @@
 <!-- ================== BEGIN page-css ================== -->
 <link href="{{ asset('assets/plugins/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
 <link href="{{ asset('assets/plugins/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css') }}"
-    rel="stylesheet" />
+  rel="stylesheet" />
 <link href="{{ asset('assets/plugins/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet" />
 <link href="{{ asset('assets/plugins/select2/dist/css/select2.min.css') }}" rel="stylesheet" />
 <link href="{{ asset('assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css') }}" rel="stylesheet" />

@@ -77,6 +77,18 @@ class Backup extends Command
       'wargas' => [
         'wargas',
       ],
+      'periodes' => [
+        'periodes',
+      ],
+      'umums' => [
+        'umums',
+      ],
+      'pams' => [
+        'pams',
+      ],
+      'rondas' => [
+        'rondas',
+      ],
 
     ];
     if ($opt_users == 1 || $arg_type == 'users')
