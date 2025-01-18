@@ -141,9 +141,9 @@ class MenusTableSeeder extends Seeder
                 'caret' => 0,
                 'aktif' => 1,
                 'parent_id' => NULL,
-                'deleted_at' => '2025-01-18 19:50:22',
+                'deleted_at' => NULL,
                 'created_at' => '2024-12-21 15:48:01',
-                'updated_at' => '2025-01-18 19:50:22',
+                'updated_at' => '2024-12-21 17:08:34',
             ),
             9 => 
             array (
@@ -155,9 +155,9 @@ class MenusTableSeeder extends Seeder
                 'caret' => 0,
                 'aktif' => 1,
                 'parent_id' => NULL,
-                'deleted_at' => '2025-01-18 19:50:08',
+                'deleted_at' => NULL,
                 'created_at' => '2024-12-21 17:09:35',
-                'updated_at' => '2025-01-18 19:50:08',
+                'updated_at' => '2024-12-21 17:10:07',
             ),
             10 => 
             array (
@@ -169,9 +169,9 @@ class MenusTableSeeder extends Seeder
                 'caret' => 0,
                 'aktif' => 1,
                 'parent_id' => 7,
-                'deleted_at' => '2025-01-18 19:51:01',
+                'deleted_at' => NULL,
                 'created_at' => '2024-12-21 17:24:36',
-                'updated_at' => '2025-01-18 19:51:01',
+                'updated_at' => '2024-12-21 17:24:36',
             ),
             11 => 
             array (
@@ -197,9 +197,9 @@ class MenusTableSeeder extends Seeder
                 'caret' => 0,
                 'aktif' => 1,
                 'parent_id' => 7,
-                'deleted_at' => '2025-01-18 19:50:54',
+                'deleted_at' => NULL,
                 'created_at' => '2024-12-22 02:23:36',
-                'updated_at' => '2025-01-18 19:50:54',
+                'updated_at' => '2024-12-22 02:23:36',
             ),
             13 => 
             array (
@@ -211,9 +211,9 @@ class MenusTableSeeder extends Seeder
                 'caret' => 0,
                 'aktif' => 1,
                 'parent_id' => 7,
-                'deleted_at' => '2025-01-18 19:50:38',
+                'deleted_at' => NULL,
                 'created_at' => '2024-12-22 03:15:36',
-                'updated_at' => '2025-01-18 19:50:38',
+                'updated_at' => '2024-12-22 03:15:36',
             ),
             14 => 
             array (
@@ -228,48 +228,6 @@ class MenusTableSeeder extends Seeder
                 'deleted_at' => NULL,
                 'created_at' => '2025-01-17 11:11:15',
                 'updated_at' => '2025-01-17 11:15:32',
-            ),
-            15 => 
-            array (
-                'id' => 16,
-                'title' => 'Data Tagihan',
-                'url' => '/master/tagihan',
-                'route-name' => NULL,
-                'icon' => NULL,
-                'caret' => 0,
-                'aktif' => 1,
-                'parent_id' => 7,
-                'deleted_at' => NULL,
-                'created_at' => '2025-01-18 19:47:22',
-                'updated_at' => '2025-01-18 19:47:22',
-            ),
-            16 => 
-            array (
-                'id' => 17,
-                'title' => 'Kategori Tagihan',
-                'url' => '/master/kategori_tagihan',
-                'route-name' => NULL,
-                'icon' => NULL,
-                'caret' => 0,
-                'aktif' => 1,
-                'parent_id' => 7,
-                'deleted_at' => NULL,
-                'created_at' => '2025-01-18 19:48:07',
-                'updated_at' => '2025-01-18 19:48:07',
-            ),
-            17 => 
-            array (
-                'id' => 18,
-                'title' => 'Ronda',
-                'url' => '/ronda',
-                'route-name' => NULL,
-                'icon' => 'fa fa-shield',
-                'caret' => 0,
-                'aktif' => 1,
-                'parent_id' => NULL,
-                'deleted_at' => NULL,
-                'created_at' => '2025-01-18 19:49:04',
-                'updated_at' => '2025-01-18 19:49:04',
             ),
         ));
         

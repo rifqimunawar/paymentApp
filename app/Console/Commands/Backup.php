@@ -74,9 +74,9 @@ class Backup extends Command
       'karyawans' => [
         'karyawans',
       ],
-      // 'kelas' => [
-      //   'kelas',
-      // ],
+      'wargas' => [
+        'wargas',
+      ],
 
     ];
     if ($opt_users == 1 || $arg_type == 'users')

@@ -22,12 +22,12 @@ class SettingsTableSeeder extends Seeder
             0 => 
             array (
                 'id' => 1,
-                'name' => 'Payment App',
-                'alamat' => 'Bekasi',
-                'email' => 'info@technoart.id',
+                'name' => 'RSU UMC Cirebon',
+                'alamat' => 'Kp. Tonjong RT 008 RW 004, Ds. Sukaragame',
+                'email' => 'rsuumc@gmail.com',
                 'phone' => '085161145097',
                 'base_url' => 'http://127.0.0.1:8000/',
-                'logo' => 'logo_-1736570481.png',
+                'logo' => 'logo_-1734803585.png',
                 'favicon' => NULL,
                 'description' => NULL,
                 'social_facebook' => NULL,
@@ -35,7 +35,7 @@ class SettingsTableSeeder extends Seeder
                 'social_instagram' => NULL,
                 'deleted_at' => NULL,
                 'created_at' => NULL,
-                'updated_at' => '2025-01-11 11:42:49',
+                'updated_at' => '2024-12-21 17:53:05',
             ),
         ));
         

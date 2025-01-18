@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Modules\Master\Http\Controllers\JenisKendaraanController;
 use Modules\Master\Http\Controllers\KaryawanController;
 use Modules\Master\Http\Controllers\PosisiController;
+use Modules\Master\Http\Controllers\WargaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,4 +50,14 @@ Route::prefix('master')->middleware('auth')->group(function () {
   Route::get('/karyawan/{id}/view', [KaryawanController::class, 'view'])->name('karyawan.view');
   Route::put('/karyawan/{id}', [KaryawanController::class, 'update'])->name('karyawan.update');
   Route::delete('/karyawan/{id}/del', [KaryawanController::class, 'destroy'])->name('karyawan.destroy');
+
+  Route::get('/warga', [WargaController::class, 'index'])->name('warga.index');
+  Route::get('/warga/create', [WargaController::class, 'create'])->name('warga.create');
+  Route::get('/warga/export', [WargaController::class, 'export'])->name('warga.export');
+  Route::get('/warga/pdf', [WargaController::class, 'pdf'])->name('warga.pdf');
+  Route::get('/warga/print', [WargaController::class, 'print'])->name('warga.print');
+  Route::post('/warga/store', [WargaController::class, 'store'])->name('warga.store');
+  Route::get('/warga/{id}', [WargaController::class, 'edit'])->name('warga.edit');
+  Route::get('/warga/{id}/view', [WargaController::class, 'view'])->name('warga.view');
+  Route::delete('/warga/{id}/del', [WargaController::class, 'destroy'])->name('warga.destroy');
 });

@@ -147,38 +147,6 @@ class RoleMenuTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            16 => 
-            array (
-                'id' => 41,
-                'role_id' => 2,
-                'menu_id' => 15,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            17 => 
-            array (
-                'id' => 42,
-                'role_id' => 2,
-                'menu_id' => 16,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            18 => 
-            array (
-                'id' => 43,
-                'role_id' => 2,
-                'menu_id' => 17,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            19 => 
-            array (
-                'id' => 44,
-                'role_id' => 2,
-                'menu_id' => 18,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
         ));
         
         

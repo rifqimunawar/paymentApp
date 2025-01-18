@@ -161,10 +161,6 @@ class ComposerStaticInit4cbdbe8d6ef9005b6c72afa8ef166f5c
             'Modules\\Register\\Database\\Seeders\\' => 34,
             'Modules\\Register\\Database\\Factories\\' => 36,
             'Modules\\Register\\' => 17,
-            'Modules\\ReactModule\\Tests\\' => 26,
-            'Modules\\ReactModule\\Database\\Seeders\\' => 37,
-            'Modules\\ReactModule\\Database\\Factories\\' => 39,
-            'Modules\\ReactModule\\' => 20,
             'Modules\\Profile\\Tests\\' => 22,
             'Modules\\Profile\\Database\\Seeders\\' => 33,
             'Modules\\Profile\\Database\\Factories\\' => 35,
@@ -570,22 +566,6 @@ class ComposerStaticInit4cbdbe8d6ef9005b6c72afa8ef166f5c
         'Modules\\Register\\' => 
         array (
             0 => __DIR__ . '/../..' . '/Modules/Register/app',
-        ),
-        'Modules\\ReactModule\\Tests\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/Modules/ReactModule/tests',
-        ),
-        'Modules\\ReactModule\\Database\\Seeders\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/Modules/ReactModule/database/seeders',
-        ),
-        'Modules\\ReactModule\\Database\\Factories\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/Modules/ReactModule/database/factories',
-        ),
-        'Modules\\ReactModule\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/Modules/ReactModule/app',
         ),
         'Modules\\Profile\\Tests\\' => 
         array (
@@ -993,6 +973,7 @@ class ComposerStaticInit4cbdbe8d6ef9005b6c72afa8ef166f5c
         'Database\\Seeders\\RolesTableSeeder' => __DIR__ . '/../..' . '/database/seeders/RolesTableSeeder.php',
         'Database\\Seeders\\SettingsTableSeeder' => __DIR__ . '/../..' . '/database/seeders/SettingsTableSeeder.php',
         'Database\\Seeders\\UsersTableSeeder' => __DIR__ . '/../..' . '/database/seeders/UsersTableSeeder.php',
+        'Database\\Seeders\\WargasTableSeeder' => __DIR__ . '/../..' . '/database/seeders/WargasTableSeeder.php',
         'DateError' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateError.php',
         'DateException' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateException.php',
         'DateInvalidOperationException' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateInvalidOperationException.php',
@@ -4262,16 +4243,20 @@ class ComposerStaticInit4cbdbe8d6ef9005b6c72afa8ef166f5c
         'Modules\\Master\\Database\\Seeders\\KaryawanSeeder' => __DIR__ . '/../..' . '/Modules/Master/database/seeders/KaryawanSeeder.php',
         'Modules\\Master\\Database\\Seeders\\MasterDatabaseSeeder' => __DIR__ . '/../..' . '/Modules/Master/database/seeders/MasterDatabaseSeeder.php',
         'Modules\\Master\\Database\\Seeders\\PosisiSeeder' => __DIR__ . '/../..' . '/Modules/Master/database/seeders/PosisiSeeder.php',
+        'Modules\\Master\\Database\\Seeders\\WargaSeeder' => __DIR__ . '/../..' . '/Modules/Master/database/seeders/WargaSeeder.php',
         'Modules\\Master\\Exports\\JenisKendaraanExport' => __DIR__ . '/../..' . '/Modules/Master/app/Exports/JenisKendaraanExport.php',
         'Modules\\Master\\Exports\\KaryawanExport' => __DIR__ . '/../..' . '/Modules/Master/app/Exports/KaryawanExport.php',
         'Modules\\Master\\Exports\\PosisiExport' => __DIR__ . '/../..' . '/Modules/Master/app/Exports/PosisiExport.php',
+        'Modules\\Master\\Exports\\WargaExport' => __DIR__ . '/../..' . '/Modules/Master/app/Exports/WargaExport.php',
         'Modules\\Master\\Http\\Controllers\\JenisKendaraanController' => __DIR__ . '/../..' . '/Modules/Master/app/Http/Controllers/JenisKendaraanController.php',
         'Modules\\Master\\Http\\Controllers\\KaryawanController' => __DIR__ . '/../..' . '/Modules/Master/app/Http/Controllers/KaryawanController.php',
         'Modules\\Master\\Http\\Controllers\\MasterController' => __DIR__ . '/../..' . '/Modules/Master/app/Http/Controllers/MasterController.php',
         'Modules\\Master\\Http\\Controllers\\PosisiController' => __DIR__ . '/../..' . '/Modules/Master/app/Http/Controllers/PosisiController.php',
+        'Modules\\Master\\Http\\Controllers\\WargaController' => __DIR__ . '/../..' . '/Modules/Master/app/Http/Controllers/WargaController.php',
         'Modules\\Master\\Models\\JenisKendaraan' => __DIR__ . '/../..' . '/Modules/Master/app/Models/JenisKendaraan.php',
         'Modules\\Master\\Models\\Karyawan' => __DIR__ . '/../..' . '/Modules/Master/app/Models/Karyawan.php',
         'Modules\\Master\\Models\\Posisi' => __DIR__ . '/../..' . '/Modules/Master/app/Models/Posisi.php',
+        'Modules\\Master\\Models\\Warga' => __DIR__ . '/../..' . '/Modules/Master/app/Models/Warga.php',
         'Modules\\Master\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/Modules/Master/app/Providers/EventServiceProvider.php',
         'Modules\\Master\\Providers\\MasterServiceProvider' => __DIR__ . '/../..' . '/Modules/Master/app/Providers/MasterServiceProvider.php',
         'Modules\\Master\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/Modules/Master/app/Providers/RouteServiceProvider.php',
@@ -4280,11 +4265,6 @@ class ComposerStaticInit4cbdbe8d6ef9005b6c72afa8ef166f5c
         'Modules\\Profile\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/Modules/Profile/app/Providers/EventServiceProvider.php',
         'Modules\\Profile\\Providers\\ProfileServiceProvider' => __DIR__ . '/../..' . '/Modules/Profile/app/Providers/ProfileServiceProvider.php',
         'Modules\\Profile\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/Modules/Profile/app/Providers/RouteServiceProvider.php',
-        'Modules\\ReactModule\\Database\\Seeders\\ReactModuleDatabaseSeeder' => __DIR__ . '/../..' . '/Modules/ReactModule/database/seeders/ReactModuleDatabaseSeeder.php',
-        'Modules\\ReactModule\\Http\\Controllers\\ReactModuleController' => __DIR__ . '/../..' . '/Modules/ReactModule/app/Http/Controllers/ReactModuleController.php',
-        'Modules\\ReactModule\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/Modules/ReactModule/app/Providers/EventServiceProvider.php',
-        'Modules\\ReactModule\\Providers\\ReactModuleServiceProvider' => __DIR__ . '/../..' . '/Modules/ReactModule/app/Providers/ReactModuleServiceProvider.php',
-        'Modules\\ReactModule\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/Modules/ReactModule/app/Providers/RouteServiceProvider.php',
         'Modules\\Register\\Database\\Seeders\\RegisterDatabaseSeeder' => __DIR__ . '/../..' . '/Modules/Register/database/seeders/RegisterDatabaseSeeder.php',
         'Modules\\Register\\Database\\Seeders\\TamuSeeder' => __DIR__ . '/../..' . '/Modules/Register/database/seeders/TamuSeeder.php',
         'Modules\\Register\\Http\\Controllers\\RegisterController' => __DIR__ . '/../..' . '/Modules/Register/app/Http/Controllers/RegisterController.php',
