@@ -1,4 +1,4 @@
-@extends('tagihan::layouts.master')
+@extends('ronda::layouts.master')
 
 @section('module-content')
   <div class="row">

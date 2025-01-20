@@ -23,7 +23,7 @@ class PamController extends Controller
     confirmDelete($alert, $text);
 
     $title = 'Data Tagihan Pam';
-    $data = Warga::latest()->get();
+    $data = Warga::with('tagihanPam')->latest()->get();
     return view(
       'tagihan::/pam/index',
       [
@@ -47,38 +47,43 @@ class PamController extends Controller
 
   public function store(Request $request)
   {
-    $wargaId = $request->warga_id;
-    $dataTerakhir = Pam::where('warga_id', $wargaId)->latest('tanggal_input')->first();
-    $parameterTerakhir = $dataTerakhir ? $dataTerakhir->parameter_sekarang : 0;
-    $parameter = $request->parameter_sekarang - $parameterTerakhir;
-    $nominal = $parameter * $request->tarif_per_unit;
+
+    $warga_id = $request->warga_id;
+    $tanggal_input = $request->tanggal_input;
+    $biaya = $request->biaya;
+
+    $total_parameter = $request->total_parameter;
+    $total_parameter_sebelumnya = $request->total_parameter_sebelumnya;
+
+    $parameter = $total_parameter - $total_parameter_sebelumnya;
+    $nominal = $parameter * $request->biaya;
+
 
     if (!empty($request->id)) {
       $updateData = Pam::findOrFail($request->id);
       $updateData->update([
-        'parameter_terakhir' => $parameterTerakhir,
-        'parameter_sekarang' => $request->parameter_sekarang,
+        'warga_id' => $warga_id,
+        'tanggal_input' => $tanggal_input,
+        'total_parameter' => $total_parameter,
         'parameter' => $parameter,
-        'tanggal_input' => now(),
-        'tarif_per_unit' => $request->tarif_per_unit,
         'nominal' => $nominal,
+        'biaya_per_m3' => $biaya,
         'updated_by' => Auth::user()->username,
       ]);
       Alert::success('Success', 'Data berhasil diupdate');
     } else {
       Pam::create([
-        'warga_id' => $wargaId,
-        'parameter_terakhir' => $parameterTerakhir,
-        'parameter_sekarang' => $request->parameter_sekarang,
+        'warga_id' => $warga_id,
+        'tanggal_input' => $tanggal_input,
+        'total_parameter' => $total_parameter,
         'parameter' => $parameter,
-        'tanggal_input' => now(),
-        'tarif_per_unit' => $request->tarif_per_unit,
         'nominal' => $nominal,
+        'biaya_per_m3' => $biaya,
         'created_by' => Auth::user()->username,
       ]);
       Alert::success('Success', 'Data berhasil disimpan');
     }
-    return redirect()->route('pam.index');
+    return redirect()->route('pam.view', [$warga_id]);
   }
 
   public function edit($id)
@@ -100,13 +105,19 @@ class PamController extends Controller
   {
     $title = "Detail Tagihan Pam Swadaya";
     Fungsi::hakAkses('/tagihan/pam');
-    $warga = Warga::findOrFail($id)->with('tagihanPam')->first();
+    $warga = Warga::where('id', $id)->with('tagihanPam')->first();
+    $pamSebelumnya = Pam::where('warga_id', $id)->latest()->first();
+    $tagihanPam = Pam::where('warga_id', $id)->latest()->get();
+    $biaya = "5000";
 
     // dd($warga);
     return view(
       'tagihan::pam.view',
       [
         'data' => $warga,
+        'data_pam_sebelumnya' => $pamSebelumnya,
+        'tagihanPam' => $tagihanPam,
+        'data_biaya' => $biaya,
         'title' => $title,
       ]
     );

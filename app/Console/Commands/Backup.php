@@ -89,6 +89,19 @@ class Backup extends Command
       'rondas' => [
         'rondas',
       ],
+      'umum_warga' => [
+        'umum_warga',
+      ],
+      'periode_umum' => [
+        'periode_umum',
+      ],
+      'ronda_warga' => [
+        'ronda_warga',
+      ],
+      'pembayarans' => [
+        'pembayarans',
+      ],
+
 
     ];
     if ($opt_users == 1 || $arg_type == 'users')

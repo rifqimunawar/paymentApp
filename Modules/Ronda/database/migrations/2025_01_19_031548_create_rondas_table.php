@@ -12,7 +12,8 @@ return new class extends Migration {
   {
     Schema::create('rondas', function (Blueprint $table) {
       $table->id();
-      $table->date('tanggal_ronda');
+      $table->date('tanggal_ronda')->unique();
+      $table->smallInteger('absen')->default(0);
 
       $table->string('created_by')->default('unknown');
       $table->string('updated_by')->default('unknown');

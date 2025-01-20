@@ -5,6 +5,8 @@ namespace Modules\Master\Http\Controllers;
 use App\Helpers\Fungsi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Modules\Master\Models\Warga;
+use Modules\Tagihan\Models\Umum;
 use Modules\Master\Models\Periode;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -58,13 +60,36 @@ class PeriodeController extends Controller
     if (!empty($request->id)) {
       $updateData = Periode::findOrFail($request->id);
       $data['updated_by'] = Auth::user()->username;
+
+      // Sinkronkan Umum dan warga
+      $umumIds = Umum::pluck('id')->toArray();
+      if (!empty($umumIds)) {
+        $updateData->umums()->sync($umumIds);
+      }
+      $wargaIds = Warga::pluck('id')->toArray();
+      if (!empty($wargaIds)) {
+        foreach ($updateData->umums as $umum) {
+          $umum->wargas()->sync($wargaIds);
+        }
+      }
       $updateData->update($data);
       Alert::success('Success', 'Data berhasil diupdate');
       return redirect()->route('periode.index');
     }
-
     $data['created_by'] = Auth::user()->username;
-    Periode::create($data);
+    $periode = Periode::create($data);
+
+    // Sinkronkan Umum dan warga
+    $umumIds = Umum::pluck('id')->toArray();
+    if (!empty($umumIds)) {
+      $periode->umums()->sync($umumIds);
+    }
+    $wargaIds = Warga::pluck('id')->toArray();
+    if (!empty($wargaIds)) {
+      foreach ($periode->umums as $umum) {
+        $umum->wargas()->sync($wargaIds);
+      }
+    }
     Alert::success('Success', 'Data berhasil disimpan');
     return redirect()->route('periode.index');
   }

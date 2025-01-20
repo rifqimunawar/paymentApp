@@ -14,13 +14,12 @@ return new class extends Migration {
       $table->id();
       $table->unsignedBigInteger('warga_id'); // Relasi ke tabel warga
 
-      $table->integer('parameter_terakhir')->default(0); // Parameter sebelumnya
-      $table->integer('parameter_sekarang'); // Parameter saat ini
-      $table->integer('parameter'); // Selisih parameter (sekarang - terakhir)
+      $table->date('tanggal_input');
+      $table->integer('parameter');
+      $table->integer('total_parameter')->default(0);
 
-      $table->date('tanggal_input'); // Tanggal input
-      $table->decimal('tarif_per_unit', 10); // Tarif per unit
-      $table->decimal('nominal', 15); // Total nominal (parameter * tarif_per_unit)
+      $table->decimal('biaya_per_m3', 10);
+      $table->decimal('nominal', 15);
 
       $table->string('deskripsi')->nullable(); // Keterangan opsional
 

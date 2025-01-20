@@ -44,7 +44,7 @@
 
 <body>
 
-  {{-- @include('tagihan::layouts.kopSurat') --}}
+  {{-- @include('ronda::layouts.kopSurat') --}}
 
   <div style="text-align:center;">
     <h3>{{ $title }}</h3>

@@ -173,6 +173,10 @@ class ComposerStaticInit4cbdbe8d6ef9005b6c72afa8ef166f5c
             'Modules\\Profile\\Database\\Seeders\\' => 33,
             'Modules\\Profile\\Database\\Factories\\' => 35,
             'Modules\\Profile\\' => 16,
+            'Modules\\Pembayaran\\Tests\\' => 25,
+            'Modules\\Pembayaran\\Database\\Seeders\\' => 36,
+            'Modules\\Pembayaran\\Database\\Factories\\' => 38,
+            'Modules\\Pembayaran\\' => 19,
             'Modules\\Master\\Tests\\' => 21,
             'Modules\\Master\\Database\\Seeders\\' => 32,
             'Modules\\Master\\Database\\Factories\\' => 34,
@@ -623,6 +627,22 @@ class ComposerStaticInit4cbdbe8d6ef9005b6c72afa8ef166f5c
         array (
             0 => __DIR__ . '/../..' . '/Modules/Profile/app',
         ),
+        'Modules\\Pembayaran\\Tests\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Modules/Pembayaran/tests',
+        ),
+        'Modules\\Pembayaran\\Database\\Seeders\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Modules/Pembayaran/database/seeders',
+        ),
+        'Modules\\Pembayaran\\Database\\Factories\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Modules/Pembayaran/database/factories',
+        ),
+        'Modules\\Pembayaran\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Modules/Pembayaran/app',
+        ),
         'Modules\\Master\\Tests\\' => 
         array (
             0 => __DIR__ . '/../..' . '/Modules/Master/tests',
@@ -1009,12 +1029,16 @@ class ComposerStaticInit4cbdbe8d6ef9005b6c72afa8ef166f5c
         'Database\\Seeders\\KaryawansTableSeeder' => __DIR__ . '/../..' . '/database/seeders/KaryawansTableSeeder.php',
         'Database\\Seeders\\MenusTableSeeder' => __DIR__ . '/../..' . '/database/seeders/MenusTableSeeder.php',
         'Database\\Seeders\\PamsTableSeeder' => __DIR__ . '/../..' . '/database/seeders/PamsTableSeeder.php',
+        'Database\\Seeders\\PembayaransTableSeeder' => __DIR__ . '/../..' . '/database/seeders/PembayaransTableSeeder.php',
+        'Database\\Seeders\\PeriodeUmumTableSeeder' => __DIR__ . '/../..' . '/database/seeders/PeriodeUmumTableSeeder.php',
         'Database\\Seeders\\PeriodesTableSeeder' => __DIR__ . '/../..' . '/database/seeders/PeriodesTableSeeder.php',
         'Database\\Seeders\\PosisisTableSeeder' => __DIR__ . '/../..' . '/database/seeders/PosisisTableSeeder.php',
         'Database\\Seeders\\RoleMenuTableSeeder' => __DIR__ . '/../..' . '/database/seeders/RoleMenuTableSeeder.php',
         'Database\\Seeders\\RolesTableSeeder' => __DIR__ . '/../..' . '/database/seeders/RolesTableSeeder.php',
+        'Database\\Seeders\\RondaWargaTableSeeder' => __DIR__ . '/../..' . '/database/seeders/RondaWargaTableSeeder.php',
         'Database\\Seeders\\RondasTableSeeder' => __DIR__ . '/../..' . '/database/seeders/RondasTableSeeder.php',
         'Database\\Seeders\\SettingsTableSeeder' => __DIR__ . '/../..' . '/database/seeders/SettingsTableSeeder.php',
+        'Database\\Seeders\\UmumWargaTableSeeder' => __DIR__ . '/../..' . '/database/seeders/UmumWargaTableSeeder.php',
         'Database\\Seeders\\UmumsTableSeeder' => __DIR__ . '/../..' . '/database/seeders/UmumsTableSeeder.php',
         'Database\\Seeders\\UsersTableSeeder' => __DIR__ . '/../..' . '/database/seeders/UsersTableSeeder.php',
         'Database\\Seeders\\WargasTableSeeder' => __DIR__ . '/../..' . '/database/seeders/WargasTableSeeder.php',
@@ -4284,6 +4308,7 @@ class ComposerStaticInit4cbdbe8d6ef9005b6c72afa8ef166f5c
         'Modules\\Dashboard\\Providers\\DashboardServiceProvider' => __DIR__ . '/../..' . '/Modules/Dashboard/app/Providers/DashboardServiceProvider.php',
         'Modules\\Dashboard\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/Modules/Dashboard/app/Providers/EventServiceProvider.php',
         'Modules\\Dashboard\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/Modules/Dashboard/app/Providers/RouteServiceProvider.php',
+        'Modules\\Master\\Database\\Seeders\\HargaTagihanSeeder' => __DIR__ . '/../..' . '/Modules/Master/database/seeders/HargaTagihanSeeder.php',
         'Modules\\Master\\Database\\Seeders\\KaryawanSeeder' => __DIR__ . '/../..' . '/Modules/Master/database/seeders/KaryawanSeeder.php',
         'Modules\\Master\\Database\\Seeders\\MasterDatabaseSeeder' => __DIR__ . '/../..' . '/Modules/Master/database/seeders/MasterDatabaseSeeder.php',
         'Modules\\Master\\Database\\Seeders\\PeriodeSeeder' => __DIR__ . '/../..' . '/Modules/Master/database/seeders/PeriodeSeeder.php',
@@ -4294,6 +4319,7 @@ class ComposerStaticInit4cbdbe8d6ef9005b6c72afa8ef166f5c
         'Modules\\Master\\Exports\\PeriodeExport' => __DIR__ . '/../..' . '/Modules/Master/app/Exports/PeriodeExport.php',
         'Modules\\Master\\Exports\\PosisiExport' => __DIR__ . '/../..' . '/Modules/Master/app/Exports/PosisiExport.php',
         'Modules\\Master\\Exports\\WargaExport' => __DIR__ . '/../..' . '/Modules/Master/app/Exports/WargaExport.php',
+        'Modules\\Master\\Http\\Controllers\\HargaTagihanController' => __DIR__ . '/../..' . '/Modules/Master/app/Http/Controllers/HargaTagihanController.php',
         'Modules\\Master\\Http\\Controllers\\JenisKendaraanController' => __DIR__ . '/../..' . '/Modules/Master/app/Http/Controllers/JenisKendaraanController.php',
         'Modules\\Master\\Http\\Controllers\\KaryawanController' => __DIR__ . '/../..' . '/Modules/Master/app/Http/Controllers/KaryawanController.php',
         'Modules\\Master\\Http\\Controllers\\MasterController' => __DIR__ . '/../..' . '/Modules/Master/app/Http/Controllers/MasterController.php',
@@ -4308,6 +4334,12 @@ class ComposerStaticInit4cbdbe8d6ef9005b6c72afa8ef166f5c
         'Modules\\Master\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/Modules/Master/app/Providers/EventServiceProvider.php',
         'Modules\\Master\\Providers\\MasterServiceProvider' => __DIR__ . '/../..' . '/Modules/Master/app/Providers/MasterServiceProvider.php',
         'Modules\\Master\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/Modules/Master/app/Providers/RouteServiceProvider.php',
+        'Modules\\Pembayaran\\Database\\Seeders\\PembayaranDatabaseSeeder' => __DIR__ . '/../..' . '/Modules/Pembayaran/database/seeders/PembayaranDatabaseSeeder.php',
+        'Modules\\Pembayaran\\Database\\Seeders\\PembayaranSeeder' => __DIR__ . '/../..' . '/Modules/Pembayaran/database/seeders/PembayaranSeeder.php',
+        'Modules\\Pembayaran\\Http\\Controllers\\PembayaranController' => __DIR__ . '/../..' . '/Modules/Pembayaran/app/Http/Controllers/PembayaranController.php',
+        'Modules\\Pembayaran\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/Modules/Pembayaran/app/Providers/EventServiceProvider.php',
+        'Modules\\Pembayaran\\Providers\\PembayaranServiceProvider' => __DIR__ . '/../..' . '/Modules/Pembayaran/app/Providers/PembayaranServiceProvider.php',
+        'Modules\\Pembayaran\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/Modules/Pembayaran/app/Providers/RouteServiceProvider.php',
         'Modules\\Profile\\Database\\Seeders\\ProfileDatabaseSeeder' => __DIR__ . '/../..' . '/Modules/Profile/database/seeders/ProfileDatabaseSeeder.php',
         'Modules\\Profile\\Http\\Controllers\\ProfileController' => __DIR__ . '/../..' . '/Modules/Profile/app/Http/Controllers/ProfileController.php',
         'Modules\\Profile\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/Modules/Profile/app/Providers/EventServiceProvider.php',
@@ -4337,11 +4369,12 @@ class ComposerStaticInit4cbdbe8d6ef9005b6c72afa8ef166f5c
         'Modules\\Settings\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/Modules/Settings/app/Providers/EventServiceProvider.php',
         'Modules\\Settings\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/Modules/Settings/app/Providers/RouteServiceProvider.php',
         'Modules\\Settings\\Providers\\SettingsServiceProvider' => __DIR__ . '/../..' . '/Modules/Settings/app/Providers/SettingsServiceProvider.php',
+        'Modules\\Tagihan\\Database\\Seeders\\JenistagihanSeeder' => __DIR__ . '/../..' . '/Modules/Tagihan/database/seeders/JenistagihanSeeder.php',
         'Modules\\Tagihan\\Database\\Seeders\\PamSeeder' => __DIR__ . '/../..' . '/Modules/Tagihan/database/seeders/PamSeeder.php',
         'Modules\\Tagihan\\Database\\Seeders\\TagihanDatabaseSeeder' => __DIR__ . '/../..' . '/Modules/Tagihan/database/seeders/TagihanDatabaseSeeder.php',
+        'Modules\\Tagihan\\Database\\Seeders\\TagihanSeeder' => __DIR__ . '/../..' . '/Modules/Tagihan/database/seeders/TagihanSeeder.php',
         'Modules\\Tagihan\\Database\\Seeders\\UmumSeeder' => __DIR__ . '/../..' . '/Modules/Tagihan/database/seeders/UmumSeeder.php',
         'Modules\\Tagihan\\Http\\Controllers\\PamController' => __DIR__ . '/../..' . '/Modules/Tagihan/app/Http/Controllers/PamController.php',
-        'Modules\\Tagihan\\Http\\Controllers\\TagihanController' => __DIR__ . '/../..' . '/Modules/Tagihan/app/Http/Controllers/TagihanController.php',
         'Modules\\Tagihan\\Http\\Controllers\\UmumController' => __DIR__ . '/../..' . '/Modules/Tagihan/app/Http/Controllers/UmumController.php',
         'Modules\\Tagihan\\Models\\Pam' => __DIR__ . '/../..' . '/Modules/Tagihan/app/Models/Pam.php',
         'Modules\\Tagihan\\Models\\Umum' => __DIR__ . '/../..' . '/Modules/Tagihan/app/Models/Umum.php',

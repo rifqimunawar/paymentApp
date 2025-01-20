@@ -1,5 +1,7 @@
 @extends('tagihan::layouts.master')
-
+@php
+  use App\Helpers\Fungsi;
+@endphp
 @section('module-content')
   <!-- BEGIN panel -->
   <div class="panel panel-inverse">
@@ -61,7 +63,7 @@
             <tr class="odd gradeX">
               <td width="1%" class="fw-bold">{{ $loop->iteration }}</td>
               <td>{{ $item->nama_tagihan }}</td>
-              <td>{{ $item->nominal }}</td>
+              <td>{{ Fungsi::rupiah($item->nominal) }}</td>
               <td>dalam perbaikan</td>
               <td>dalam perbaikan</td>
               <td>
@@ -71,9 +73,9 @@
                 <a href="{{ route('umum.destroy', $item->id) }}" data-confirm-delete="true">
                   <i class="fa fa-trash mx-2" style="font-size: 14px"></i>
                 </a>
-                {{-- <a href="{{ route('umum.view', $item->id) }}">
-                                    <i class="fa fa-eye mx-2" style="font-size: 14px"></i>
-                                </a> --}}
+                <a href="{{ route('umum.view', $item->id) }}">
+                  <i class="fa fa-eye mx-2" style="font-size: 14px"></i>
+                </a>
               </td>
             </tr>
           @endforeach

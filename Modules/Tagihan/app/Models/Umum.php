@@ -14,12 +14,22 @@ class Umum extends Model
   use HasFactory, SoftDeletes;
   protected $guarded = [];
 
-  public function periode()
+
+  // Relasi ke Warga melalui tabel pivot "umum_warga"
+  public function wargas()
   {
-    return $this->belongsTo(Periode::class, 'periode_id');
+    return $this->belongsToMany(Warga::class, 'umum_warga', 'umum_id', 'warga_id')
+      ->withTimestamps();
   }
-  public function warga()
+  public function umums()
   {
-    return $this->belongsTo(Warga::class, 'warga_id');
+    return $this->belongsToMany(Umum::class, 'umum_warga', 'warga_id', 'umum_id')
+      ->withTimestamps();
   }
+  public function periodes()
+  {
+    return $this->belongsToMany(Periode::class, 'periode_umum', 'umum_id', 'periode_id')
+      ->withTimestamps();
+  }
+
 }

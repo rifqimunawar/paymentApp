@@ -1,18 +1,18 @@
 <?php
 
-namespace Modules\Tagihan\Http\Controllers;
+namespace Modules\Master\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class TagihanController extends Controller
+class HargaTagihanController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('tagihan::index');
+        return view('master::index');
     }
 
     /**
@@ -20,7 +20,7 @@ class TagihanController extends Controller
      */
     public function create()
     {
-        return view('tagihan::create');
+        return view('master::create');
     }
 
     /**
@@ -36,7 +36,7 @@ class TagihanController extends Controller
      */
     public function show($id)
     {
-        return view('tagihan::show');
+        return view('master::show');
     }
 
     /**
@@ -44,7 +44,7 @@ class TagihanController extends Controller
      */
     public function edit($id)
     {
-        return view('tagihan::edit');
+        return view('master::edit');
     }
 
     /**

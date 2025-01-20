@@ -1,1 +1,10 @@
+PR:
+
 1.
+skema ketika  ada warga baru yang baru pindah, misal di bulan maret sedangkan tagihan umum sudah berjalan dari januari, warga tersebut jadi memiliki tagihan umum di bulan januari februari, harusnya ketika warga datang di bulan maret, maka tagihannya berjalan ketika tambah periode di maret atau april, harusnya april.
+# solusi
+- memberikan fitur hapus tagihan pada detail tagihan warga yang memiliki tagihan secara manual.
+- nanti kita pikirkan lagi.
+
+2.
+selesaikan fitur ronda untuk kas ronda, lalu ke pembayaran,

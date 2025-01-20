@@ -13,8 +13,9 @@ class Periode extends Model
   use HasFactory, SoftDeletes;
   protected $guarded = [];
 
-  public function tagihanUmum()
+  public function umums()
   {
-    return $this->hasMany(Umum::class, 'periode_id');
+    return $this->belongsToMany(Umum::class, 'periode_umum', 'periode_id', 'umum_id')
+      ->withTimestamps();
   }
 }

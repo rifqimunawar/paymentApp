@@ -1,4 +1,4 @@
-@extends('tagihan::layouts.master')
+@extends('ronda::layouts.master')
 
 @section('module-content')
   <div class="row">
@@ -9,26 +9,42 @@
         </div>
         <div class="card-body">
           <div class="row">
-            <form action="{{ route('umum.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('jadwalkan.store') }}" method="post" enctype="multipart/form-data">
               @csrf
               <div class="col-md-12 col-lg-12">
                 <div class="form-group mb-2">
-                  <label for="nama_tagihan">Nama Tagihan</label>
-                  <input type="text" class="form-control" required name="nama_tagihan" id="nama_tagihan"
-                    placeholder="Kas kebersihan" />
+                  <label for="nama_tagihan">Tanggal Ronda</label>
+                  <input type="date" class="form-control" required name="tanggal_ronda" id="tanggal_ronda" />
                 </div>
 
                 <div class="form-group mb-2">
-                  <label for="nominal">Nominal</label>
-                  <input type="text" class="form-control" name="nominal" required id="nominal" placeholder="Nominal"
-                    oninput="formatRupiah(this)" />
+                  <label for="nominal">Warga</label>
+
+                  <div class="form-group row mb-2">
+                    <select name="warga_id[]" class="multiple-select2 form-control" multiple>
+
+                      @foreach ($data_warga as $item)
+                        <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                      @endforeach
+                    </select>
+                  </div>
+
                 </div>
 
+                @if ($errors->any())
+                  <div class="alert alert-danger">
+                    <ul>
+                      @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                      @endforeach
+                    </ul>
+                  </div>
+                @endif
 
                 <div class="card-action">
                   <input type="hidden" name="id">
                   <button class="btn btn-success btn-sm" type="submit">Simpan</button>
-                  <a href="{{ route('umum.index') }}" class="btn btn-warning btn-sm">Kembali</a>
+                  <a href="{{ route('jadwalkan.index') }}" class="btn btn-warning btn-sm">Kembali</a>
                 </div>
               </div>
             </form>

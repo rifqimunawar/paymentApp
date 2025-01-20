@@ -5,6 +5,7 @@ namespace Modules\Tagihan\Http\Controllers;
 use Carbon\Carbon;
 use App\Helpers\Fungsi;
 use Illuminate\Http\Request;
+use Modules\Master\Models\Warga;
 use Modules\Tagihan\Models\Umum;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +23,10 @@ class UmumController extends Controller
     confirmDelete($alert, $text);
 
     $title = 'Data Tagihan Umum';
-    $data = Umum::latest()->get();
+    $data = Umum::withCount('wargas')->latest()->get();
+
+
+    // dd($data);
     return view(
       'tagihan::/umum/index',
       [
@@ -43,10 +47,12 @@ class UmumController extends Controller
       ]
     );
   }
-
   public function store(Request $request)
   {
     $data = $request->all();
+    $formatNominal = str_replace(['Rp', '.', ' ', "\u{A0}"], '', $request->nominal);
+    $data['nominal'] = intval($formatNominal);
+
 
     if ($request->hasFile('img')) {
       $extension = $request->img->getClientOriginalExtension();
@@ -59,12 +65,22 @@ class UmumController extends Controller
       $updateData = Umum::findOrFail($request->id);
       $data['updated_by'] = Auth::user()->username;
       $updateData->update($data);
+
+      $wargaIds = Warga::pluck('id')->toArray();
+      if (!empty($wargaIds)) {
+        $updateData->wargas()->sync($wargaIds);
+      }
+
       Alert::success('Success', 'Data berhasil diupdate');
       return redirect()->route('umum.index');
     }
 
     $data['created_by'] = Auth::user()->username;
-    Umum::create($data);
+    $umum = Umum::create($data);
+    $wargaIds = Warga::pluck('id')->toArray();
+    if (!empty($wargaIds)) {
+      $umum->wargas()->sync($wargaIds);
+    }
     Alert::success('Success', 'Data berhasil disimpan');
     return redirect()->route('umum.index');
   }
@@ -88,6 +104,10 @@ class UmumController extends Controller
 
     $data = Umum::findOrFail($id);
     $data->deleted_by = Auth::user()->username;
+    // if ($data->karyawans()->count() > 0) {
+    //   Alert::error('Oops....', 'Data tidak dapat dihapus karena memiliki data umum');
+    //   return redirect()->route('umum.index');
+    // }
     // if ($data->karyawans()->count() > 0) {
     //   Alert::error('Oops....', 'Data tidak dapat dihapus karena memiliki data umum');
     //   return redirect()->route('umum.index');

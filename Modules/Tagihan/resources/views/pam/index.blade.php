@@ -1,5 +1,7 @@
 @extends('tagihan::layouts.master')
-
+@php
+  use App\Helpers\Fungsi;
+@endphp
 @section('module-content')
   <!-- BEGIN panel -->
   <div class="panel panel-inverse">
@@ -59,7 +61,7 @@
             <tr class="odd gradeX">
               <td width="1%" class="fw-bold">{{ $loop->iteration }}</td>
               <td>{{ $item->nama }}</td>
-              <td>Kalkulasi dari seleruh waktu</td>
+              <td>{{ Fungsi::rupiah($item->tagihanPam->sum('nominal')) }}</td>
               <td>
                 {{-- <a href="{{ route('pam.edit', $item->id) }}">
                   <i class="fa fa-pencil-square" style="font-size: 14px; margin-right:5px"></i>

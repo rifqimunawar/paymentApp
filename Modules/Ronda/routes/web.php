@@ -16,14 +16,16 @@ use Modules\Ronda\Http\Controllers\RondaController;
 
 Route::prefix('ronda')->middleware('auth')->group(function () {
 
-  Route::get('/r', [RondaController::class, 'index'])->name('ronda.index');
-  Route::get('/r/create', [RondaController::class, 'create'])->name('ronda.create');
-  Route::get('/r/export', [RondaController::class, 'export'])->name('ronda.export');
-  Route::get('/r/pdf', [RondaController::class, 'pdf'])->name('ronda.pdf');
-  Route::get('/r/print', [RondaController::class, 'print'])->name('ronda.print');
-  Route::get('/r/{id}', [RondaController::class, 'edit'])->name('ronda.edit');
-  Route::get('/r/{id}/view', [RondaController::class, 'view'])->name('ronda.view');
-  Route::post('/r/store', [RondaController::class, 'store'])->name('ronda.store');
-  Route::delete('/r/{id}/del', [RondaController::class, 'destroy'])->name('ronda.destroy');
+  Route::get('/jadwal', [RondaController::class, 'jadwal'])->name('jadwal.index');
+
+  Route::get('/jadwalkan', [RondaController::class, 'index'])->name('jadwalkan.index');
+  Route::get('/jadwalkan/create', [RondaController::class, 'create'])->name('jadwalkan.create');
+  Route::get('/jadwalkan/export', [RondaController::class, 'export'])->name('jadwalkan.export');
+  Route::get('/jadwalkan/pdf', [RondaController::class, 'pdf'])->name('jadwalkan.pdf');
+  Route::get('/jadwalkan/print', [RondaController::class, 'print'])->name('jadwalkan.print');
+  Route::get('/jadwalkan/{id}', [RondaController::class, 'edit'])->name('jadwalkan.edit');
+  Route::get('/jadwalkan/{id}/view', [RondaController::class, 'view'])->name('jadwalkan.view');
+  Route::post('/jadwalkan/store', [RondaController::class, 'store'])->name('jadwalkan.store');
+  Route::delete('/jadwalkan/{id}/del', [RondaController::class, 'destroy'])->name('jadwalkan.destroy');
 
 });

@@ -13,8 +13,9 @@ class Ronda extends Model
   use HasFactory, SoftDeletes;
   protected $guarded = [];
 
-  public function warga()
+  public function wargas()
   {
-    return $this->hasMany(Warga::class);
+    return $this->belongsToMany(Warga::class, 'ronda_warga', 'ronda_id', 'warga_id')
+      ->withTimestamps();
   }
 }

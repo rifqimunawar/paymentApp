@@ -10,14 +10,13 @@ return new class extends Migration {
    */
   public function up() : void
   {
-    Schema::create('umums', function (Blueprint $table) {
+    Schema::create('pembayarans', function (Blueprint $table) {
       $table->id();
-      $table->string('nama_tagihan');
-      $table->unsignedBigInteger('periode_id')->nullable();
-      $table->unsignedBigInteger('warga_id')->nullable();
-      $table->unsignedBigInteger('nominal');
-      $table->enum('status', ['belum_lunas', 'lunas'])->default('belum_lunas');
-
+      $table->unsignedBigInteger('warga_id');
+      $table->unsignedBigInteger('tagihan_id');
+      $table->unsignedBigInteger('nominal_tagihan')->default(0);
+      $table->unsignedBigInteger('nominal_dibayar')->default(0);
+      $table->smallInteger('status');
       $table->string('created_by')->default('unknown');
       $table->string('updated_by')->default('unknown');
       $table->string('deleted_by')->nullable();
@@ -31,6 +30,6 @@ return new class extends Migration {
    */
   public function down() : void
   {
-    Schema::dropIfExists('umums');
+    Schema::dropIfExists('pembayarans');
   }
 };

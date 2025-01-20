@@ -7,5 +7,6 @@
     "Master": true,
     "Register": true,
     "Tagihan": true,
-    "Ronda": true
+    "Ronda": true,
+    "Pembayaran": true
 }
