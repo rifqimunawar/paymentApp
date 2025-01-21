@@ -63,15 +63,23 @@
               <td width="1%" class="fw-bold">{{ $loop->iteration }}</td>
               <td>{{ Fungsi::format_tgl($item->tanggal_ronda) }}</td>
               <td>
-                @foreach ($item->wargas as $warga)
-                  <li>{{ $warga->nama }}</li>
-                @endforeach
+                <ul>
+                  @foreach ($item->wargas as $warga)
+                    <li>{{ $warga->nama }}</li>
+                  @endforeach
+                </ul>
               </td>
               <td>
-                {{-- @foreach ($item->wargas as $warga) --}}
-                <li style="color: blue">Hadir</li>
-                <li style="color: red">Alpa</li>
-                {{-- @endforeach --}}
+                <ul>
+                  @foreach ($item->wargas as $warga)
+                    @php
+                      $absen = $item->absens->firstWhere('warga_id', $warga->id);
+                    @endphp
+                    <li style="color: {{ $absen && $absen->absen == '1' ? 'blue' : 'red' }}">
+                      {{ $absen && $absen->absen == '1' ? 'Hadir' : 'Alpa' }}
+                    </li>
+                  @endforeach
+                </ul>
               </td>
               <td>
                 <a href="{{ route('jadwalkan.edit', $item->id) }}">

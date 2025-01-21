@@ -18,4 +18,8 @@ class Ronda extends Model
     return $this->belongsToMany(Warga::class, 'ronda_warga', 'ronda_id', 'warga_id')
       ->withTimestamps();
   }
+  public function absens()
+  {
+    return $this->hasMany(RondaAbsen::class, 'ronda_id');
+  }
 }

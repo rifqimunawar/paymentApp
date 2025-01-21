@@ -101,6 +101,9 @@ class Backup extends Command
       'pembayarans' => [
         'pembayarans',
       ],
+      'ronda_absens' => [
+        'ronda_absens',
+      ],
 
 
     ];

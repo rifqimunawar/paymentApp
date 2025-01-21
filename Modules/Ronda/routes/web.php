@@ -26,6 +26,7 @@ Route::prefix('ronda')->middleware('auth')->group(function () {
   Route::get('/jadwalkan/{id}', [RondaController::class, 'edit'])->name('jadwalkan.edit');
   Route::get('/jadwalkan/{id}/view', [RondaController::class, 'view'])->name('jadwalkan.view');
   Route::post('/jadwalkan/store', [RondaController::class, 'store'])->name('jadwalkan.store');
+  Route::post('/jadwalkan/absen', [RondaController::class, 'absen'])->name('absen.ronda');
   Route::delete('/jadwalkan/{id}/del', [RondaController::class, 'destroy'])->name('jadwalkan.destroy');
 
 });

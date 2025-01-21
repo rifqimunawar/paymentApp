@@ -3,6 +3,7 @@
 namespace Modules\Master\Models;
 
 use Modules\Ronda\Models\Ronda;
+use Modules\Ronda\Models\RondaAbsen;
 use Modules\Tagihan\Models\Pam;
 use Modules\Tagihan\Models\Umum;
 use Modules\Tagihan\Models\Tagihan;
@@ -29,5 +30,9 @@ class Warga extends Model
   {
     return $this->belongsToMany(Ronda::class, 'ronda_warga', 'warga_id', 'ronda_id')
       ->withTimestamps();
+  }
+  public function absens()
+  {
+    return $this->hasMany(RondaAbsen::class, 'warga_id');
   }
 }

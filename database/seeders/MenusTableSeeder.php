@@ -428,8 +428,8 @@ class MenusTableSeeder extends Seeder
             29 => 
             array (
                 'id' => 30,
-                'title' => 'Kas Ronda',
-                'url' => '/tagihan/kas_ronda',
+                'title' => 'Tagihan Ronda',
+                'url' => '/tagihan/ronda',
                 'route-name' => NULL,
                 'icon' => NULL,
                 'caret' => 0,
@@ -437,7 +437,7 @@ class MenusTableSeeder extends Seeder
                 'parent_id' => 22,
                 'deleted_at' => NULL,
                 'created_at' => '2025-01-21 02:26:00',
-                'updated_at' => '2025-01-21 02:26:00',
+                'updated_at' => '2025-01-21 19:18:34',
             ),
         ));
         

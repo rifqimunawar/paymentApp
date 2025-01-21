@@ -43,7 +43,7 @@ class WargasTableSeeder extends Seeder
                 'created_by' => 'admin',
                 'updated_by' => 'admin',
                 'deleted_by' => NULL,
-                'deleted_at' => '2025-01-18 23:08:28',
+                'deleted_at' => '',
                 'created_at' => '2025-01-18 19:53:46',
                 'updated_at' => '2025-01-18 23:08:28',
             ),
@@ -57,9 +57,9 @@ class WargasTableSeeder extends Seeder
                 'created_by' => 'admin',
                 'updated_by' => 'admin',
                 'deleted_by' => NULL,
-                'deleted_at' => NULL,
+                'deleted_at' => '2025-01-21 02:19:54',
                 'created_at' => '2025-01-18 19:54:52',
-                'updated_at' => '2025-01-18 22:24:52',
+                'updated_at' => '2025-01-21 02:19:54',
             ),
             3 => 
             array (

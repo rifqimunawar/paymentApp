@@ -411,6 +411,34 @@ class MenusTableSeeder extends Seeder
                 'created_at' => '2025-01-21 01:12:28',
                 'updated_at' => '2025-01-21 01:12:28',
             ),
+            28 => 
+            array (
+                'id' => 29,
+                'title' => 'Pengajuan Surat',
+                'url' => '/surat',
+                'route-name' => NULL,
+                'icon' => 'fa fa-envelope',
+                'caret' => 0,
+                'aktif' => 1,
+                'parent_id' => NULL,
+                'deleted_at' => NULL,
+                'created_at' => '2025-01-21 02:24:29',
+                'updated_at' => '2025-01-21 02:24:29',
+            ),
+            29 => 
+            array (
+                'id' => 30,
+                'title' => 'Kas Ronda',
+                'url' => '/tagihan/kas_ronda',
+                'route-name' => NULL,
+                'icon' => NULL,
+                'caret' => 0,
+                'aktif' => 1,
+                'parent_id' => 22,
+                'deleted_at' => NULL,
+                'created_at' => '2025-01-21 02:26:00',
+                'updated_at' => '2025-01-21 02:26:00',
+            ),
         ));
         
         

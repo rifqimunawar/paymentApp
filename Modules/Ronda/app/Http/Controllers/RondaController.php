@@ -8,6 +8,7 @@ use Modules\Ronda\Models\Ronda;
 use Modules\Master\Models\Warga;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Modules\Ronda\Models\RondaAbsen;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class RondaController extends Controller
@@ -23,8 +24,8 @@ class RondaController extends Controller
     confirmDelete($alert, $text);
 
     $title = '';
-    $data = Ronda::latest()->get();
-    // dd($data);
+    $data = Ronda::with('wargas')->latest()->get();
+    dd($data);
     return view(
       'ronda::/ronda/jadwal',
       [
@@ -42,7 +43,7 @@ class RondaController extends Controller
     confirmDelete($alert, $text);
 
     $title = 'Jadwal Ronda Malam';
-    $data = Ronda::latest()->get();
+    $data = Ronda::with(['wargas', 'absens'])->latest()->get();
 
     return view(
       'ronda::/ronda/index',
@@ -69,18 +70,13 @@ class RondaController extends Controller
 
   public function store(Request $request)
   {
-    // Validasi input
     $request->validate([
       'tanggal_ronda' => 'required|date|unique:rondas,tanggal_ronda',
     ], [
       'tanggal_ronda.unique' => 'Tanggal sudah diisi, pilih tanggal lain.',
     ]);
-
-    // dd($request);
-    // $data = $request->all();
     $data = $request->except('warga_id');
 
-    // Proses jika ada file gambar
     if ($request->hasFile('img')) {
       $extension = $request->img->getClientOriginalExtension();
       $newFileName = 'Ronda' . '_' . now()->timestamp . '.' . $extension;
@@ -88,32 +84,38 @@ class RondaController extends Controller
       $data['img'] = $newFileName;
     }
 
-    // Jika ada id untuk update
     if (!empty($request->id)) {
       $updateData = Ronda::findOrFail($request->id);
       $data['updated_by'] = Auth::user()->username;
       $updateData->update($data);
-
-      // Ambil warga_id dari frontend
-      $wargaIds = $request->warga_id; // Menggunakan warga_id yang dikirim dari frontend
+      $wargaIds = $request->warga_id;
       if (!empty($wargaIds)) {
-        $updateData->wargas()->sync($wargaIds); // Menghubungkan warga dengan ronda
+        $updateData->wargas()->sync($wargaIds);
+        foreach ($wargaIds as $wargaId) {
+          RondaAbsen::updateOrCreate(
+            ['ronda_id' => $updateData->id, 'warga_id' => $wargaId],
+            ['absen' => 0, 'created_by' => Auth::user()->username]
+          );
+        }
       }
-
       Alert::success('Success', 'Data berhasil diupdate');
       return redirect()->route('jadwalkan.index');
     }
 
-    // Jika tidak ada id untuk update, buat data baru
     $data['created_by'] = Auth::user()->username;
     $newRonda = Ronda::create($data);
-
-    // Ambil warga_id dari frontend dan sinkronkan
-    $wargaIds = $request->warga_id; // Menggunakan warga_id yang dikirim dari frontend
+    $wargaIds = $request->warga_id;
     if (!empty($wargaIds)) {
-      $newRonda->wargas()->sync($wargaIds); // Menghubungkan warga dengan ronda
+      $newRonda->wargas()->sync($wargaIds);
+      foreach ($wargaIds as $wargaId) {
+        RondaAbsen::create([
+          'ronda_id' => $newRonda->id,
+          'warga_id' => $wargaId,
+          'absen' => 0,
+          'created_by' => Auth::user()->username,
+        ]);
+      }
     }
-
     Alert::success('Success', 'Data berhasil disimpan');
     return redirect()->route('jadwalkan.index');
   }
@@ -122,16 +124,51 @@ class RondaController extends Controller
   {
     $title = "Update Data Warga";
     Fungsi::hakAkses('/ronda/jadwalkan');
-    $warga = Warga::findOrFail($id);
+    $ronda = Ronda::with('wargas')->findOrFail($id);
+    $warga = Warga::latest()->get();
+    $selectedWargas = $ronda->wargas->pluck('id')->toArray();
+    $data_jadwal_ronda = Ronda::with(['wargas', 'absens'])->latest()->get();
 
     return view(
-      'ronda::warga.edit',
+      'ronda::ronda.edit',
       [
-        'data' => $warga,
+        'data' => $ronda,
+        'data_warga' => $warga,
+        'data_jadwal_ronda' => $data_jadwal_ronda,
+        'selected_wargas' => $selectedWargas,
         'title' => $title,
       ]
     );
   }
+
+  public function absen(Request $request)
+  {
+    // Validasi akses
+    Fungsi::hakAkses('/ronda/jadwalkan');
+
+    // Ambil data ronda berdasarkan ID
+    $ronda = Ronda::findOrFail($request->ronda_id);
+
+    // Proses data kehadiran yang dikirim dari form
+    $absenData = $request->input('absen', []); // Ambil data absen, default jika kosong adalah array kosong
+
+    foreach ($absenData as $warga_id => $status) {
+      // Cari warga berdasarkan ID
+      $warga = Warga::find($warga_id);
+
+      if ($warga) {
+        // Update status hadir (1 = tidak hadir, 2 = hadir)
+        $rondaAbsen = RondaAbsen::updateOrCreate(
+          ['ronda_id' => $ronda->id, 'warga_id' => $warga_id],
+          ['absen' => $status]
+        );
+      }
+    }
+
+    // Redirect atau tampilkan feedback
+    return redirect()->route('jadwalkan.index')->with('success', 'Absensi berhasil disimpan!');
+  }
+
   public function destroy($id)
   {
     Fungsi::hakAkses('/ronda/jadwalkan');
