@@ -71,19 +71,37 @@
                     <th>Absen</th>
                   </thead>
                   <tbody>
+                    @forelse ($cek_absen as $item)
+                      <tr>
+                        <td>{{ $item->warga['nama'] ?? '' }}</td>
+                        <td>
+                          <input type="radio" name="absen[{{ $item['warga_id'] }}]" value="2"
+                            class="form-check-input" @if ($item['absen'] == 2) checked @endif>
+                          <label class="form-check-label">Hadir</label>
+
+                          <input type="radio" name="absen[{{ $item['warga_id'] }}]" value="1"
+                            class="form-check-input" @if ($item['absen'] == 1) checked @endif>
+                          <label class="form-check-label">Tidak</label>
+                        </td>
+                      </tr>
+                    @empty
+                      <tr>
+                        <td colspan="2" class="text-center">Data Kosong</td>
+                      </tr>
+                    @endforelse
+                  </tbody>
+                  {{-- <tbody>
                     @forelse ($data_jadwal_ronda as $item)
-                      @foreach ($item->wargas as $warga)
+                      @foreach (array_merge($item->wargas->toArray(), $item->absens->toArray()) as $data)
                         <tr>
-                          <td>{{ $warga->nama }}</td>
+                          <td>{{ $data['nama'] ?? $data['id'] }}</td>
                           <td>
-                            <div class="mb-3 form-check">
-                              <input type="radio" name="absen[{{ $warga->id }}]" value="2"
-                                class="form-check-input" @if ($warga->absen == 2) checked @endif>
-                              <label class="form-check-label">Ya</label>
-                              <input type="radio" name="absen[{{ $warga->id }}]" value="1"
-                                class="form-check-input" @if ($warga->absen == 1) checked @endif>
-                              <label class="form-check-label">Tidak</label>
-                            </div>
+                            <input type="radio" name="absen[{{ $data['id'] }}]" value="2"
+                              class="form-check-input" @if ($data['absen'] == 2) checked @endif>
+                            <label class="form-check-label">Hadir</label>
+                            <input type="radio" name="absen[{{ $data['id'] }}]" value="1"
+                              class="form-check-input" @if ($data['absen'] == 1) checked @endif>
+                            <label class="form-check-label">Tidak</label>
                           </td>
                         </tr>
                       @endforeach
@@ -92,10 +110,12 @@
                         <td colspan="2" class="text-center">Data Kosong</td>
                       </tr>
                     @endforelse
-                  </tbody>
+                  </tbody> --}}
+
+
                 </table>
                 <div class="card-action d-flex justify-content-center">
-                  <input type="text" name="ronda_id" value="{{ $data->id }}">
+                  <input type="hidden" name="ronda_id" value="{{ $data->id }}">
                   <button class="btn btn-success btn-sm" type="submit">Simpan</button>
                 </div>
               </div>

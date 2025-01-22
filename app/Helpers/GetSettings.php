@@ -1,13 +1,18 @@
 <?php
 namespace App\Helpers;
 
-use Illuminate\Support\Facades\Auth;
+use Modules\Ronda\Models\Ronda;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class GetSettings
 {
 
-
+  public static function getRondaJadwal()
+  {
+    $data = Ronda::with('wargas')->latest()->get();
+    return json_encode($data);
+  }
 
   public static function getMenu()
   {

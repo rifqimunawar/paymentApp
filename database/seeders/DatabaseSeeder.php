@@ -30,5 +30,6 @@ class DatabaseSeeder extends Seeder
     $this->call(PembayaransTableSeeder::class);
       $this->call(PeriodeUmumTableSeeder::class);
         $this->call(RondaWargaTableSeeder::class);
+        $this->call(RondaAbsensTableSeeder::class);
     }
 }

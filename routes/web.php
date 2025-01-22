@@ -1,5 +1,6 @@
 <?php
 
+use App\Helpers\GetSettings;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 
@@ -17,3 +18,6 @@ use App\Http\Controllers\MainController;
 // Route::get('/', function () {
 //   return redirect('dashboard');
 // });
+Route::get('/api/ronda-jadwal', function () {
+  return response()->json(json_decode(GetSettings::getRondaJadwal()), 200);
+});

@@ -75,8 +75,8 @@
                     @php
                       $absen = $item->absens->firstWhere('warga_id', $warga->id);
                     @endphp
-                    <li style="color: {{ $absen && $absen->absen == '1' ? 'blue' : 'red' }}">
-                      {{ $absen && $absen->absen == '1' ? 'Hadir' : 'Alpa' }}
+                    <li style="color: {{ $absen && $absen->absen == '2' ? 'blue' : 'red' }}">
+                      {{ $absen && $absen->absen == '2' ? 'Hadir' : 'Alpa' }}
                     </li>
                   @endforeach
                 </ul>
@@ -94,11 +94,8 @@
               </td>
             </tr>
           @endforeach
-
         </tbody>
       </table>
     </div>
-    <!-- END panel-body -->
   </div>
-  <!-- END panel -->
 @endsection

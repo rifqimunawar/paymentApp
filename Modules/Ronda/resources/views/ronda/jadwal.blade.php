@@ -1,9 +1,7 @@
 @extends('ronda::layouts.master')
 
 @section('module-content')
-  <!-- BEGIN panel -->
   <div class="panel panel-inverse">
-    <!-- BEGIN panel-heading -->
     <div class="panel-heading">
       <h4 class="panel-title">{{ $title }}</h4>
       <div class="panel-heading-btn">
@@ -17,8 +15,6 @@
             class="fa fa-times"></i></a>
       </div>
     </div>
-
-
     <div>
       <div class="row mt-3">
         <div class="col-lg">
@@ -27,5 +23,4 @@
       </div>
     </div>
   </div>
-  <!-- END panel -->
 @endsection

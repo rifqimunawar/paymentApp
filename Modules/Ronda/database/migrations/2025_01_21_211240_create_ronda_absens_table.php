@@ -14,7 +14,7 @@ return new class extends Migration {
       $table->id();
       $table->foreignId('ronda_id')->constrained('rondas')->onDelete('cascade');
       $table->foreignId('warga_id')->constrained('wargas')->onDelete('cascade');
-      $table->string('absen')->nullable();
+      $table->integer('absen')->default(1);
       $table->timestamp('waktu_absen')->nullable();
       $table->text('catatan')->nullable();
 

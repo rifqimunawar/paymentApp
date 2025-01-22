@@ -1,52 +1,39 @@
-var handleCalendarDemo = function() {
-  var d = new Date();
-	var month = d.getMonth() + 1;
-	    month = (month < 10) ? '0' + month : month;
-	var year = d.getFullYear();
-	var day = d.getDate();
-	var today = moment().startOf('day');
+document.addEventListener('DOMContentLoaded', function () {
   var calendarElm = document.getElementById('calendar');
-	var calendar = new FullCalendar.Calendar(calendarElm, {
-    headerToolbar: {
-      left: 'dayGridMonth,timeGridWeek,timeGridDay',
-      center: 'title',
-      right: 'prev,next today'
-    },
-    buttonText: {
-    	today:    'Today',
-			month:    'Month',
-			week:     'Week',
-			day:      'Day'
-    },
-    initialView: 'dayGridMonth',
-    editable: true,
-    droppable: true,
-  	themeSystem: 'bootstrap',
-    events: [
-      {
-        title: 'Pak Teguh',
-        start: year + '-' + month + '-19'
-      },
-      {
-        title: 'Abdul Dilan',
-        start: year + '-' + month + '-20'
-      },
-    ]
-  });
 
-	calendar.render();
-};
+  // Ambil data dari API
+  fetch('http://127.0.0.1:8000/api/ronda-jadwal')
+      .then(response => response.json())
+      .then(data => {
+          // Proses data ke format events
+          var events = data.map(item => {
+              return item.wargas.map(warga => ({
+                  title: warga.nama, // Nama warga
+                  start: item.tanggal_ronda, // Tanggal ronda
+              }));
+          }).flat(); // Gabungkan array nested menjadi satu array
 
-var Calendar = function () {
-	"use strict";
-	return {
-		//main function
-		init: function () {
-			handleCalendarDemo();
-		}
-	};
-}();
+          // Inisialisasi kalender
+          var calendar = new FullCalendar.Calendar(calendarElm, {
+              headerToolbar: {
+                  left: 'dayGridMonth,timeGridWeek,timeGridDay',
+                  center: 'title',
+                  right: 'prev,next today'
+              },
+              buttonText: {
+                  today: 'Today',
+                  month: 'Month',
+                  week: 'Week',
+                  day: 'Day'
+              },
+              initialView: 'dayGridMonth',
+              editable: true,
+              droppable: true,
+              themeSystem: 'bootstrap',
+              events: events // Masukkan events dari API
+          });
 
-$(document).ready(function() {
-	Calendar.init();
+          calendar.render();
+      })
+      .catch(error => console.error('Error fetching ronda data:', error));
 });

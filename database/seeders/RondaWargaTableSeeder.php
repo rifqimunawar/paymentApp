@@ -21,35 +21,19 @@ class RondaWargaTableSeeder extends Seeder
         \DB::table('ronda_warga')->insert(array (
             0 => 
             array (
-                'id' => 8,
-                'ronda_id' => 4,
-                'warga_id' => 4,
-                'created_at' => '2025-01-21 02:22:29',
-                'updated_at' => '2025-01-21 02:22:29',
+                'id' => 1,
+                'ronda_id' => 1,
+                'warga_id' => 7,
+                'created_at' => '2025-01-22 20:57:58',
+                'updated_at' => '2025-01-22 20:57:58',
             ),
             1 => 
             array (
-                'id' => 9,
-                'ronda_id' => 4,
-                'warga_id' => 1,
-                'created_at' => '2025-01-21 02:22:29',
-                'updated_at' => '2025-01-21 02:22:29',
-            ),
-            2 => 
-            array (
-                'id' => 10,
-                'ronda_id' => 5,
-                'warga_id' => 7,
-                'created_at' => '2025-01-21 02:23:05',
-                'updated_at' => '2025-01-21 02:23:05',
-            ),
-            3 => 
-            array (
-                'id' => 11,
-                'ronda_id' => 5,
+                'id' => 2,
+                'ronda_id' => 1,
                 'warga_id' => 6,
-                'created_at' => '2025-01-21 02:23:05',
-                'updated_at' => '2025-01-21 02:23:05',
+                'created_at' => '2025-01-22 20:57:58',
+                'updated_at' => '2025-01-22 20:57:58',
             ),
         ));
         

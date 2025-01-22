@@ -24,8 +24,9 @@ class RondaController extends Controller
     confirmDelete($alert, $text);
 
     $title = '';
-    $data = Ronda::with('wargas')->latest()->get();
-    dd($data);
+    $data = Ronda::with(['wargas', 'absens'])->latest()->get();
+
+    // dd($data);
     return view(
       'ronda::/ronda/jadwal',
       [
@@ -45,6 +46,7 @@ class RondaController extends Controller
     $title = 'Jadwal Ronda Malam';
     $data = Ronda::with(['wargas', 'absens'])->latest()->get();
 
+    // dd($data);
     return view(
       'ronda::/ronda/index',
       [
@@ -111,7 +113,7 @@ class RondaController extends Controller
         RondaAbsen::create([
           'ronda_id' => $newRonda->id,
           'warga_id' => $wargaId,
-          'absen' => 0,
+          'absen' => 1,
           'created_by' => Auth::user()->username,
         ]);
       }
@@ -128,13 +130,16 @@ class RondaController extends Controller
     $warga = Warga::latest()->get();
     $selectedWargas = $ronda->wargas->pluck('id')->toArray();
     $data_jadwal_ronda = Ronda::with(['wargas', 'absens'])->latest()->get();
-
+    $absen_ronda = RondaAbsen::where('ronda_id', $id)->latest()->get();
+    $cek_absen = RondaAbsen::cekAbsen($id);
+    // dd($cek_absen);
     return view(
       'ronda::ronda.edit',
       [
         'data' => $ronda,
         'data_warga' => $warga,
-        'data_jadwal_ronda' => $data_jadwal_ronda,
+        'cek_absen' => $cek_absen,
+        'data_jadwal_ronda' => $cek_absen,
         'selected_wargas' => $selectedWargas,
         'title' => $title,
       ]
@@ -143,36 +148,28 @@ class RondaController extends Controller
 
   public function absen(Request $request)
   {
-    // Validasi akses
-    Fungsi::hakAkses('/ronda/jadwalkan');
+    // dd($request);
+    $validated = $request->validate([
+      'ronda_id' => 'required|exists:rondas,id',
+      'absen' => 'required|array',
+    ]);
 
-    // Ambil data ronda berdasarkan ID
-    $ronda = Ronda::findOrFail($request->ronda_id);
-
-    // Proses data kehadiran yang dikirim dari form
-    $absenData = $request->input('absen', []); // Ambil data absen, default jika kosong adalah array kosong
-
-    foreach ($absenData as $warga_id => $status) {
-      // Cari warga berdasarkan ID
-      $warga = Warga::find($warga_id);
-
-      if ($warga) {
-        // Update status hadir (1 = tidak hadir, 2 = hadir)
-        $rondaAbsen = RondaAbsen::updateOrCreate(
-          ['ronda_id' => $ronda->id, 'warga_id' => $warga_id],
-          ['absen' => $status]
-        );
-      }
+    foreach ($request->absen as $warga_id => $absen) {
+      $rondaAbsen = RondaAbsen::updateOrCreate(
+        ['ronda_id' => $request->ronda_id, 'warga_id' => $warga_id],
+        ['absen' => $absen]
+      );
     }
 
-    // Redirect atau tampilkan feedback
-    return redirect()->route('jadwalkan.index')->with('success', 'Absensi berhasil disimpan!');
+    Alert::success('Success', 'Absen berhasil disimpan');
+    return redirect()->route('jadwalkan.index');
   }
+
 
   public function destroy($id)
   {
-    Fungsi::hakAkses('/ronda/jadwalkan');
 
+    Fungsi::hakAkses('/ronda/jadwalkan');
     $data = Warga::findOrFail($id);
     $data->deleted_by = Auth::user()->username;
     // if ($data->karyawans()->count() > 0) {
