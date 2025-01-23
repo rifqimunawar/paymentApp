@@ -8,3 +8,6 @@ skema ketika  ada warga baru yang baru pindah, misal di bulan maret sedangkan ta
 
 2.
 selesaikan fitur ronda untuk kas ronda, lalu ke pembayaran,
+
+3.
+sedang dipikirkan jika tanggal sudah terlewat, fitur absen ronda aksesnya di tutup.

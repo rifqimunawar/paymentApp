@@ -7,6 +7,7 @@ use App\Helpers\Fungsi;
 use Illuminate\Http\Request;
 use Modules\Master\Models\Warga;
 use Modules\Tagihan\Models\Umum;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
@@ -23,7 +24,10 @@ class UmumController extends Controller
     confirmDelete($alert, $text);
 
     $title = 'Data Tagihan Umum';
-    $data = Umum::withCount('wargas')->latest()->get();
+    $data = Umum::withCount('wargas')
+      ->latest()
+      ->get();
+
 
 
     // dd($data);
@@ -94,6 +98,32 @@ class UmumController extends Controller
       'tagihan::umum.edit',
       [
         'data' => $umum,
+        'title' => $title,
+      ]
+    );
+  }
+  public function view($id)
+  {
+    $tagihan_id = $id;
+    $umum = Umum::findOrFail($id)->with('wargas')->get();
+    $judul = Umum::findOrFail($id);
+    $title = "Tagihan " . $judul->nama_tagihan;
+    Fungsi::hakAkses('/tagihan/umum');
+    // $response = Umum::findOrFail($tagihan_id)->with('wargas')->get();
+
+    $data = DB::table('umum_warga')
+      ->select('umum_warga.*', 'umums.nama_tagihan', 'umums.nominal', 'wargas.nama as nama_warga', 'wargas.telp')
+      ->join('umums', 'umum_warga.umum_id', '=', 'umums.id')
+      ->join('wargas', 'umum_warga.warga_id', '=', 'wargas.id')
+      ->where('umum_warga.umum_id', $tagihan_id)
+      ->orderBy('umum_warga.id', 'desc')
+      ->get();
+    // dd($response);
+    return view(
+      'tagihan::umum.view',
+      [
+        // 'data' => $judul,
+        'data' => $data,
         'title' => $title,
       ]
     );

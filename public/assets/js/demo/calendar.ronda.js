@@ -1,19 +1,16 @@
 document.addEventListener('DOMContentLoaded', function () {
   var calendarElm = document.getElementById('calendar');
-
-  // Ambil data dari API
-  fetch('http://127.0.0.1:8000/api/ronda-jadwal')
+  var baseUrl = calendarElm.getAttribute('data-base-url');
+  fetch(baseUrl + 'api/ronda-jadwal')
       .then(response => response.json())
       .then(data => {
-          // Proses data ke format events
           var events = data.map(item => {
               return item.wargas.map(warga => ({
-                  title: warga.nama, // Nama warga
-                  start: item.tanggal_ronda, // Tanggal ronda
+                  title: warga.nama,
+                  start: item.tanggal_ronda,
               }));
-          }).flat(); // Gabungkan array nested menjadi satu array
+          }).flat();
 
-          // Inisialisasi kalender
           var calendar = new FullCalendar.Calendar(calendarElm, {
               headerToolbar: {
                   left: 'dayGridMonth,timeGridWeek,timeGridDay',
@@ -30,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
               editable: true,
               droppable: true,
               themeSystem: 'bootstrap',
-              events: events // Masukkan events dari API
+              events: events
           });
 
           calendar.render();

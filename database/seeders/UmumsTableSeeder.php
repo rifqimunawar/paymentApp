@@ -55,6 +55,18 @@ class UmumsTableSeeder extends Seeder
                 'created_at' => '2025-01-21 00:38:00',
                 'updated_at' => '2025-01-21 00:38:00',
             ),
+            3 => 
+            array (
+                'id' => 11,
+                'nama_tagihan' => 'Iuran Pembangunan Jalan',
+                'nominal' => 50000,
+                'created_by' => 'admin',
+                'updated_by' => 'unknown',
+                'deleted_by' => NULL,
+                'deleted_at' => NULL,
+                'created_at' => '2025-01-23 15:03:41',
+                'updated_at' => '2025-01-23 15:03:41',
+            ),
         ));
         
         

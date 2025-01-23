@@ -32,4 +32,19 @@ class Umum extends Model
       ->withTimestamps();
   }
 
+  public static function dataTagihanWarga($tagihan_id)
+  {
+    if (isset($tagihan_id)) {
+      return self::select('umum_warga.*', 'umums.nama_tagihan', 'umums.nominal', 'wargas.nama')
+        ->join('umums', 'umum_warga.umum_id', '=', 'umums.id')
+        ->join('wargas', 'umum_warga.warga_id', '=', 'wargas.id')
+        ->where('umums.id', $tagihan_id) // Kondisi sesuai query SQL
+        ->orderBy('umum_warga.id', 'desc')
+        ->get(); // Mengembalikan semua data
+    }
+
+    return false;
+  }
+
+
 }

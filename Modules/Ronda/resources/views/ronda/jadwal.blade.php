@@ -18,7 +18,8 @@
     <div>
       <div class="row mt-3">
         <div class="col-lg">
-          <div id="calendar" class="calendar" style="margin: 10px"></div>
+          <div id="calendar" class="calendar" data-base-url="{{ App\Helpers\GetSettings::getBaseUrl() }}"
+            style="margin: 10px"></div>
         </div>
       </div>
     </div>

@@ -53,8 +53,9 @@
             <th width="1%"></th>
             <th class="text-nowrap">Nama Tagihan</th>
             <th class="text-nowrap">Nominal Tagihan</th>
-            <th class="text-nowrap">Jumlah Terkumpul</th>
+            <th class="text-nowrap">Sudah Terkumpul</th>
             <th class="text-nowrap">Belum Terkumpul</th>
+            <th class="text-nowrap">Target Terkumpul</th>
             <th class="text-nowrap"></th>
           </tr>
         </thead>
@@ -66,6 +67,7 @@
               <td>{{ Fungsi::rupiah($item->nominal) }}</td>
               <td>dalam perbaikan</td>
               <td>dalam perbaikan</td>
+              <td>{{ Fungsi::rupiah($item->nominal * $item->wargas->count()) }}</td>
               <td>
                 <a href="{{ route('umum.edit', $item->id) }}">
                   <i class="fa fa-pencil-square" style="font-size: 14px; margin-right:5px"></i>

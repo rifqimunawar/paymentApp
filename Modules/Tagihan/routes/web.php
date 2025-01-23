@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Tagihan\Http\Controllers\PamController;
 use Modules\Tagihan\Http\Controllers\TagihanController;
+use Modules\Tagihan\Http\Controllers\TagihanRondaController;
 use Modules\Tagihan\Http\Controllers\UmumController;
 
 /*
@@ -38,4 +39,14 @@ Route::prefix('tagihan')->middleware('auth')->group(function () {
   Route::get('/pam/{id}/view', [PamController::class, 'view'])->name('pam.view');
   Route::post('/pam/store', [PamController::class, 'store'])->name('pam.store');
   Route::delete('/pam/{id}/del', [PamController::class, 'destroy'])->name('pam.destroy');
+
+  Route::get('/ronda', [TagihanRondaController::class, 'index'])->name('tagihan_ronda.index');
+  Route::get('/ronda/create', [TagihanRondaController::class, 'create'])->name('tagihan_ronda.create');
+  Route::get('/ronda/export', [TagihanRondaController::class, 'export'])->name('tagihan_ronda.export');
+  Route::get('/ronda/pdf', [TagihanRondaController::class, 'pdf'])->name('tagihan_ronda.pdf');
+  Route::get('/ronda/print', [TagihanRondaController::class, 'print'])->name('tagihan_ronda.print');
+  Route::get('/ronda/{id}', [TagihanRondaController::class, 'edit'])->name('tagihan_ronda.edit');
+  Route::get('/ronda/{id}/view', [TagihanRondaController::class, 'view'])->name('tagihan_ronda.view');
+  Route::post('/ronda/store', [TagihanRondaController::class, 'store'])->name('tagihan_ronda.store');
+  Route::delete('/ronda/{id}/del', [TagihanRondaController::class, 'destroy'])->name('tagihan_ronda.destroy');
 });

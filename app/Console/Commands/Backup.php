@@ -104,6 +104,9 @@ class Backup extends Command
       'ronda_absens' => [
         'ronda_absens',
       ],
+      'tagihan_rondas' => [
+        'tagihan_rondas',
+      ],
 
 
     ];

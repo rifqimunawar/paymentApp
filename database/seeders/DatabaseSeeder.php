@@ -31,5 +31,6 @@ class DatabaseSeeder extends Seeder
       $this->call(PeriodeUmumTableSeeder::class);
         $this->call(RondaWargaTableSeeder::class);
         $this->call(RondaAbsensTableSeeder::class);
+        $this->call(TagihanRondasTableSeeder::class);
     }
 }
