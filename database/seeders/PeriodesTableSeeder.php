@@ -65,11 +65,11 @@ class PeriodesTableSeeder extends Seeder
                 'tanggal_mulai' => '2025-03-01',
                 'tanggal_akhir' => '2025-03-31',
                 'created_by' => 'admin',
-                'updated_by' => 'unknown',
+                'updated_by' => 'admin',
                 'deleted_by' => NULL,
                 'deleted_at' => NULL,
                 'created_at' => '2025-01-21 00:31:17',
-                'updated_at' => '2025-01-21 00:31:17',
+                'updated_at' => '2025-01-23 23:22:41',
             ),
             4 => 
             array (
@@ -78,11 +78,11 @@ class PeriodesTableSeeder extends Seeder
                 'tanggal_mulai' => '2025-04-01',
                 'tanggal_akhir' => '2025-04-30',
                 'created_by' => 'admin',
-                'updated_by' => 'unknown',
+                'updated_by' => 'admin',
                 'deleted_by' => NULL,
                 'deleted_at' => NULL,
                 'created_at' => '2025-01-21 00:40:15',
-                'updated_at' => '2025-01-21 00:40:15',
+                'updated_at' => '2025-01-23 23:22:51',
             ),
         ));
         

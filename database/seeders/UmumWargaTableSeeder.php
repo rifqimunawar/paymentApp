@@ -29,21 +29,13 @@ class UmumWargaTableSeeder extends Seeder
             ),
             1 => 
             array (
-                'id' => 23,
-                'umum_id' => 8,
-                'warga_id' => 3,
-                'created_at' => '2025-01-21 00:33:12',
-                'updated_at' => '2025-01-21 00:33:12',
-            ),
-            2 => 
-            array (
                 'id' => 24,
                 'umum_id' => 8,
                 'warga_id' => 4,
                 'created_at' => '2025-01-21 00:33:12',
                 'updated_at' => '2025-01-21 00:33:12',
             ),
-            3 => 
+            2 => 
             array (
                 'id' => 25,
                 'umum_id' => 8,
@@ -51,7 +43,7 @@ class UmumWargaTableSeeder extends Seeder
                 'created_at' => '2025-01-21 00:35:50',
                 'updated_at' => '2025-01-21 00:35:50',
             ),
-            4 => 
+            3 => 
             array (
                 'id' => 26,
                 'umum_id' => 9,
@@ -59,15 +51,7 @@ class UmumWargaTableSeeder extends Seeder
                 'created_at' => '2025-01-21 00:37:45',
                 'updated_at' => '2025-01-21 00:37:45',
             ),
-            5 => 
-            array (
-                'id' => 27,
-                'umum_id' => 9,
-                'warga_id' => 3,
-                'created_at' => '2025-01-21 00:37:45',
-                'updated_at' => '2025-01-21 00:37:45',
-            ),
-            6 => 
+            4 => 
             array (
                 'id' => 28,
                 'umum_id' => 9,
@@ -75,7 +59,7 @@ class UmumWargaTableSeeder extends Seeder
                 'created_at' => '2025-01-21 00:37:45',
                 'updated_at' => '2025-01-21 00:37:45',
             ),
-            7 => 
+            5 => 
             array (
                 'id' => 29,
                 'umum_id' => 9,
@@ -83,7 +67,7 @@ class UmumWargaTableSeeder extends Seeder
                 'created_at' => '2025-01-21 00:37:45',
                 'updated_at' => '2025-01-21 00:37:45',
             ),
-            8 => 
+            6 => 
             array (
                 'id' => 30,
                 'umum_id' => 10,
@@ -91,15 +75,7 @@ class UmumWargaTableSeeder extends Seeder
                 'created_at' => '2025-01-21 00:38:00',
                 'updated_at' => '2025-01-21 00:38:00',
             ),
-            9 => 
-            array (
-                'id' => 31,
-                'umum_id' => 10,
-                'warga_id' => 3,
-                'created_at' => '2025-01-21 00:38:00',
-                'updated_at' => '2025-01-21 00:38:00',
-            ),
-            10 => 
+            7 => 
             array (
                 'id' => 32,
                 'umum_id' => 10,
@@ -107,7 +83,7 @@ class UmumWargaTableSeeder extends Seeder
                 'created_at' => '2025-01-21 00:38:00',
                 'updated_at' => '2025-01-21 00:38:00',
             ),
-            11 => 
+            8 => 
             array (
                 'id' => 33,
                 'umum_id' => 10,
@@ -115,7 +91,7 @@ class UmumWargaTableSeeder extends Seeder
                 'created_at' => '2025-01-21 00:38:00',
                 'updated_at' => '2025-01-21 00:38:00',
             ),
-            12 => 
+            9 => 
             array (
                 'id' => 34,
                 'umum_id' => 8,
@@ -123,7 +99,7 @@ class UmumWargaTableSeeder extends Seeder
                 'created_at' => '2025-01-21 00:40:15',
                 'updated_at' => '2025-01-21 00:40:15',
             ),
-            13 => 
+            10 => 
             array (
                 'id' => 35,
                 'umum_id' => 8,
@@ -131,7 +107,7 @@ class UmumWargaTableSeeder extends Seeder
                 'created_at' => '2025-01-21 00:40:15',
                 'updated_at' => '2025-01-21 00:40:15',
             ),
-            14 => 
+            11 => 
             array (
                 'id' => 36,
                 'umum_id' => 9,
@@ -139,7 +115,7 @@ class UmumWargaTableSeeder extends Seeder
                 'created_at' => '2025-01-21 00:40:15',
                 'updated_at' => '2025-01-21 00:40:15',
             ),
-            15 => 
+            12 => 
             array (
                 'id' => 37,
                 'umum_id' => 9,
@@ -147,7 +123,7 @@ class UmumWargaTableSeeder extends Seeder
                 'created_at' => '2025-01-21 00:40:15',
                 'updated_at' => '2025-01-21 00:40:15',
             ),
-            16 => 
+            13 => 
             array (
                 'id' => 38,
                 'umum_id' => 10,
@@ -155,7 +131,7 @@ class UmumWargaTableSeeder extends Seeder
                 'created_at' => '2025-01-21 00:40:15',
                 'updated_at' => '2025-01-21 00:40:15',
             ),
-            17 => 
+            14 => 
             array (
                 'id' => 39,
                 'umum_id' => 10,
@@ -163,7 +139,7 @@ class UmumWargaTableSeeder extends Seeder
                 'created_at' => '2025-01-21 00:40:15',
                 'updated_at' => '2025-01-21 00:40:15',
             ),
-            18 => 
+            15 => 
             array (
                 'id' => 40,
                 'umum_id' => 11,
@@ -171,7 +147,7 @@ class UmumWargaTableSeeder extends Seeder
                 'created_at' => '2025-01-23 15:03:41',
                 'updated_at' => '2025-01-23 15:03:41',
             ),
-            19 => 
+            16 => 
             array (
                 'id' => 41,
                 'umum_id' => 11,
@@ -179,7 +155,7 @@ class UmumWargaTableSeeder extends Seeder
                 'created_at' => '2025-01-23 15:03:41',
                 'updated_at' => '2025-01-23 15:03:41',
             ),
-            20 => 
+            17 => 
             array (
                 'id' => 42,
                 'umum_id' => 11,
@@ -187,7 +163,7 @@ class UmumWargaTableSeeder extends Seeder
                 'created_at' => '2025-01-23 15:03:41',
                 'updated_at' => '2025-01-23 15:03:41',
             ),
-            21 => 
+            18 => 
             array (
                 'id' => 43,
                 'umum_id' => 11,
@@ -195,7 +171,7 @@ class UmumWargaTableSeeder extends Seeder
                 'created_at' => '2025-01-23 15:03:41',
                 'updated_at' => '2025-01-23 15:03:41',
             ),
-            22 => 
+            19 => 
             array (
                 'id' => 44,
                 'umum_id' => 11,
