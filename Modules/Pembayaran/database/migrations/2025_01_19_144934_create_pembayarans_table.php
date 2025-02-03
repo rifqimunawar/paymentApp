@@ -14,7 +14,7 @@ return new class extends Migration {
       $table->id();
       $table->unsignedBigInteger('warga_id');
       $table->unsignedBigInteger('tagihan_id');
-      $table->unsignedBigInteger('nominal_tagihan')->default(0);
+      $table->unsignedBigInteger('periode_id')->nullable();
       $table->unsignedBigInteger('nominal_dibayar')->default(0);
       $table->smallInteger('status');
       $table->string('created_by')->default('unknown');

@@ -47,53 +47,34 @@
     <!-- END panel-heading -->
     <!-- BEGIN panel-body -->
     <div class="panel-body">
-      <table class="table table-bordered table-striped">
+      <table id="data-table-default" width="100%" class="table table-striped table-bordered align-middle text-nowrap">
         <thead>
           <tr>
             <th>#</th>
             <th>Nama</th>
+            <th>Total Tagihan</th>
+            <th>Tagihan Umum</th>
             <th>Tagihan Pam</th>
-            <th>Absensi</th>
-            <th>Umum</th>
+            <th>Denda Ronda</th>
+            <th>Absen Ronda</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
-          @foreach ($data as $index => $warga)
+
+
+          @foreach ($data as $item)
             <tr>
-              <td>{{ $index + 1 }}</td>
-              <td>{{ $warga->nama ?? 'Tidak ada nama' }}</td>
-              <td>
-                @if ($warga->tagihanPam)
-                  <ul>
-                    @foreach ($warga->tagihanPam as $tagihan)
-                      <li>{{ $tagihan->nominal }}</li>
-                    @endforeach
-                  </ul>
-                @else
-                  Tidak ada tagihan
-                @endif
-              </td>
-              <td>
-                @if ($warga->absens)
-                  <ul>
-                    @foreach ($warga->absens as $absensi)
-                      <li>{{ $absensi->tanggal }} - {{ $absensi->status }}</li>
-                    @endforeach
-                  </ul>
-                @else
-                  Tidak ada absensi
-                @endif
-              </td>
-              <td>
-                @if ($warga->umums)
-                  <ul>
-                    @foreach ($warga->umums as $umum)
-                      <li>{{ $umum->detail }}</li>
-                    @endforeach
-                  </ul>
-                @else
-                  Tidak ada data umum
-                @endif
+              <td>{{ $loop->iteration }}</td>
+              <td>{{ $item['nama_warga'] }}</td>
+              <td>{{ $item['total_tagihan'] }}</td>
+              <td>{{ $item['tagihan_umum'] }}</td>
+              <td>{{ $item['tagihan_pam'] }}</td>
+              <td>{{ $item['nominal_denda_ronda'] }}</td>
+              <td>{{ $item['jml_tdk_ronda'] }} hari</td>
+              <td><a href="{{ route('pembayaran.show', $item['warga_id']) }} " style="font-size: 24px"><i
+                    class="fa fa-money"></i></a>
+                <i class="fa fa-money mx-2" style="font-size: 14px"></i>
               </td>
             </tr>
           @endforeach

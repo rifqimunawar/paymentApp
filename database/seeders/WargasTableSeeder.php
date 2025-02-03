@@ -117,6 +117,20 @@ class WargasTableSeeder extends Seeder
                 'created_at' => '2025-01-21 00:39:18',
                 'updated_at' => '2025-01-21 00:39:18',
             ),
+            7 => 
+            array (
+                'id' => 8,
+                'nama' => 'Antony El-Gasing',
+                'telp' => '085151145097',
+                'alamat' => 'Brazil',
+                'nik' => '27',
+                'created_by' => 'admin',
+                'updated_by' => 'unknown',
+                'deleted_by' => NULL,
+                'deleted_at' => NULL,
+                'created_at' => '2025-02-03 19:25:40',
+                'updated_at' => '2025-02-03 19:25:40',
+            ),
         ));
         
         

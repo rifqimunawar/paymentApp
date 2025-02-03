@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Master\Http\Controllers\JenisKendaraanController;
 use Modules\Master\Http\Controllers\KaryawanController;
+use Modules\Master\Http\Controllers\ParameterController;
 use Modules\Master\Http\Controllers\PeriodeController;
 use Modules\Master\Http\Controllers\PosisiController;
 use Modules\Master\Http\Controllers\WargaController;
@@ -71,4 +72,7 @@ Route::prefix('master')->middleware('auth')->group(function () {
   Route::get('/periode/{id}', [PeriodeController::class, 'edit'])->name('periode.edit');
   Route::get('/periode/{id}/view', [PeriodeController::class, 'view'])->name('periode.view');
   Route::delete('/periode/{id}/del', [PeriodeController::class, 'destroy'])->name('periode.destroy');
+
+  Route::get('/parameter', [ParameterController::class, 'create'])->name('parameter.create');
+  Route::post('/parameter/store', [ParameterController::class, 'store'])->name('parameter.store');
 });

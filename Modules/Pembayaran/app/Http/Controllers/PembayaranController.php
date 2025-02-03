@@ -18,63 +18,48 @@ class PembayaranController extends Controller
 
     $title = 'Data Pembayaran';
 
-    $data = Warga::with(['umums', 'tagihanPam', 'absens'])->latest()->get();
+    $data = Warga::with(['absens.ronda', 'rondas'])->latest()->get();
 
-    // Membuat tabel HTML
-    $htmlTable = '<table border="1" cellspacing="0" cellpadding="5" style="width:100%; border-collapse: collapse;">';
-    $htmlTable .= '
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Nama</th>
-                <th>Tagihan Umum</th>
-                <th>Tagihan PAM</th>
-                <th>Absen Ronda</th>
-            </tr>
-        </thead>
-        <tbody>
-    ';
+    $response = [];
 
     foreach ($data as $index => $item) {
-      $tagihanUmum = '';
+      $totalTagihanUmum = 0;
       foreach ($item->umums as $umum) {
-        $tagihanUmum .= $umum->nama_tagihan . ' - Rp' . number_format($umum->nominal, 0, ',', '.') . '<br>';
+        $totalTagihanUmum += $umum->nominal;
       }
+      $tagihanUmum = Fungsi::rupiah($totalTagihanUmum);
 
-      $tagihanPam = '';
+      $totalTagihanPam = 0;
       foreach ($item->tagihanPam as $tagihan) {
-        $tagihanPam .= Fungsi::rupiah($tagihan->nominal) . '<br>';
+        $totalTagihanPam += $tagihan->nominal;
       }
+      $tagihanPamTotalFormatted = Fungsi::rupiah($totalTagihanPam);
 
-      $absensi = '';
-      foreach ($item->absens as $absen) {
-        $absensi .= $absen->tanggal_absen_ronda . ' - ' . $absen->nominal_tagihan . '<br>';
-      }
+      $jml_tdk_ronda = $item->absens->where('absen', 1)->count();
+      $nominal_denda_ronda = $jml_tdk_ronda * 20000;
 
-      $htmlTable .= "
-            <tr>
-                <td>" . ($index + 1) . "</td>
-                <td>" . $item->nama . "</td>
-                <td>" . $tagihanUmum . "</td>
-                <td>" . $tagihanPam . "</td>
-                <td>" . $absensi . "</td>
-            </tr>
-        ";
+      $totalTagihan = $totalTagihanUmum + $totalTagihanPam + $nominal_denda_ronda;
+
+      $response[] = [
+        'warga_id' => $item->id,
+        'nama_warga' => $item->nama,
+        'total_tagihan' => Fungsi::rupiah($totalTagihan),
+        'tagihan_umum' => $tagihanUmum,
+        'tagihan_pam' => $tagihanPamTotalFormatted,
+        'jml_tdk_ronda' => $jml_tdk_ronda,
+        'nominal_denda_ronda' => Fungsi::rupiah($nominal_denda_ronda)
+      ];
     }
 
-    $htmlTable .= '</tbody></table>';
-
-    return $htmlTable;
-    // return view('warga.index', compact('htmlTable'));
-
-
+    // dd($response);
     // return $data;
-    // return view(
-    //   'pembayaran::/pembayaran/index',
-    //   [
-    //     'title' => $title,
-    //     'data' => $data,
-    //   ]
-    // );
+    return view(
+      'pembayaran::/pembayaran/index',
+      [
+        'title' => $title,
+        'data' => $response,
+      ]
+    );
   }
+
 }

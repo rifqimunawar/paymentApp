@@ -439,6 +439,20 @@ class MenusTableSeeder extends Seeder
                 'created_at' => '2025-01-21 02:26:00',
                 'updated_at' => '2025-01-21 19:18:34',
             ),
+            30 => 
+            array (
+                'id' => 31,
+                'title' => 'Parameter',
+                'url' => '/master/parameter',
+                'route-name' => NULL,
+                'icon' => NULL,
+                'caret' => 0,
+                'aktif' => 1,
+                'parent_id' => 7,
+                'deleted_at' => NULL,
+                'created_at' => '2025-02-03 11:35:48',
+                'updated_at' => '2025-02-03 11:36:22',
+            ),
         ));
         
         

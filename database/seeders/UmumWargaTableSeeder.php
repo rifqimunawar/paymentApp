@@ -179,6 +179,38 @@ class UmumWargaTableSeeder extends Seeder
                 'created_at' => '2025-01-23 15:03:41',
                 'updated_at' => '2025-01-23 15:03:41',
             ),
+            20 => 
+            array (
+                'id' => 45,
+                'umum_id' => 8,
+                'warga_id' => 8,
+                'created_at' => '2025-02-03 19:27:03',
+                'updated_at' => '2025-02-03 19:27:03',
+            ),
+            21 => 
+            array (
+                'id' => 46,
+                'umum_id' => 9,
+                'warga_id' => 8,
+                'created_at' => '2025-02-03 19:27:03',
+                'updated_at' => '2025-02-03 19:27:03',
+            ),
+            22 => 
+            array (
+                'id' => 47,
+                'umum_id' => 10,
+                'warga_id' => 8,
+                'created_at' => '2025-02-03 19:27:03',
+                'updated_at' => '2025-02-03 19:27:03',
+            ),
+            23 => 
+            array (
+                'id' => 48,
+                'umum_id' => 11,
+                'warga_id' => 8,
+                'created_at' => '2025-02-03 19:27:03',
+                'updated_at' => '2025-02-03 19:27:03',
+            ),
         ));
         
         

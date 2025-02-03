@@ -6,11 +6,12 @@ use Carbon\Carbon;
 use App\Helpers\Fungsi;
 use Illuminate\Http\Request;
 use Modules\Tagihan\Models\Pam;
+use Modules\Master\Models\Warga;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
+use Modules\Master\Models\Parameter;
 use Modules\Master\Exports\UmumExport;
-use Modules\Master\Models\Warga;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PamController extends Controller
@@ -50,7 +51,7 @@ class PamController extends Controller
 
     $warga_id = $request->warga_id;
     $tanggal_input = $request->tanggal_input;
-    $biaya = $request->biaya;
+    $biaya = Parameter::pluck('biaya_pam')->first();
 
     $total_parameter = $request->total_parameter;
     $total_parameter_sebelumnya = $request->total_parameter_sebelumnya;
@@ -108,7 +109,7 @@ class PamController extends Controller
     $warga = Warga::where('id', $id)->with('tagihanPam')->first();
     $pamSebelumnya = Pam::where('warga_id', $id)->latest()->first();
     $tagihanPam = Pam::where('warga_id', $id)->latest()->get();
-    $biaya = "5000";
+    $biaya = Parameter::pluck('biaya_pam')->first();
 
     // dd($warga);
     return view(

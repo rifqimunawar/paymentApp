@@ -21,8 +21,8 @@
     </div>
     <div
       style="display: flex; justify-content: space-between; align-items: center; margin-right: 15px;margin-top:10px;margin-left:15px">
-      <a href="{{ route('pam.create') }}" class="btn btn-primary btn-sm">Tambah &ensp;<i class="fa fa-plus-square"
-          aria-hidden="true" style="font-size: 12px"></i></a>
+      {{-- <a href="{{ route('pam.create') }}" class="btn btn-primary btn-sm">Tambah &ensp;<i class="fa fa-plus-square"
+          aria-hidden="true" style="font-size: 12px"></i></a> --}}
       <div style="display: flex; gap: 10px;">
         <a href="{{ route('pam.export') }}" class="btn btn-warning btn-sm">
           <i class="fa fa-file-excel" style="font-size: 12px"></i> Export XLS

@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Tagihan\Http\Controllers\PamController;
-use Modules\Tagihan\Http\Controllers\TagihanController;
 use Modules\Tagihan\Http\Controllers\TagihanRondaController;
 use Modules\Tagihan\Http\Controllers\UmumController;
 
@@ -20,7 +19,8 @@ use Modules\Tagihan\Http\Controllers\UmumController;
 
 Route::prefix('tagihan')->middleware('auth')->group(function () {
 
-  Route::get('/umum', [UmumController::class, 'index'])->name('umum.index');
+  Route::get('/umum', [UmumController::class, 'periode'])->name('periode_umum.index');
+  Route::get('/{id}/umum/', [UmumController::class, 'index'])->name('tagihan_umum.index');
   Route::get('/umum/create', [UmumController::class, 'create'])->name('umum.create');
   Route::get('/umum/export', [UmumController::class, 'export'])->name('umum.export');
   Route::get('/umum/pdf', [UmumController::class, 'pdf'])->name('umum.pdf');

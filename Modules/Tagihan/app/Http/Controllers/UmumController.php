@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Modules\Master\Models\Warga;
 use Modules\Tagihan\Models\Umum;
 use Illuminate\Support\Facades\DB;
+use Modules\Master\Models\Periode;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
@@ -16,7 +17,27 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class UmumController extends Controller
 {
-  public function index()
+  public function periode()
+  {
+    Fungsi::hakAkses('/tagihan/umum');
+    $alert = 'Delete Data!';
+    $text = "Are you sure you want to delete?";
+    confirmDelete($alert, $text);
+
+    $title = 'Pilih Periode';
+    $data = Periode::latest()
+      ->latest()
+      ->get();
+
+    return view(
+      'tagihan::/umum/periode',
+      [
+        'title' => $title,
+        'data' => $data,
+      ]
+    );
+  }
+  public function index($id)
   {
     Fungsi::hakAkses('/tagihan/umum');
     $alert = 'Delete Data!';
@@ -24,20 +45,22 @@ class UmumController extends Controller
     confirmDelete($alert, $text);
 
     $title = 'Data Tagihan Umum';
-    $data = Umum::withCount('wargas')
-      ->latest()
-      ->get();
+    // $data = Umum::with('periodes')->withCount('wargas')
+    //   ->latest()
+    //   ->get();
+    $data = Periode::with('umums')->find($id);
 
 
 
-    // dd($data);
-    return view(
-      'tagihan::/umum/index',
-      [
-        'title' => $title,
-        'data' => $data,
-      ]
-    );
+
+    return $data;
+    // return view(
+    //   'tagihan::/umum/index',
+    //   [
+    //     'title' => $title,
+    //     'data' => $data,
+    //   ]
+    // );
   }
   public function create()
   {

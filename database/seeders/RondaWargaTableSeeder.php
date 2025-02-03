@@ -51,6 +51,38 @@ class RondaWargaTableSeeder extends Seeder
                 'created_at' => '2025-01-23 20:07:24',
                 'updated_at' => '2025-01-23 20:07:24',
             ),
+            4 => 
+            array (
+                'id' => 5,
+                'ronda_id' => 3,
+                'warga_id' => 7,
+                'created_at' => '2025-02-03 15:52:38',
+                'updated_at' => '2025-02-03 15:52:38',
+            ),
+            5 => 
+            array (
+                'id' => 6,
+                'ronda_id' => 3,
+                'warga_id' => 1,
+                'created_at' => '2025-02-03 15:52:38',
+                'updated_at' => '2025-02-03 15:52:38',
+            ),
+            6 => 
+            array (
+                'id' => 7,
+                'ronda_id' => 4,
+                'warga_id' => 7,
+                'created_at' => '2025-02-03 15:53:23',
+                'updated_at' => '2025-02-03 15:53:23',
+            ),
+            7 => 
+            array (
+                'id' => 8,
+                'ronda_id' => 4,
+                'warga_id' => 1,
+                'created_at' => '2025-02-03 15:53:23',
+                'updated_at' => '2025-02-03 15:53:23',
+            ),
         ));
         
         

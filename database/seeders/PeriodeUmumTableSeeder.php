@@ -147,6 +147,38 @@ class PeriodeUmumTableSeeder extends Seeder
                 'created_at' => '2025-01-23 23:22:51',
                 'updated_at' => '2025-01-23 23:22:51',
             ),
+            16 => 
+            array (
+                'id' => 18,
+                'periode_id' => 6,
+                'umum_id' => 8,
+                'created_at' => '2025-02-03 19:27:03',
+                'updated_at' => '2025-02-03 19:27:03',
+            ),
+            17 => 
+            array (
+                'id' => 19,
+                'periode_id' => 6,
+                'umum_id' => 9,
+                'created_at' => '2025-02-03 19:27:03',
+                'updated_at' => '2025-02-03 19:27:03',
+            ),
+            18 => 
+            array (
+                'id' => 20,
+                'periode_id' => 6,
+                'umum_id' => 10,
+                'created_at' => '2025-02-03 19:27:03',
+                'updated_at' => '2025-02-03 19:27:03',
+            ),
+            19 => 
+            array (
+                'id' => 21,
+                'periode_id' => 6,
+                'umum_id' => 11,
+                'created_at' => '2025-02-03 19:27:03',
+                'updated_at' => '2025-02-03 19:27:03',
+            ),
         ));
         
         

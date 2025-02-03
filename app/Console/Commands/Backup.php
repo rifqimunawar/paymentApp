@@ -107,6 +107,9 @@ class Backup extends Command
       'tagihan_rondas' => [
         'tagihan_rondas',
       ],
+      'parameters' => [
+        'parameters',
+      ],
 
 
     ];
