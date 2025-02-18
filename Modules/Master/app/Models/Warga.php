@@ -16,15 +16,19 @@ class Warga extends Model
 {
   use HasFactory, SoftDeletes;
   protected $guarded = [];
-  public function tagihanPam()
-  {
-    return $this->hasMany(Pam::class, 'warga_id');
-  }
+
   // Relasi ke Umum melalui tabel pivot "umum_warga"
   public function umums()
   {
     return $this->belongsToMany(Umum::class, 'umum_warga', 'warga_id', 'umum_id')
       ->withTimestamps();
+  }
+
+
+
+  public function tagihanPam()
+  {
+    return $this->hasMany(Pam::class, 'warga_id');
   }
   public function rondas()
   {
@@ -34,5 +38,21 @@ class Warga extends Model
   public function absens()
   {
     return $this->hasMany(RondaAbsen::class, 'warga_id');
+  }
+
+  // Relasi dengan Tagihan melalui tabel pivot
+  public function tagihans()
+  {
+    return $this->belongsToMany(Umum::class, 'warga_tagihan_periode')
+      ->withPivot('periode_id')
+      ->withTimestamps();
+  }
+
+  // Relasi dengan Periode melalui tabel pivot
+  public function periodes()
+  {
+    return $this->belongsToMany(Periode::class, 'warga_tagihan_periode')
+      ->withPivot('umum_id')
+      ->withTimestamps();
   }
 }

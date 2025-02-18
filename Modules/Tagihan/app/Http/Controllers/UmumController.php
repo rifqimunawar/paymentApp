@@ -17,56 +17,35 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class UmumController extends Controller
 {
-  public function periode()
+  public function index()
   {
     Fungsi::hakAkses('/tagihan/umum');
     $alert = 'Delete Data!';
     $text = "Are you sure you want to delete?";
     confirmDelete($alert, $text);
 
-    $title = 'Pilih Periode';
-    $data = Periode::latest()
+    $title = 'Data Tagihan Rutin';
+    $data = Umum::with('periodes')->withCount('wargas')
       ->latest()
       ->get();
 
+    // $data = Periode::with('umums');
+
+
+    // return $data;
     return view(
-      'tagihan::/umum/periode',
+      'tagihan::/umum/index',
       [
         'title' => $title,
         'data' => $data,
       ]
     );
   }
-  public function index($id)
-  {
-    Fungsi::hakAkses('/tagihan/umum');
-    $alert = 'Delete Data!';
-    $text = "Are you sure you want to delete?";
-    confirmDelete($alert, $text);
-
-    $title = 'Data Tagihan Umum';
-    // $data = Umum::with('periodes')->withCount('wargas')
-    //   ->latest()
-    //   ->get();
-    $data = Periode::with('umums')->find($id);
-
-
-
-
-    return $data;
-    // return view(
-    //   'tagihan::/umum/index',
-    //   [
-    //     'title' => $title,
-    //     'data' => $data,
-    //   ]
-    // );
-  }
   public function create()
   {
     Fungsi::hakAkses('/tagihan/umum');
 
-    $title = "Tagihan Umum Baru";
+    $title = "Tagihan Rutin Baru";
     return view(
       'tagihan::umum/create',
       [
@@ -80,7 +59,6 @@ class UmumController extends Controller
     $formatNominal = str_replace(['Rp', '.', ' ', "\u{A0}"], '', $request->nominal);
     $data['nominal'] = intval($formatNominal);
 
-
     if ($request->hasFile('img')) {
       $extension = $request->img->getClientOriginalExtension();
       $newFileName = 'umum' . '_' . now()->timestamp . '.' . $extension;
@@ -93,27 +71,45 @@ class UmumController extends Controller
       $data['updated_by'] = Auth::user()->username;
       $updateData->update($data);
 
-      $wargaIds = Warga::pluck('id')->toArray();
-      if (!empty($wargaIds)) {
-        $updateData->wargas()->sync($wargaIds);
+      // **Hapus Data Lama di Pivot**
+      // DB::table('warga_tagihan_periode')->where('umum_id', $updateData->id)->delete();
+
+      $umumId = $updateData->id;
+    } else {
+      $data['created_by'] = Auth::user()->username;
+      $umum = Umum::create($data);
+      $umumId = $umum->id;
+    }
+
+    // **Dapatkan Semua Warga dan Periode Aktif**
+    $wargaList = Warga::all();
+    $periodeList = Periode::where('tanggal_awal', '>=', now()->startOfMonth())->get();
+
+    // **Simpan ke Tabel Pivot**
+    $pivotData = [];
+    foreach ($wargaList as $warga) {
+      foreach ($periodeList as $periode) {
+        $pivotData[] = [
+          'warga_id' => $warga->id,
+          'umum_id' => $umumId,
+          'periode_id' => $periode->id,
+          'created_at' => now(),
+          'updated_at' => now(),
+        ];
       }
-
-      Alert::success('Success', 'Data berhasil diupdate');
-      return redirect()->route('umum.index');
     }
 
-    $data['created_by'] = Auth::user()->username;
-    $umum = Umum::create($data);
-    $wargaIds = Warga::pluck('id')->toArray();
-    if (!empty($wargaIds)) {
-      $umum->wargas()->sync($wargaIds);
+    if (!empty($pivotData)) {
+      // DB::table('warga_tagihan_periode')->insert($pivotData);
     }
-    Alert::success('Success', 'Data berhasil disimpan');
+
+    Alert::success('Success', 'Data berhasil ' . (!empty($request->id) ? 'diupdate' : 'disimpan'));
     return redirect()->route('umum.index');
   }
+
   public function edit($id)
   {
-    $title = "Update Data Umum";
+    $title = "Update Data Rutin";
     Fungsi::hakAkses('/tagihan/umum');
     $umum = Umum::findOrFail($id);
 
@@ -121,32 +117,6 @@ class UmumController extends Controller
       'tagihan::umum.edit',
       [
         'data' => $umum,
-        'title' => $title,
-      ]
-    );
-  }
-  public function view($id)
-  {
-    $tagihan_id = $id;
-    $umum = Umum::findOrFail($id)->with('wargas')->get();
-    $judul = Umum::findOrFail($id);
-    $title = "Tagihan " . $judul->nama_tagihan;
-    Fungsi::hakAkses('/tagihan/umum');
-    // $response = Umum::findOrFail($tagihan_id)->with('wargas')->get();
-
-    $data = DB::table('umum_warga')
-      ->select('umum_warga.*', 'umums.nama_tagihan', 'umums.nominal', 'wargas.nama as nama_warga', 'wargas.telp')
-      ->join('umums', 'umum_warga.umum_id', '=', 'umums.id')
-      ->join('wargas', 'umum_warga.warga_id', '=', 'wargas.id')
-      ->where('umum_warga.umum_id', $tagihan_id)
-      ->orderBy('umum_warga.id', 'desc')
-      ->get();
-    // dd($response);
-    return view(
-      'tagihan::umum.view',
-      [
-        // 'data' => $judul,
-        'data' => $data,
         'title' => $title,
       ]
     );
@@ -171,7 +141,7 @@ class UmumController extends Controller
   }
   public function print()
   {
-    $title = "List Data Umum ";
+    $title = "List Data Rutin ";
     $data = Umum::latest();
     return view(
       'tagihan::umum/print',
@@ -187,7 +157,7 @@ class UmumController extends Controller
   }
   public function pdf()
   {
-    $title = "List Data Tagihan Umum " . Carbon::now()->format('d-M-Y');
+    $title = "List Data Tagihan Rutin " . Carbon::now()->format('d-M-Y');
     $today = Carbon::now()->format('d M Y');
     $data = Umum::latest();
 

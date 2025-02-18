@@ -14,6 +14,25 @@ use Modules\Pembayaran\Http\Controllers\PembayaranController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('pembayaran', PembayaranController::class)->names('pembayaran');
+
+
+Route::prefix('pembayaran')->middleware('auth')->group(function () {
+
+  Route::get('/', [PembayaranController::class, 'index'])->name('pembayaran.index');
+
+  // pembayran umum / rutin
+  Route::post('/store', [PembayaranController::class, 'store'])->name('pembayaran.store');
+  Route::get('/{warga_id}/periode', [PembayaranController::class, 'periode_pembayaran'])->name('periode_pembayaran');
+  Route::get('/{warga_id}/{periode_id}', [PembayaranController::class, 'indexByPeriode'])->name('indexByPeriode');
+
+  // pembayran pam swadaya
+  Route::get('/{warga_id}', [PembayaranController::class, 'pembayaran_pam'])->name('pembayaran_pam');
+  Route::post('/storePam', [PembayaranController::class, 'storePam'])->name('pembayaran.storePam');
 });
+
+Route::prefix('pembayaran_denda')->middleware('auth')->group(function () {
+  Route::get('/{warga_id}', [PembayaranController::class, 'pembayaran_denda'])->name('pembayaran_denda');
+  Route::post('/storeDenda', [PembayaranController::class, 'storeDenda'])->name('pembayaran.storeDenda');
+});
+
+Route::get('/{id}/invoice', [PembayaranController::class, 'invoice'])->name('invoice');

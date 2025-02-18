@@ -18,4 +18,22 @@ class Periode extends Model
     return $this->belongsToMany(Umum::class, 'periode_umum', 'periode_id', 'umum_id')
       ->withTimestamps();
   }
+
+
+
+  // Relasi dengan Warga melalui tabel pivot
+  public function wargas()
+  {
+    return $this->belongsToMany(Warga::class, 'warga_tagihan_periode')
+      ->withPivot('umum_id')
+      ->withTimestamps();
+  }
+
+  // Relasi dengan Tagihan melalui tabel pivot
+  public function tagihans()
+  {
+    return $this->belongsToMany(Umum::class, 'warga_tagihan_periode')
+      ->withPivot('warga_id')
+      ->withTimestamps();
+  }
 }

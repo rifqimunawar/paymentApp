@@ -12,11 +12,25 @@ return new class extends Migration {
   {
     Schema::create('pembayarans', function (Blueprint $table) {
       $table->id();
-      $table->unsignedBigInteger('warga_id');
-      $table->unsignedBigInteger('tagihan_id');
+      $table->unsignedBigInteger('tagihan_id')->nullable();
       $table->unsignedBigInteger('periode_id')->nullable();
+      $table->unsignedBigInteger('warga_id')->nullable();
       $table->unsignedBigInteger('nominal_dibayar')->default(0);
-      $table->smallInteger('status');
+      $table->smallInteger('status')->nullable();
+      $table->smallInteger('pembayaran_tipe')->nullable();
+
+      $table->string('nama_warga')->nullable();
+      $table->string('alamat_warga')->nullable();
+      $table->string('telp_warga')->nullable();
+
+      $table->string('tagihan_nama')->nullable();
+      $table->string('periode_nama')->nullable();
+
+      $table->unsignedBigInteger('pam_id')->nullable();
+      $table->unsignedBigInteger('denda_ronda_id')->nullable();
+      $table->unsignedBigInteger('parameter_pam')->nullable();
+      $table->string('tgl_absen_ronda')->nullable();
+
       $table->string('created_by')->default('unknown');
       $table->string('updated_by')->default('unknown');
       $table->string('deleted_by')->nullable();

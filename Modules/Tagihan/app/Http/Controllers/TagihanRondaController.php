@@ -9,6 +9,7 @@ use Modules\Ronda\Models\Ronda;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Modules\Master\Models\Parameter;
 use Modules\Tagihan\Models\TagihanRonda;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -25,7 +26,7 @@ class TagihanRondaController extends Controller
 
     $hari_ini = Carbon::today();
     $jadwal_ronda_warga = Ronda::with(['wargas', 'absens'])->get();
-    $nominal_denda_ronda = 20000; // Nominal denda ronda
+    $nominal_denda_ronda = Parameter::first()->denda_ronda;
     $hasil = [];
 
     foreach ($jadwal_ronda_warga as $ronda) {

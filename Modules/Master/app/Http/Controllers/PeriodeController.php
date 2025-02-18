@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Modules\Master\Models\Warga;
 use Modules\Tagihan\Models\Umum;
+use Illuminate\Support\Facades\DB;
 use Modules\Master\Models\Periode;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -45,7 +46,6 @@ class PeriodeController extends Controller
       ]
     );
   }
-
   public function store(Request $request)
   {
     $data = $request->all();
@@ -60,39 +60,45 @@ class PeriodeController extends Controller
     if (!empty($request->id)) {
       $updateData = Periode::findOrFail($request->id);
       $data['updated_by'] = Auth::user()->username;
-
-      // Sinkronkan Umum dan warga
-      $umumIds = Umum::pluck('id')->toArray();
-      if (!empty($umumIds)) {
-        $updateData->umums()->sync($umumIds);
-      }
-      $wargaIds = Warga::pluck('id')->toArray();
-      if (!empty($wargaIds)) {
-        foreach ($updateData->umums as $umum) {
-          $umum->wargas()->sync($wargaIds);
-        }
-      }
       $updateData->update($data);
-      Alert::success('Success', 'Data berhasil diupdate');
-      return redirect()->route('periode.index');
-    }
-    $data['created_by'] = Auth::user()->username;
-    $periode = Periode::create($data);
 
-    // Sinkronkan Umum dan warga
-    $umumIds = Umum::pluck('id')->toArray();
-    if (!empty($umumIds)) {
-      $periode->umums()->sync($umumIds);
+      // **Hapus Data Lama di Pivot**
+      DB::table('warga_tagihan_periode')->where('periode_id', $updateData->id)->delete();
+
+      $periodeId = $updateData->id;
+    } else {
+      $data['created_by'] = Auth::user()->username;
+      $periode = Periode::create($data);
+      $periodeId = $periode->id;
     }
-    $wargaIds = Warga::pluck('id')->toArray();
-    if (!empty($wargaIds)) {
-      foreach ($periode->umums as $umum) {
-        $umum->wargas()->sync($wargaIds);
+
+    // **Ambil Semua Warga dan Tagihan Umum**
+    $wargaList = Warga::all();
+    $tagihanList = Umum::all();
+
+    // **Simpan ke Tabel Pivot**
+    $pivotData = [];
+    foreach ($wargaList as $warga) {
+      foreach ($tagihanList as $tagihan) {
+        $pivotData[] = [
+          'warga_id' => $warga->id,
+          'umum_id' => $tagihan->id,
+          'periode_id' => $periodeId,
+          'created_at' => now(),
+          'updated_at' => now(),
+        ];
       }
     }
-    Alert::success('Success', 'Data berhasil disimpan');
+
+    if (!empty($pivotData)) {
+      DB::table('warga_tagihan_periode')->insert($pivotData);
+    }
+
+    Alert::success('Success', 'Data periode berhasil ' . (!empty($request->id) ? 'diupdate' : 'disimpan'));
     return redirect()->route('periode.index');
   }
+
+
   public function edit($id)
   {
     $title = "Update Data Periode";

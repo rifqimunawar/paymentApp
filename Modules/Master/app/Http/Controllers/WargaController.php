@@ -6,6 +6,9 @@ use App\Helpers\Fungsi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Modules\Master\Models\Warga;
+use Modules\Tagihan\Models\Umum;
+use Illuminate\Support\Facades\DB;
+use Modules\Master\Models\Periode;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
@@ -59,29 +62,43 @@ class WargaController extends Controller
       $updateData = Warga::findOrFail($request->id);
       $data['updated_by'] = Auth::user()->username;
       $updateData->update($data);
-      Alert::success('Success', 'Data berhasil diupdate');
-      return redirect()->route('warga.index');
+
+      // **Hapus Data Lama di Pivot**
+      DB::table('warga_tagihan_periode')->where('warga_id', $updateData->id)->delete();
+
+      $wargaId = $updateData->id;
+    } else {
+      $data['created_by'] = Auth::user()->username;
+      $warga = Warga::create($data);
+      $wargaId = $warga->id;
     }
 
-    $data['created_by'] = Auth::user()->username;
-    Warga::create($data);
-    Alert::success('Success', 'Data berhasil disimpan');
+    // **Ambil Periode Aktif dan Semua Tagihan Umum**
+    $periodeList = Periode::where('tanggal_awal', '>=', now()->startOfMonth())->get();
+    $tagihanList = Umum::all();
+
+    // **Simpan ke Tabel Pivot**
+    $pivotData = [];
+    foreach ($periodeList as $periode) {
+      foreach ($tagihanList as $tagihan) {
+        $pivotData[] = [
+          'warga_id' => $wargaId,
+          'umum_id' => $tagihan->id,
+          'periode_id' => $periode->id,
+          'created_at' => now(),
+          'updated_at' => now(),
+        ];
+      }
+    }
+
+    if (!empty($pivotData)) {
+      // DB::table('warga_tagihan_periode')->insert($pivotData);
+    }
+
+    Alert::success('Success', 'Data warga berhasil ' . (!empty($request->id) ? 'diupdate' : 'disimpan'));
     return redirect()->route('warga.index');
   }
-  public function edit($id)
-  {
-    $title = "Update Data Warga";
-    Fungsi::hakAkses('/master/warga');
-    $warga = Warga::findOrFail($id);
 
-    return view(
-      'master::warga.edit',
-      [
-        'data' => $warga,
-        'title' => $title,
-      ]
-    );
-  }
   public function destroy($id)
   {
     Fungsi::hakAkses('/master/warga');

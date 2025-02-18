@@ -54,7 +54,7 @@ class PamController extends Controller
     $biaya = Parameter::pluck('biaya_pam')->first();
 
     $total_parameter = $request->total_parameter;
-    $total_parameter_sebelumnya = $request->total_parameter_sebelumnya;
+    $total_parameter_sebelumnya = $request->total_parameter_sebelumnya ?? 0;
 
     $parameter = $total_parameter - $total_parameter_sebelumnya;
     $nominal = $parameter * $request->biaya;

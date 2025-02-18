@@ -49,7 +49,7 @@ class Backup extends Command
       $copy = $is_windows ? 'copy' : 'cp -R';
       shell_exec($win_parse("$copy $root/database/seeders/* $folder_backup"));
 
-      echo 'Berhasil backup data sebelumnya' . PHP_EOL;
+      echo 'Backup data sedang berjalan . . . . . .' . PHP_EOL;
     }
 
     $tables = [
@@ -89,12 +89,12 @@ class Backup extends Command
       'rondas' => [
         'rondas',
       ],
-      'umum_warga' => [
-        'umum_warga',
-      ],
-      'periode_umum' => [
-        'periode_umum',
-      ],
+      // 'umum_warga' => [
+      //   'umum_warga',
+      // ],
+      // 'periode_umum' => [
+      //   'periode_umum',
+      // ],
       'ronda_warga' => [
         'ronda_warga',
       ],
@@ -109,6 +109,9 @@ class Backup extends Command
       ],
       'parameters' => [
         'parameters',
+      ],
+      'warga_tagihan_periode' => [
+        'warga_tagihan_periode',
       ],
 
 

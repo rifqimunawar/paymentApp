@@ -20,15 +20,20 @@
 
                 <div class="form-group mb-2">
                   <label for="biaya_pam">Biaya Pam (m³)</label>
-                  <input type="text" class="form-control" name="biaya_pam" required id="biaya_pam"
-                    value="{{ $data->biaya_pam ?? '' }}" placeholder="Biaya Pam/m³" oninput="formatRupiah(this)" />
+                  <input type="text" class="form-control" required id="biaya_pam_display"
+                    value="{{ $data->biaya_pam ?? '' }}" placeholder="Biaya Pam/m³"
+                    oninput="formatCurrency(this, 'biaya_pam')" />
+
+                  <input type="hidden" name="biaya_pam" id="biaya_pam" value="{{ $data->biaya_pam ?? '' }}" />
                 </div>
 
                 <div class="form-group mb-2">
                   <label for="denda_ronda">Denda Ronda / Malam</label>
-                  <input type="text" class="form-control" name="denda_ronda" required id="denda_ronda"
+                  <input type="text" class="form-control" required id="denda_ronda_display"
                     value="{{ $data->denda_ronda ?? '' }}" placeholder="Denda ronda / malam"
-                    oninput="formatRupiah(this)" />
+                    oninput="formatCurrency(this, 'denda_ronda')" />
+
+                  <input type="hidden" name="denda_ronda" id="denda_ronda" value="{{ $data->denda_ronda ?? '' }}" />
                 </div>
 
 
@@ -47,25 +52,16 @@
   </div>
 @endsection
 <script>
-  function formatRupiah(input) {
-    let value = input.value.replace(/[^0-9]/g, ''); // Hapus semua karakter selain angka
-    let formatted = new Intl.NumberFormat('id-ID', {
-      style: 'currency',
-      currency: 'IDR',
-      minimumFractionDigits: 0,
-    }).format(value); // Format sebagai Rupiah
-    input.value = formatted.replace('Rp', 'Rp '); // Pastikan 'Rp' terpasang
-  }
+  function formatCurrency(input, hiddenFieldId) {
+    let value = input.value.replace(/[^0-9]/g, '');
 
-  function validateNumberInput(event) {
-    // Dapatkan karakter yang dimasukkan
-    const charCode = (event.which) ? event.which : event.keyCode;
-
-    // Jika karakter yang dimasukkan bukan angka, batalkan input
-    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-      event.preventDefault();
-      return false;
+    if (value.length > 0) {
+      let formatted = parseInt(value, 10).toLocaleString('id-ID');
+      input.value = `Rp ${formatted}`;
+      document.getElementById(hiddenFieldId).value = value;
+    } else {
+      input.value = '';
+      document.getElementById(hiddenFieldId).value = '';
     }
-    return true;
   }
 </script>

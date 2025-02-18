@@ -75,9 +75,9 @@
                 <a href="{{ route('umum.destroy', $item->id) }}" data-confirm-delete="true">
                   <i class="fa fa-trash mx-2" style="font-size: 14px"></i>
                 </a>
-                <a href="{{ route('umum.view', $item->id) }}">
+                {{-- <a href="{{ route('umum.view', $item->id) }}">
                   <i class="fa fa-eye mx-2" style="font-size: 14px"></i>
-                </a>
+                </a> --}}
               </td>
             </tr>
           @endforeach

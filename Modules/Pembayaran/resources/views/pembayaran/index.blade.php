@@ -53,7 +53,7 @@
             <th>#</th>
             <th>Nama</th>
             <th>Total Tagihan</th>
-            <th>Tagihan Umum</th>
+            <th>Tagihan Rutin</th>
             <th>Tagihan Pam</th>
             <th>Denda Ronda</th>
             <th>Absen Ronda</th>
@@ -61,7 +61,6 @@
           </tr>
         </thead>
         <tbody>
-
 
           @foreach ($data as $item)
             <tr>
@@ -72,16 +71,64 @@
               <td>{{ $item['tagihan_pam'] }}</td>
               <td>{{ $item['nominal_denda_ronda'] }}</td>
               <td>{{ $item['jml_tdk_ronda'] }} hari</td>
-              <td><a href="{{ route('pembayaran.show', $item['warga_id']) }} " style="font-size: 24px"><i
-                    class="fa fa-money"></i></a>
-                <i class="fa fa-money mx-2" style="font-size: 14px"></i>
+              <td>
+                <a href="#modal-dialog" data-bs-toggle="modal" data-id="{{ $item['warga_id'] }}"
+                  class="btn btn-sm btn-success w-100px open-modal"
+                  style="font-size: 12px; text-decoration: none; border: solid 1px; border-radius: 3px;">
+                  <i class="fas fa-xs fa-fw me-10px fa-eye"></i>Lihat
+                </a>
               </td>
             </tr>
           @endforeach
+
         </tbody>
       </table>
     </div>
-    <!-- END panel-body -->
   </div>
-  <!-- END panel -->
+
+  <!-- #modal-dialog -->
+  <div class="modal fade" id="modal-dialog">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Pilih Pembayaran</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row gap-2 justify-content-center">
+            <a id="link-rutin" href="#" class="btn btn-sm btn-success w-250px" style="display: inline">
+              <i class="fa-regular fa-clock" style="font-size: 80px; margin: 10px;"></i><br>
+              Pembayaran Rutin
+            </a>
+            <a id="link-pam" href="#" class="btn btn-sm btn-success w-250px">
+              <i class="fa-solid fa-shower" style="font-size: 80px ; margin: 10px;"></i><br>
+              Pembayaran Pam
+            </a>
+            <a id="link-denda" href="#" class="btn btn-sm btn-success w-250px">
+              <i class="fa-solid fa-person-military-rifle" style="font-size: 80px ; margin: 10px;"></i><br>
+              Pembayaran Denda Ronda
+            </a>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a href="javascript:;" class="btn btn-white" data-bs-dismiss="modal">Close</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      document.querySelectorAll(".open-modal").forEach(function(button) {
+        button.addEventListener("click", function() {
+          let wargaId = this.getAttribute("data-id"); // Ambil ID dari tombol
+
+          // Update link di dalam modal dengan ID yang sesuai
+          document.getElementById("link-rutin").href = "/pembayaran/" + wargaId + "/periode";
+          document.getElementById("link-pam").href = "/pembayaran/" + wargaId;
+          document.getElementById("link-denda").href = "/pembayaran_denda/" + wargaId;
+        });
+      });
+    });
+  </script>
 @endsection

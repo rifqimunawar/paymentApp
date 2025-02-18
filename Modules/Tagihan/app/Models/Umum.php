@@ -5,6 +5,7 @@ namespace Modules\Tagihan\Models;
 use Modules\Master\Models\Warga;
 use Modules\Master\Models\Periode;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Pembayaran\Models\Pembayaran;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 // use Modules\Tagihan\Database\Factories\UmumFactory;
@@ -13,38 +14,42 @@ class Umum extends Model
 {
   use HasFactory, SoftDeletes;
   protected $guarded = [];
-
-
   // Relasi ke Warga melalui tabel pivot "umum_warga"
-  public function wargas()
-  {
-    return $this->belongsToMany(Warga::class, 'umum_warga', 'umum_id', 'warga_id')
-      ->withTimestamps();
-  }
+  // public function wargas()
+  // {
+  //   return $this->belongsToMany(Warga::class, 'umum_warga', 'umum_id', 'warga_id')
+  //     ->withTimestamps();
+  // }
   public function umums()
   {
     return $this->belongsToMany(Umum::class, 'umum_warga', 'warga_id', 'umum_id')
       ->withTimestamps();
   }
-  public function periodes()
+  // public function periodes()
+  // {
+  //   return $this->belongsToMany(Periode::class, 'periode_umum', 'umum_id', 'periode_id')
+  //     ->withTimestamps();
+  // }
+
+  // Relasi dengan Warga melalui tabel pivot
+  public function wargas()
   {
-    return $this->belongsToMany(Periode::class, 'periode_umum', 'umum_id', 'periode_id')
+    return $this->belongsToMany(Warga::class, 'warga_tagihan_periode')
+      ->withPivot('periode_id')
       ->withTimestamps();
   }
 
-  public static function dataTagihanWarga($tagihan_id)
+  // Relasi dengan Periode melalui tabel pivot
+  public function periodes()
   {
-    if (isset($tagihan_id)) {
-      return self::select('umum_warga.*', 'umums.nama_tagihan', 'umums.nominal', 'wargas.nama')
-        ->join('umums', 'umum_warga.umum_id', '=', 'umums.id')
-        ->join('wargas', 'umum_warga.warga_id', '=', 'wargas.id')
-        ->where('umums.id', $tagihan_id) // Kondisi sesuai query SQL
-        ->orderBy('umum_warga.id', 'desc')
-        ->get(); // Mengembalikan semua data
-    }
-
-    return false;
+    return $this->belongsToMany(Periode::class, 'warga_tagihan_periode')
+      ->withPivot('warga_id')
+      ->withTimestamps();
   }
 
+  public function pembayaran()
+  {
+    return $this->hasMany(Pembayaran::class, 'tagihan_id', 'id');
+  }
 
 }
