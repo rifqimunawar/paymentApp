@@ -78,7 +78,8 @@
                   @php
                     $pembayaranId = $item->pembayaran->first()->id; // Mengambil ID pembayaran pertama
                   @endphp
-                  <a href="{{ route('invoice', $pembayaranId) }}" class="btn btn-sm btn-success w-100px">
+                  <a href="javascript:void(0);" onclick="printInvoice('{{ route('invoice', $pembayaranId) }}')"
+                    class="btn btn-sm btn-success w-100px">
                     <i class="fas fa-file-invoice"></i> Lunas
                   </a>
                 @else

@@ -75,6 +75,14 @@
 
 
 <script>
+  // Untuk Print
+  function printInvoice(url) {
+    var iframe = document.getElementById('printFrame');
+    iframe.src = url;
+    iframe.onload = function() {
+      iframe.contentWindow.print();
+    };
+  }
   var handleDashboardSparkline = function() {
     "use strict";
     var options = {

@@ -5,11 +5,13 @@
 <meta charset="utf-8" />
 <title>{{ $getWebName }} | @yield('title')</title>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
-
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <link rel="icon" type="image/x-icon" href="{{ $getLogo }}">
 <meta content="" name="description" />
 <meta content="" name="author" />
 
+<!-- ================== BEGIN BASE jQuery ================== -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- ================== BEGIN BASE CSS STYLE ================== -->
 <link href="{{ asset('assets/css/vendor.min.css') }}" rel="stylesheet" />
 <link href="{{ asset('assets/css/default/app.min.css') }}" rel="stylesheet" />

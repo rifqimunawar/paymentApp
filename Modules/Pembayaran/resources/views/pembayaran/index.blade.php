@@ -53,10 +53,10 @@
             <th>#</th>
             <th>Nama</th>
             <th>Total Tagihan</th>
+            <th>Total Terbayar</th>
             <th>Tagihan Rutin</th>
             <th>Tagihan Pam</th>
             <th>Denda Ronda</th>
-            <th>Absen Ronda</th>
             <th></th>
           </tr>
         </thead>
@@ -67,10 +67,10 @@
               <td>{{ $loop->iteration }}</td>
               <td>{{ $item['nama_warga'] }}</td>
               <td>{{ $item['total_tagihan'] }}</td>
+              <td>{{ $item['nominal_terbayar'] }}</td>
               <td>{{ $item['tagihan_umum'] }}</td>
               <td>{{ $item['tagihan_pam'] }}</td>
               <td>{{ $item['nominal_denda_ronda'] }}</td>
-              <td>{{ $item['jml_tdk_ronda'] }} hari</td>
               <td>
                 <a href="#modal-dialog" data-bs-toggle="modal" data-id="{{ $item['warga_id'] }}"
                   class="btn btn-sm btn-success w-100px open-modal"

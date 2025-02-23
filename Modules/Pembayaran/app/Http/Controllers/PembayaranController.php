@@ -9,6 +9,7 @@ use Modules\Master\Models\Warga;
 use Modules\Master\Models\Periode;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Modules\Master\Models\Parameter;
 use Modules\Tagihan\Models\TagihanRonda;
 use RealRashid\SweetAlert\Facades\Alert;
 use Modules\Pembayaran\Models\Pembayaran;
@@ -41,17 +42,20 @@ class PembayaranController extends Controller
         $totalTagihanPam += $tagihan->nominal;
       }
       $tagihanPamTotalFormatted = Fungsi::rupiah($totalTagihanPam);
-
+      $nominal_denda = Parameter::pluck('denda_ronda')->first();
       // ronda di ambil harus dari model TagihanRonda
       $jml_tdk_ronda = $item->absens->where('absen', 1)->count();
-      $nominal_denda_ronda = $jml_tdk_ronda * 20000;
+      $nominal_denda_ronda = $jml_tdk_ronda * $nominal_denda;
 
       $totalTagihan = $totalTagihanUmum + $totalTagihanPam + $nominal_denda_ronda;
+
+      $nominal_terbayar = Pembayaran::where('warga_id', $item->id)->sum('nominal_dibayar');
 
       $response[] = [
         'warga_id' => $item->id,
         'nama_warga' => $item->nama,
         'total_tagihan' => Fungsi::rupiah($totalTagihan),
+        'nominal_terbayar' => Fungsi::rupiah($nominal_terbayar),
         'tagihan_umum' => $tagihanUmum,
         'tagihan_pam' => $tagihanPamTotalFormatted,
         'jml_tdk_ronda' => $jml_tdk_ronda,
@@ -196,6 +200,7 @@ class PembayaranController extends Controller
     $title = 'Tagihan Denda Ronda';
     Fungsi::hakAkses('/pembayaran');
     $data = TagihanRonda::with(['warga', 'pembayaran'])
+      ->where('warga_id', $warga_id)
       ->latest()
       ->get();
 
@@ -240,14 +245,40 @@ class PembayaranController extends Controller
     $title = '';
     $data = Pembayaran::find($id);
 
+    $route = route('invoiceVerifikasi', $id);
     // return $data;
-    $qrCode = QrCode::size(80)->generate('Hello, Laravel 11!');
+    $qrCode = QrCode::size(80)->generate($route);
     return view(
       'pembayaran::/pembayaran/invoice',
       [
         'title' => $title,
         'data' => $data,
         'qrCode' => $qrCode,
+      ]
+    );
+  }
+
+  public function invoiceVerifikasi($id)
+  {
+    $title = '';
+    $data = Pembayaran::find($id);
+
+    if ($data) {
+      $periode = !empty($data->periode_nama) ? "untuk periode {$data->periode_nama}" : "";
+      $pesan = "Verifikasi pembayaran berhasil! Nota pembayaran ini adalah bukti sah atas pembayaran '{$data->tagihan_nama}' {$periode}.
+        Pembayaran ini dilakukan oleh Bapak/Ibu {$data->nama_warga} dengan nominal sebesar " . Fungsi::rupiah($data->nominal_dibayar) . "
+        Kami telah menerima pembayaran ini pada " . Fungsi::format_tgl($data->created_at) . ".
+        Terima kasih atas kontribusi Anda. Jika ada pertanyaan, silakan hubungi kami.";
+    } else {
+      $pesan = "Verifikasi gagal! Data pembayaran tidak ditemukan.";
+    }
+
+    Alert::success('Success', 'Verifikasi data berhasil');
+    return view(
+      'pembayaran::/pembayaran/verifikasi',
+      [
+        'title' => $title,
+        'data' => $pesan,
       ]
     );
   }

@@ -9,6 +9,7 @@ use Modules\Master\Models\Warga;
 use Modules\Tagihan\Models\Umum;
 use Illuminate\Support\Facades\DB;
 use Modules\Master\Models\Periode;
+use Modules\Master\Models\Provinsi;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
@@ -39,10 +40,12 @@ class WargaController extends Controller
     Fungsi::hakAkses('/master/warga');
 
     $title = "Karyawan Baru";
+    $data['provinsi'] = Provinsi::all();
     return view(
       'master::warga/create',
       [
         'title' => $title,
+        'data' => $data,
       ]
     );
   }

@@ -1,12 +1,11 @@
 PR:
 
 1.
-skema ketika  ada warga baru yang baru pindah/atau datang, misal di bulan maret sedangkan tagihan umum sudah berjalan dari januari, ketika menambahkan periode, warga tersebut jadi memiliki tagihan umum untuk bulan januari februari dan maret, harusnya ketika warga datang di bulan maret, maka tagihannya berjalan ketika warga itu datang, contohnya datang bulan maret dan periode di tambah di bulan maret maka tagihan umum di mulai untuk warga tersebut di bulan maret
-# solusi
-- menambahkan tanggal_datang ke migrasi warga, dan mengubah tiap fungsi store di periode, umum dan warga.
+membuat dropdown alamat dynamis
+
 
 2.
-selesaikan fitur ronda untuk kas ronda, lalu ke pembayaran,
+membuat 5 halaman mobile
 
 3.
-sedang dipikirkan jika tanggal sudah terlewat, fitur absen ronda aksesnya di tutup.
+fitur export dan print excel

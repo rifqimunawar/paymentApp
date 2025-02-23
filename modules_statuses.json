@@ -8,5 +8,7 @@
     "Register": true,
     "Tagihan": true,
     "Ronda": true,
-    "Pembayaran": true
+    "Pembayaran": true,
+    "Laporan": true,
+    "Mobile": true
 }

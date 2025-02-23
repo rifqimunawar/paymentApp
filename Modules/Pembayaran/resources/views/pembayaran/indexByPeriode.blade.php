@@ -88,10 +88,13 @@
                         ->where('periode_id', $tagihan->pivot->periode_id)
                         ->where('status', 1)
                         ->isNotEmpty();
-                    $pembayaranId = $tagihan->pembayaran->first()->id;
+
+                    $pembayaranId = optional($tagihan->pembayaran->first())->id ?? null;
                   @endphp
+
                   @if ($isLunas)
-                    <a href="{{ route('invoice', $pembayaranId) }}" class="btn btn-sm btn-success w-100px">
+                    <a href="javascript:void(0);" onclick="printInvoice('{{ route('invoice', $pembayaranId) }}')"
+                      class="btn btn-sm btn-success w-100px">
                       <i class="fas fa-file-invoice"></i> Lunas
                     </a>
                   @else
