@@ -8,6 +8,7 @@ use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Modules\Master\Models\Warga;
 
 class User extends Authenticatable
 {
@@ -26,6 +27,7 @@ class User extends Authenticatable
     'email',
     'password',
     'role_id',
+    'warga_id',
   ];
 
   /**
@@ -54,5 +56,10 @@ class User extends Authenticatable
   public function role()
   {
     return $this->belongsTo(Roles::class, 'role_id');
+  }
+
+  public function warga()
+  {
+    return $this->belongsTo(Warga::class, 'warga_id');
   }
 }

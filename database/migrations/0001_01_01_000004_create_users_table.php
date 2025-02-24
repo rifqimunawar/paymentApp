@@ -15,6 +15,7 @@ return new class extends Migration {
       $table->id();
       $table->string('name');
       $table->string('username');
+      $table->unsignedBigInteger('warga_id')->nullable();
       $table->string('img')->default('profile.png');
       $table->string('email')->unique();
       $table->timestamp('email_verified_at')->nullable();

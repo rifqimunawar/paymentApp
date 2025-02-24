@@ -89,12 +89,6 @@ class Backup extends Command
       'rondas' => [
         'rondas',
       ],
-      // 'umum_warga' => [
-      //   'umum_warga',
-      // ],
-      // 'periode_umum' => [
-      //   'periode_umum',
-      // ],
       'ronda_warga' => [
         'ronda_warga',
       ],
@@ -113,6 +107,18 @@ class Backup extends Command
       'warga_tagihan_periode' => [
         'warga_tagihan_periode',
       ],
+      // 'provinsis' => [
+      //   'provinsis',
+      // ],
+      // 'kabupatens' => [
+      //   'kabupatens',
+      // ],
+      // 'kecamatans' => [
+      //   'kecamatans',
+      // ],
+      // 'kelurahans' => [
+      //   'kelurahans',
+      // ],
 
 
     ];

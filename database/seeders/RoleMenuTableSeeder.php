@@ -93,29 +93,13 @@ class RoleMenuTableSeeder extends Seeder
             ),
             9 => 
             array (
-                'id' => 34,
-                'role_id' => 2,
-                'menu_id' => 8,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            10 => 
-            array (
-                'id' => 38,
-                'role_id' => 2,
-                'menu_id' => 12,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            11 => 
-            array (
                 'id' => 41,
                 'role_id' => 2,
                 'menu_id' => 15,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            12 => 
+            10 => 
             array (
                 'id' => 44,
                 'role_id' => 2,
@@ -123,7 +107,7 @@ class RoleMenuTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            13 => 
+            11 => 
             array (
                 'id' => 47,
                 'role_id' => 2,
@@ -131,7 +115,7 @@ class RoleMenuTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            14 => 
+            12 => 
             array (
                 'id' => 48,
                 'role_id' => 2,
@@ -139,7 +123,7 @@ class RoleMenuTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            15 => 
+            13 => 
             array (
                 'id' => 49,
                 'role_id' => 2,
@@ -147,7 +131,7 @@ class RoleMenuTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            16 => 
+            14 => 
             array (
                 'id' => 50,
                 'role_id' => 2,
@@ -155,23 +139,7 @@ class RoleMenuTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            17 => 
-            array (
-                'id' => 51,
-                'role_id' => 2,
-                'menu_id' => 23,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            18 => 
-            array (
-                'id' => 52,
-                'role_id' => 2,
-                'menu_id' => 24,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            19 => 
+            15 => 
             array (
                 'id' => 54,
                 'role_id' => 2,
@@ -179,7 +147,7 @@ class RoleMenuTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            20 => 
+            16 => 
             array (
                 'id' => 55,
                 'role_id' => 2,
@@ -187,7 +155,7 @@ class RoleMenuTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            21 => 
+            17 => 
             array (
                 'id' => 56,
                 'role_id' => 2,
@@ -195,7 +163,7 @@ class RoleMenuTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            22 => 
+            18 => 
             array (
                 'id' => 58,
                 'role_id' => 2,
@@ -203,7 +171,7 @@ class RoleMenuTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            23 => 
+            19 => 
             array (
                 'id' => 59,
                 'role_id' => 2,

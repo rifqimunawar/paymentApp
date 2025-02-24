@@ -17,6 +17,14 @@ return new class extends Migration {
       $table->string('telp')->nullable();
       $table->text('alamat')->nullable();
       $table->text('nik')->nullable();
+      $table->string('jk')->nullable();
+      $table->string('kota_kelahiran')->nullable();
+      $table->date('tgl_lahir')->nullable();
+      $table->string('agama')->nullable();
+      $table->string('pendidikan')->nullable();
+      $table->string('pekerjaan')->nullable();
+      $table->string('status_perkawinan')->nullable();
+      $table->string('status_keluarga')->nullable();
 
       $table->string('created_by')->default('unknown');
       $table->string('updated_by')->default('unknown');

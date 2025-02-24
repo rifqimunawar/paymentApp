@@ -127,9 +127,9 @@ class WargasTableSeeder extends Seeder
                 'created_by' => 'admin',
                 'updated_by' => 'unknown',
                 'deleted_by' => NULL,
-                'deleted_at' => NULL,
+                'deleted_at' => '2025-02-21 21:27:53',
                 'created_at' => '2025-02-09 01:48:20',
-                'updated_at' => '2025-02-09 01:48:20',
+                'updated_at' => '2025-02-21 21:27:53',
             ),
             8 => 
             array (

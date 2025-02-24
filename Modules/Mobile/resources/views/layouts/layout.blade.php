@@ -26,24 +26,27 @@
 <body>
 
   <!-- loader -->
-  <div id="loader">
+  {{-- <div id="loader">
     <img src="{{ GetSettings::getLogo() }}" alt="icon" class="loading-icon">
-  </div>
+  </div> --}}
   <!-- * loader -->
 
   <!-- App Header -->
   <div class="appHeader bg-primary text-light">
     <div class="pageTitle">
       <img src="{{ GetSettings::getLogo() }}" alt="logo" class="logo">
+
+      {{-- <h3 class="text-warning">Selamat datang {{ Auth::user()->name }}</h3> --}}
     </div>
     <div class="right">
-      <a href="app-notifications.html" class="headerButton">
+      <a href="app-notifications.html" class="headerButton premium-alert">
         <ion-icon class="icon" name="notifications-outline"></ion-icon>
-        <span class="badge badge-danger">4</span>
+        <span class="badge badge-danger">1</span>
       </a>
-      <a href="app-settings.html" class="headerButton">
-        <img src="{{ asset('mobile/assets/img/sample/avatar/avatar1.jpg') }}" alt="image" class="imaged w32">
-        <span class="badge badge-danger">6</span>
+      <a href="{{ route('mobile.settings') }}" class="headerButton">
+        <img src="{{ asset('img/' . Auth::user()->img) }}" alt="image" class="imaged"
+          style="width: 32px; height: 32px; object-fit: cover;">
+        <span class="badge badge-danger"></span>
       </a>
     </div>
   </div>
@@ -51,40 +54,40 @@
 
   @yield('content-mobile')
 
-
   <!-- App Bottom Menu -->
   <div class="appBottomMenu">
-    <a href="{{ route('mobile.home') }}" class="item active">
+    <a href="{{ route('mobile.home') }}" class="item {{ Request::is('mobile/home*') ? 'active' : '' }}">
       <div class="col">
         <ion-icon name="pie-chart-outline"></ion-icon>
         <strong>Home</strong>
       </div>
     </a>
-    <a href="{{ route('mobile.tagihan') }}" class="item">
+    <a href="{{ route('mobile.tagihan') }}" class="item {{ Request::is('mobile/tagihan*') ? 'active' : '' }}">
       <div class="col">
         <ion-icon name="document-text-outline"></ion-icon>
         <strong>Tagihan</strong>
       </div>
     </a>
-    <a href="{{ route('mobile.ronda') }}" class="item">
+    <a href="{{ route('mobile.ronda') }}" class="item {{ Request::is('mobile/ronda*') ? 'active' : '' }}">
       <div class="col">
         <ion-icon name="apps-outline"></ion-icon>
         <strong>Ronda</strong>
       </div>
     </a>
-    <a href="{{ route('mobile.history') }}" class="item">
+    <a href="{{ route('mobile.history') }}" class="item {{ Request::is('mobile/history*') ? 'active' : '' }}">
       <div class="col">
         <ion-icon name="card-outline"></ion-icon>
         <strong>History</strong>
       </div>
     </a>
-    <a href="{{ route('mobile.settings') }}" class="item">
+    <a href="{{ route('mobile.settings') }}" class="item {{ Request::is('mobile/settings*') ? 'active' : '' }}">
       <div class="col">
         <ion-icon name="settings-outline"></ion-icon>
         <strong>Settings</strong>
       </div>
     </a>
   </div>
+
   <!-- * App Bottom Menu -->
 
 
@@ -169,7 +172,29 @@
     // Add to Home with 2 seconds delay.
     AddtoHome("2000", "once");
   </script>
-
+  <!-- ================== BEGIN page-js jadwal ronda ================== -->
+  <script src="{{ asset('/assets/plugins/moment/min/moment.min.js') }}"></script>
+  <script src="{{ asset('/assets/plugins/@fullcalendar/core/index.global.js') }}"></script>
+  <script src="{{ asset('/assets/plugins/@fullcalendar/daygrid/index.global.js') }}"></script>
+  <script src="{{ asset('/assets/plugins/@fullcalendar/timegrid/index.global.js') }}"></script>
+  <script src="{{ asset('/assets/plugins/@fullcalendar/interaction/index.global.js') }}"></script>
+  <script src="{{ asset('/assets/plugins/@fullcalendar/list/index.global.js') }}"></script>
+  <script src="{{ asset('/assets/plugins/@fullcalendar/bootstrap/index.global.js') }}"></script>
+  <script src="{{ asset('/assets/js/demo/calendar.ronda_mobile.js') }}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    document.querySelectorAll(".premium-alert").forEach(item => {
+      item.addEventListener("click", function(event) {
+        event.preventDefault();
+        Swal.fire({
+          title: 'Fitur Premium!',
+          text: 'Fitur ini hanya tersedia di versi Premium. Upgrade sekarang untuk mengaksesnya!',
+          icon: 'warning',
+          confirmButtonText: 'Kembali'
+        });
+      });
+    });
+  </script>
 </body>
 
 </html>

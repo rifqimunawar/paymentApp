@@ -2,16 +2,16 @@
 
 @section('module-content')
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
       <div class="card">
         <div class="card-header">
           <div class="card-title">Form Elements</div>
         </div>
         <div class="card-body">
-          <div class="row">
-            <form action="{{ route('warga.store') }}" method="post" enctype="multipart/form-data">
+          <form action="{{ route('warga.store') }}" method="post" enctype="multipart/form-data">
+            <div class="row">
               @csrf
-              <div class="col-md-12 col-lg-12">
+              <div class="col-md-6 col-lg-6">
                 <div class="form-group mb-2">
                   <label for="nama">Nama</label>
                   <input type="text" class="form-control" required name="nama" id="nama" placeholder="Nama" />
@@ -63,11 +63,101 @@
                   </select>
                 </div> --}}
 
+                <div class="form-group mb-2">
+                  <label for="status_perkawinan">Status Perkawinan</label>
+                  <select class="form-select" name="status_perkawinan" aria-label="Default select example">
+                    <option disabled selected> - pilih - </option>
+                    <option value="Belum Menikah">Belum Menikah</option>
+                    <option value="Menikah">Menikah</option>
+                    <option value="Cerai Hidup">Cerai Hidup</option>
+                    <option value="Cerai Mati">Cerai Mati</option>
+                  </select>
+                </div>
+                <div class="form-group mb-2">
+                  <label for="status_keluarga">Status Dalam Keluarga</label>
+                  <select class="form-select" name="status_keluarga" aria-label="Default select example">
+                    <option disabled selected> - pilih - </option>
+                    <option value="Kepala Keluarga">Kepala Keluarga</option>
+                    <option value="Suami">Suami</option>
+                    <option value="Istri">Istri</option>
+                    <option value="Anak">Anak</option>
+                  </select>
+                </div>
 
                 <div class="form-group mb-2">
                   <label for="telp">Telpon WhatsApp</label>
                   <input type="text" class="form-control" required name="telp" id="telp" placeholder="085xxx"
                     oninput="numberInput(this)" />
+                </div>
+
+              </div>
+              <div class="col-md-6 col-lg-6">
+                <div class="form-group mb-2">
+                  <label for="jk">Jenis Kelamin</label>
+                  <select class="form-select" name="jk" aria-label="Default select example">
+                    <option disabled selected> - pilih - </option>
+                    <option value="Laki-laki">Laki-laki</option>
+                    <option value="Perempuan">Perempuan</option>
+                  </select>
+                </div>
+                <div class="form-group mb-2">
+                  <label for="kota_kelahiran">Kota Kelahiran</label>
+                  <input type="text" class="form-control" name="kota_kelahiran" required id="kota_kelahiran"
+                    placeholder="Kota kelahiran" />
+                </div>
+                <div class="form-group mb-2">
+                  <label for="tgl_lahir">Tanggal Lahir</label>
+                  <input type="date" class="form-control" required name="tgl_lahir" id="tgl_lahir"
+                    placeholder="085xxx" />
+                </div>
+                <div class="form-group mb-2">
+                  <label for="agama">Agama</label>
+                  <select class="form-select" name="agama" aria-label="Default select example">
+                    <option disabled selected> - pilih - </option>
+                    <option value="Islam">Islam</option>
+                    <option value="Kristen">Kristen</option>
+                    <option value="Hindu">Hindu</option>
+                    <option value="Budha">Budha</option>
+                  </select>
+                </div>
+                <div class="form-group mb-2">
+                  <label for="pendidikan">Pendidikan</label>
+                  <select class="form-select" name="pendidikan" aria-label="Default select example">
+                    <option disabled selected> - pilih - </option>
+                    <option value="SD/Sederajat">SD/Sederajat</option>
+                    <option value="SMP/Sederajat">SMP/Sederajat</option>
+                    <option value="SMA/Sederajat">SMA/Sederajat</option>
+                    <option value="D3/Sederajat">D3/Sederajat</option>
+                    <option value="S1/Sederajat">S1/Sederajat</option>
+                    <option value="S2/Sederajat">S2/Sederajat</option>
+                    <option value="S3/Sederajat">S3/Sederajat</option>
+                  </select>
+                </div>
+                <div class="form-group mb-2">
+                  <label for="pekerjaan">Pekerjaan</label>
+                  <select class="form-select" name="pekerjaan" aria-label="Default select example">
+                    <option disabled selected> - pilih - </option>
+                    <option value="Pegawai Negeri Sipil (PNS)">Pegawai Negeri Sipil (PNS)</option>
+                    <option value="Karyawan Swasta">Karyawan Swasta</option>
+                    <option value="Wiraswasta / Pengusaha">Wiraswasta / Pengusaha</option>
+                    <option value="Petani">Petani</option>
+                    <option value="Nelayan">Nelayan</option>
+                    <option value="Buruh / Pekerja Lepas">Buruh / Pekerja Lepas</option>
+                    <option value="Guru / Dosen">Guru / Dosen</option>
+                    <option value="Dokter / Tenaga Medis">Dokter / Tenaga Medis</option>
+                    <option value="TNI / Polri">TNI / Polri</option>
+                    <option value="Ojek Online / Sopir">Ojek Online / Sopir</option>
+                    <option value="Ibu Rumah Tangga">Ibu Rumah Tangga</option>
+                    <option value="Mahasiswa / Pelajar">Mahasiswa / Pelajar</option>
+                    <option value="Pensiunan">Pensiunan</option>
+                    <option value="Teknisi / Mekanik">Teknisi / Mekanik</option>
+                    <option value="Seniman / Pekerja Kreatif">Seniman / Pekerja Kreatif</option>
+                    <option value="Programmer / IT Specialist">Programmer / IT Specialist</option>
+                    <option value="Pengacara / Notaris">Pengacara / Notaris</option>
+                    <option value="Akuntan / Konsultan Keuangan">Akuntan / Konsultan Keuangan</option>
+                    <option value="Pedagang / Penjual">Pedagang / Penjual</option>
+                    <option value="Lainnya">Lainnya</option>
+                  </select>
                 </div>
 
                 <div class="card-action">
@@ -76,9 +166,8 @@
                   <a href="{{ route('warga.index') }}" class="btn btn-warning btn-sm">Kembali</a>
                 </div>
               </div>
-            </form>
-
-          </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>

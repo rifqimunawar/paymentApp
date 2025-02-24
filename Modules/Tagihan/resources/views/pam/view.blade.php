@@ -20,6 +20,50 @@
                 <td>{{ $data->nama }}</td>
               </tr>
               <tr>
+                <td>NIK</td>
+                <td>:</td>
+                <td>{{ $data->nik }}</td>
+              </tr>
+              <tr>
+                <td>Usia</td>
+                <td>:</td>
+                <td>{{ Fungsi::usia($data->tgl_lahir) }}</td>
+              </tr>
+              <tr>
+                <td>Jenis Kelamin</td>
+                <td>:</td>
+                <td>{{ $data->jk }}</td>
+              </tr>
+              <tr>
+                <td>Kota Kelahiran</td>
+                <td>:</td>
+                <td>{{ $data->kota_kelahiran }}</td>
+              </tr>
+              <tr>
+                <td>Agama</td>
+                <td>:</td>
+                <td>{{ $data->agama }}</td>
+              </tr>
+              <tr>
+                <td>Pendidikan</td>
+                <td>:</td>
+                <td>{{ $data->pendidikan }}</td>
+              </tr>
+              <tr>
+                <td>Pekerjaan</td>
+                <td>:</td>
+                <td>{{ $data->pekerjaan }}</td>
+              </tr>
+              <tr>
+                <td>Status Perkawinan</td>
+                <td>:</td>
+                <td>{{ $data->status_perkawinan }}</td>
+              </tr>
+              <tr>
+                <td>Status Keluarga</td>
+                <td>:</td>
+                <td>{{ $data->status_keluarga }}</td>
+              </tr>
               <tr>
                 <td>Alamat</td>
                 <td>:</td>

@@ -5,6 +5,7 @@ namespace Modules\Users\Http\Controllers;
 use App\Models\User;
 use App\Helpers\Fungsi;
 use Illuminate\Http\Request;
+use Modules\Master\Models\Warga;
 use Modules\Settings\Models\Roles;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
@@ -36,7 +37,7 @@ class UsersController extends Controller
   {
     Fungsi::hakAkses('/users');
     $title = "User Baru";
-
+    $dataWarga = Warga::all();
     $dataRoles = Roles::all();
 
     return view(
@@ -44,6 +45,7 @@ class UsersController extends Controller
       [
         'title' => $title,
         'dataRoles' => $dataRoles,
+        'dataWarga' => $dataWarga,
       ]
     );
   }
@@ -52,6 +54,7 @@ class UsersController extends Controller
   {
     Fungsi::hakAkses('/users');
     $request->validate([
+      'warga_id' => 'required|exists:wargas,id|unique:users,warga_id',
       'role_id' => 'required|exists:roles,id',
       'name' => 'required',
       'username' => 'required|unique:users,username',
@@ -87,7 +90,8 @@ class UsersController extends Controller
     ]));
 
     $title = "Update Users";
-    $data = User::findOrFail($id);
+    $data = User::with('warga')->findOrFail($id);
+    $dataWarga = Warga::all();
     $dataRoles = Roles::all();
     return view(
       'users::users.edit',
@@ -95,6 +99,7 @@ class UsersController extends Controller
         'data' => $data,
         'title' => $title,
         'dataRoles' => $dataRoles,
+        'dataWarga' => $dataWarga,
       ]
     );
   }

@@ -5,72 +5,37 @@
   <div id="appCapsule">
 
     <!-- Wallet Card -->
-    <div class="section wallet-card-section pt-1">
+    <div class="section wallet-card-section pt-1 mb-2">
       <div class="wallet-card">
-        <!-- Balance -->
-        <div class="balance">
-          <div class="left">
-            <span class="title">Total Balance</span>
-            <h1 class="total">$ 2,562.50</h1>
-          </div>
-          <div class="right">
-            <a href="#" class="button" data-bs-toggle="modal" data-bs-target="#depositActionSheet">
-              <ion-icon name="add-outline"></ion-icon>
-            </a>
-          </div>
+        <div id="calendar" class="calendar" data-base-url="{{ App\Helpers\GetSettings::getBaseUrl() }}" style="margin: 10px">
         </div>
-        <!-- * Balance -->
-        <!-- Wallet Footer -->
-        <div class="wallet-footer">
-          <div class="item">
-            <a href="#" data-bs-toggle="modal" data-bs-target="#withdrawActionSheet">
-              <div class="icon-wrapper bg-danger">
-                <ion-icon name="arrow-down-outline"></ion-icon>
-              </div>
-              <strong>Withdraw</strong>
-            </a>
-          </div>
-          <div class="item">
-            <a href="#" data-bs-toggle="modal" data-bs-target="#sendActionSheet">
-              <div class="icon-wrapper">
-                <ion-icon name="arrow-forward-outline"></ion-icon>
-              </div>
-              <strong>Send</strong>
-            </a>
-          </div>
-          <div class="item">
-            <a href="app-cards.html">
-              <div class="icon-wrapper bg-success">
-                <ion-icon name="card-outline"></ion-icon>
-              </div>
-              <strong>Cards</strong>
-            </a>
-          </div>
-          <div class="item">
-            <a href="#" data-bs-toggle="modal" data-bs-target="#exchangeActionSheet">
-              <div class="icon-wrapper bg-warning">
-                <ion-icon name="swap-vertical"></ion-icon>
-              </div>
-              <strong>Exchange</strong>
-            </a>
-          </div>
-
-        </div>
-        <!-- * Wallet Footer -->
       </div>
     </div>
+    <div class="wallet-card">
+      <div class="accordion" id="accordionExample2">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#accordion001">
+              <ion-icon name="calendar-number-outline"></ion-icon>
+              Tanggal
+            </button>
+          </h2>
+          <div id="accordion001" class="accordion-collapse collapse" data-bs-parent="#accordionExample2">
+            <div class="accordion-body">
+              <li>1</li>
+              <li>2</li>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Wallet Card -->
 
 
 
-    <!-- app footer -->
-    <div class="appFooter">
-      <div class="footer-title">
-        Copyright © Finapp 2021. All Rights Reserved.
-      </div>
-      Bootstrap 5 based mobile template.
-    </div>
-    <!-- * app footer -->
+    @include('mobile::layouts.footer')
 
   </div>
   <!-- * App Capsule -->

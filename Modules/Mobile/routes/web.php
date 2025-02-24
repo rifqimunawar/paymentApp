@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Auth\Http\Controllers\AuthController;
 use Modules\Mobile\Http\Controllers\MobileController;
 
 /*
@@ -14,6 +15,11 @@ use Modules\Mobile\Http\Controllers\MobileController;
 |
 */
 
+Route::prefix('mobile')->group(function () {
+  Route::get('/login', [AuthController::class, 'login'])->name('mobile.login');
+  Route::post('/login', [AuthController::class, 'authenticate'])->name('mobile.authenticate');
+  Route::get('/logout', [AuthController::class, 'mobileLogout'])->name('mobile.logout');
+});
 
 Route::prefix('mobile')->middleware('auth')->group(function () {
   Route::get('/home', [MobileController::class, 'home'])->name('mobile.home');

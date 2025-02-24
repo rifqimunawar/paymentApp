@@ -24,6 +24,7 @@ class UsersTableSeeder extends Seeder
                 'id' => 1,
                 'name' => 'Rifqi Munawar R.',
                 'username' => 'admin',
+                'warga_id' => NULL,
                 'img' => 'profile_admin_1734787375.JPG',
                 'email' => 'admin@gmail.com',
                 'email_verified_at' => NULL,
@@ -35,17 +36,18 @@ class UsersTableSeeder extends Seeder
             ),
             1 => 
             array (
-                'id' => 2,
-                'name' => 'admin2',
-                'username' => 'admin2',
+                'id' => 4,
+                'name' => 'munawar',
+                'username' => 'munawar',
+                'warga_id' => 9,
                 'img' => 'profile.png',
-                'email' => 'admin2@gmail.com',
+                'email' => 'munawar@gmail.com',
                 'email_verified_at' => NULL,
-                'password' => '$2y$12$IUPpt6N/19aeDOs3OK3v5eUZ0povneovOI8PWBgMmF42mo7/UQJq.',
+                'password' => '$2y$12$UbtQtopGrvwLPhaazhU/3OSXma1jsUfY2BTmdHgywlFKIryoEAM16',
                 'role_id' => 3,
                 'remember_token' => NULL,
-                'created_at' => '2024-12-21 13:40:54',
-                'updated_at' => '2025-02-15 19:08:22',
+                'created_at' => '2025-02-23 23:22:10',
+                'updated_at' => '2025-02-23 23:22:10',
             ),
         ));
         

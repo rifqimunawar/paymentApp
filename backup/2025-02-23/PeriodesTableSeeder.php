@@ -21,7 +21,7 @@ class PeriodesTableSeeder extends Seeder
         \DB::table('periodes')->insert(array (
             0 => 
             array (
-                'id' => 7,
+                'id' => 11,
                 'nama_periode' => 'Januari 2025',
                 'tanggal_mulai' => '2025-01-01',
                 'tanggal_akhir' => '2025-01-31',
@@ -29,12 +29,12 @@ class PeriodesTableSeeder extends Seeder
                 'updated_by' => 'unknown',
                 'deleted_by' => NULL,
                 'deleted_at' => NULL,
-                'created_at' => '2025-02-09 21:10:16',
-                'updated_at' => '2025-02-09 21:10:16',
+                'created_at' => '2025-02-21 22:29:05',
+                'updated_at' => '2025-02-21 22:29:05',
             ),
             1 => 
             array (
-                'id' => 8,
+                'id' => 12,
                 'nama_periode' => 'Februari 2025',
                 'tanggal_mulai' => '2025-02-01',
                 'tanggal_akhir' => '2025-02-28',
@@ -42,8 +42,8 @@ class PeriodesTableSeeder extends Seeder
                 'updated_by' => 'unknown',
                 'deleted_by' => NULL,
                 'deleted_at' => NULL,
-                'created_at' => '2025-02-09 21:10:33',
-                'updated_at' => '2025-02-09 21:10:33',
+                'created_at' => '2025-02-21 22:34:08',
+                'updated_at' => '2025-02-21 22:34:08',
             ),
         ));
         

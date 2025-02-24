@@ -39,10 +39,24 @@ class WargaController extends Controller
   {
     Fungsi::hakAkses('/master/warga');
 
-    $title = "Karyawan Baru";
+    $title = "Warga Baru";
     $data['provinsi'] = Provinsi::all();
     return view(
       'master::warga/create',
+      [
+        'title' => $title,
+        'data' => $data,
+      ]
+    );
+  }
+  public function edit($id)
+  {
+    Fungsi::hakAkses('/master/warga');
+
+    $title = "Update Warga";
+    $data = Warga::findOrfail($id);
+    return view(
+      'master::warga/edit',
       [
         'title' => $title,
         'data' => $data,

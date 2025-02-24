@@ -7,7 +7,8 @@
     <div class="section mt-3 text-center">
       <div class="avatar-section">
         <a href="#">
-          <img src="assets/img/sample/avatar/avatar1.jpg" alt="avatar" class="imaged w100 rounded">
+          <img src="{{ asset('img/' . Auth::user()->img) }}" alt="avatar" class="imaged rounded"
+            style="width: 100px; height: 100px; object-fit: cover;">
           <span class="button">
             <ion-icon name="camera-outline"></ion-icon>
           </span>
@@ -34,7 +35,7 @@
 
     <div class="listview-title mt-1">Notifications</div>
     <ul class="listview image-listview text inset">
-      <li>
+      {{-- <li>
         <div class="item">
           <div class="in">
             <div>
@@ -49,12 +50,12 @@
             </div>
           </div>
         </div>
-      </li>
+      </li> --}}
       <li>
-        <a href="#" class="item">
+        <a href="#" class="item premium-alert">
           <div class="in">
             <div>Notification Sound</div>
-            <span class="text-primary">Beep</span>
+            <span class="text-primary">Edit</span>
           </div>
         </a>
       </li>
@@ -63,28 +64,28 @@
     <div class="listview-title mt-1">Profile Settings</div>
     <ul class="listview image-listview text inset">
       <li>
-        <a href="#" class="item">
+        <a href="#" class="item premium-alert">
           <div class="in">
             <div>Change Username</div>
           </div>
         </a>
       </li>
       <li>
-        <a href="#" class="item">
+        <a href="#" class="item premium-alert">
           <div class="in">
             <div>Update E-mail</div>
           </div>
         </a>
       </li>
       <li>
-        <a href="#" class="item">
+        <a href="#" class="item premium-alert">
           <div class="in">
             <div>Address</div>
             <span class="text-primary">Edit</span>
           </div>
         </a>
       </li>
-      <li>
+      {{-- <li>
         <div class="item">
           <div class="in">
             <div>
@@ -96,19 +97,19 @@
             </div>
           </div>
         </div>
-      </li>
+      </li> --}}
     </ul>
 
     <div class="listview-title mt-1">Security</div>
     <ul class="listview image-listview text mb-2 inset">
       <li>
-        <a href="#" class="item">
+        <a href="#" class="item premium-alert">
           <div class="in">
             <div>Update Password</div>
           </div>
         </a>
       </li>
-      <li>
+      {{-- <li>
         <div class="item">
           <div class="in">
             <div>
@@ -120,9 +121,9 @@
             </div>
           </div>
         </div>
-      </li>
+      </li> --}}
       <li>
-        <a href="#" class="item">
+        <a href="{{ route('mobile.logout') }}" class="item">
           <div class="in">
             <div>Log out all devices</div>
           </div>
