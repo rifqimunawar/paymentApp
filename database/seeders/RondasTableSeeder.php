@@ -52,6 +52,17 @@ class RondasTableSeeder extends Seeder
                 'created_at' => '2025-02-18 20:37:24',
                 'updated_at' => '2025-02-18 20:37:24',
             ),
+            3 => 
+            array (
+                'id' => 4,
+                'tanggal_ronda' => '2025-02-23',
+                'created_by' => 'admin',
+                'updated_by' => 'unknown',
+                'deleted_by' => NULL,
+                'deleted_at' => NULL,
+                'created_at' => '2025-02-24 21:52:12',
+                'updated_at' => '2025-02-24 21:52:12',
+            ),
         ));
         
         

@@ -14,6 +14,14 @@ use Modules\Laporan\Http\Controllers\LaporanController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('laporan', LaporanController::class)->names('laporan');
+// Route::group([], function () {
+//     Route::resource('laporan', LaporanController::class)->names('laporan');
+// });
+Route::prefix('lap')->middleware('auth')->group(function () {
+
+  Route::get('/keuangan', [LaporanController::class, 'keuangan'])->name('laporan.keuangan');
+  Route::get('/pembayaran', [LaporanController::class, 'pembayaran'])->name('laporan.pembayaran');
+  Route::get('/get_data_pembayaran', [LaporanController::class, 'get_ajx_pembayaran']);
+  Route::get('/pembayaran/export', [LaporanController::class, 'export'])->name('lap_pembayaran.export');
+  Route::get('/pembayaran/pdf', [LaporanController::class, 'pdf'])->name('lap_pembayaran.pdf');
 });

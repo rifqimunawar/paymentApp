@@ -2,64 +2,122 @@
 
 namespace Modules\Laporan\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use Log;
+use Carbon\Carbon;
+use App\Helpers\Fungsi;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
+use Modules\Laporan\Exports\PembayaranExport;
+use Modules\Pembayaran\Models\Pembayaran;
 
 class LaporanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        return view('laporan::index');
+  public function keuangan()
+  {
+    return "hello world";
+  }
+  public function pembayaran()
+  {
+    Fungsi::hakAkses('/lap/pembayaran');
+    $title = 'Pembayaran';
+
+    return view(
+      'laporan::/pembayaran/index',
+      [
+        'title' => $title,
+      ]
+    );
+  }
+  public function get_ajx_pembayaran(Request $request)
+  {
+    // Jika request kosong, gunakan tanggal hari ini dengan waktu 00:00:00 - 23:59:59
+    $start_date = $request->input('start_date')
+      ? Carbon::parse($request->input('start_date'))->startOfDay()->format('Y-m-d H:i:s')
+      : now()->startOfDay()->format('Y-m-d H:i:s');
+
+    $end_date = $request->input('end_date')
+      ? Carbon::parse($request->input('end_date'))->endOfDay()->format('Y-m-d H:i:s')
+      : now()->endOfDay()->format('Y-m-d H:i:s');
+
+    // Ambil parameter DataTables
+    $start = $request->input('start', 0);
+    $length = $request->input('length', 10);
+    $searchValue = $request->input('search.value', '');
+
+    // Query utama
+    $query = Pembayaran::whereBetween('created_at', [$start_date, $end_date]);
+
+    // Jika ada pencarian, tambahkan filter LIKE pada nama_warga
+    if (!empty($searchValue)) {
+      $query->where('nama_warga', 'LIKE', "%{$searchValue}%");
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('laporan::create');
+    // Hitung total data setelah filter
+    $totalData = $query->count();
+
+    // Ambil data dengan paginasi
+    $data = $query->orderBy('created_at', 'desc')
+      ->skip($start)->take($length)
+      ->get();
+
+    // Tambahkan nomor urut dan keterangan ke dalam data
+    foreach ($data as $index => $item) {
+      $item->number = $start + $index + 1;
+      $item->keterangan = '';
+
+      if (!empty($item->periode_nama)) {
+        $item->keterangan .= 'Periode ' . $item->periode_nama;
+      }
+      if (!empty($item->tgl_absen_ronda)) {
+        $item->keterangan .= ($item->keterangan ? ' | ' : '') . 'Absen Ronda ' . $item->tgl_absen_ronda;
+      }
+      if (!empty($item->parameter_pam)) {
+        $item->keterangan .= ($item->keterangan ? ' | ' : '') . 'Pam ' . $item->parameter_pam . ' m³';
+      }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    // Response JSON untuk DataTables
+    return response()->json([
+      'draw' => $request->input('draw'),
+      'recordsTotal' => $totalData,
+      'recordsFiltered' => $totalData,
+      'data' => $data
+    ]);
+  }
 
-    /**
-     * Show the specified resource.
-     */
-    public function show($id)
-    {
-        return view('laporan::show');
-    }
+  public function export()
+  {
+    return Excel::download(new PembayaranExport, 'pembayaran.xlsx');
+  }
+  public function pdf()
+  {
+    $title = "List Data Pembayaran per :" . Carbon::now()->format('d-M-Y');
+    $today = Carbon::now()->format('d M Y');
+    $data = Pembayaran::latest()->get();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($id)
-    {
-        return view('laporan::edit');
-    }
+    // dd($data);
+    // ========================untuk development
+    // return view(
+    //   'laporan::pembayaran/pdf',
+    //   [
+    //     'title' => $title,
+    //     'data' => $data,
+    //     'today' => $today,
+    //   ]
+    // );
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+    // ========================untuk production
+    $html = view('laporan::pembayaran/pdf', [
+      'title' => $title,
+      'data' => $data,
+      'today' => $today,
+    ])->render();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    $mpdf = new \Mpdf\Mpdf();
+    $mpdf->WriteHTML($html);
+    $fileName = Carbon::now()->format('Y_m_d') . '_data_pembayaran.pdf';
+    $mpdf->Output($fileName, 'D');
+    $mpdf->Output();
+  }
 }

@@ -19,4 +19,5 @@ use Modules\Dashboard\Http\Controllers\DashboardController;
 
 Route::middleware('auth')->group(function () {
   Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+  Route::get('/get_data_statistik', [DashboardController::class, 'statistik'])->name('statistik');
 });

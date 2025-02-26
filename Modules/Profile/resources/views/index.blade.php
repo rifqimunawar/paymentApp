@@ -50,24 +50,38 @@
 
               <div class="mb-3">
                 <label class="form-label" for="username">Username</label>
-                <input class="form-control" type="text" id="username" name="username" placeholder="username" required
-                  value="{{ $data->username }}" />
+                <input class="form-control @error('username') is-invalid @enderror" type="text" id="username"
+                  name="username" placeholder="username" required value="{{ old('username', $data->username ?? '') }}" />
+                @error('username')
+                  <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
               </div>
 
               <div class="mb-3">
                 <label class="form-label" for="email">Email</label>
-                <input class="form-control" type="email" id="email" name="email" placeholder="Email"
-                  value="{{ $data->email }}" />
+                <input class="form-control @error('email') is-invalid @enderror" type="email" id="email"
+                  name="email" placeholder="Email" value="{{ old('email', $data->email ?? '') }}" />
+                @error('email')
+                  <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
               </div>
 
               <div class="mb-3">
                 <label class="form-label" for="img">Profile</label>
-                <input class="form-control" type="file" id="img" name="img" placeholder="img"
-                  value="{{ $data->img }}" onchange="previewImage(event)" />
+                <input class="form-control @error('img') is-invalid @enderror" type="file" id="img"
+                  name="img" placeholder="img" onchange="previewImage(event)" />
+                @error('img')
+                  <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
               </div>
+
               <div class="mb-3">
                 <label class="form-label" for="password">Password</label>
-                <input class="form-control" type="password" id="password" name="password" placeholder="password" />
+                <input class="form-control @error('password') is-invalid @enderror" type="password" id="password"
+                  name="password" placeholder="password" />
+                @error('password')
+                  <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
               </div>
 
               <div class="d-flex justify-content-center">

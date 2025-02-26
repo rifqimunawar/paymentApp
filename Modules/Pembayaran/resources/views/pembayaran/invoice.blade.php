@@ -135,7 +135,7 @@
               <!-- Kolom Invoice Info -->
               <td style="padding-left: 15px; text-align: right;">
                 <p style="margin: 0; font-size: 14px;">
-                  Nomor :{{ $data->id }}
+                  Nomor :{{ $data->no_pembayaran }}
                 </p>
               </td>
             </tr>

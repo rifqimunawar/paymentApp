@@ -9,6 +9,7 @@ use Modules\Ronda\Models\Ronda;
 use App\Http\Controllers\Controller;
 use Modules\Master\Models\Parameter;
 use Modules\Tagihan\Models\TagihanRonda;
+use Modules\Pembayaran\Models\Pembayaran;
 
 class DashboardController extends Controller
 {
@@ -53,5 +54,18 @@ class DashboardController extends Controller
     // setiap login lakukan pengecekan tagihan ronda END
 
     return view('dashboard::index');
+  }
+
+  public function statistik()
+  {
+    $data = Pembayaran::latest()->get();
+
+    // Response JSON untuk DataTables
+    return response()->json([
+      // 'draw' => $request->input('draw'),
+      // 'recordsTotal' => $totalData,
+      // 'recordsFiltered' => $totalData,
+      'data' => $data
+    ]);
   }
 }

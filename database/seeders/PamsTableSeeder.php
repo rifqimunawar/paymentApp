@@ -87,6 +87,40 @@ class PamsTableSeeder extends Seeder
                 'created_at' => '2025-02-16 13:59:40',
                 'updated_at' => '2025-02-16 13:59:40',
             ),
+            4 => 
+            array (
+                'id' => 6,
+                'warga_id' => 12,
+                'tanggal_input' => '2025-02-24',
+                'parameter' => 5,
+                'total_parameter' => 5,
+                'biaya_per_m3' => 5000,
+                'nominal' => 25000,
+                'deskripsi' => NULL,
+                'created_by' => 'admin',
+                'updated_by' => 'unknown',
+                'deleted_by' => NULL,
+                'deleted_at' => NULL,
+                'created_at' => '2025-02-24 21:53:01',
+                'updated_at' => '2025-02-24 21:53:01',
+            ),
+            5 => 
+            array (
+                'id' => 7,
+                'warga_id' => 12,
+                'tanggal_input' => '2025-02-24',
+                'parameter' => 2,
+                'total_parameter' => 7,
+                'biaya_per_m3' => 5000,
+                'nominal' => 10000,
+                'deskripsi' => NULL,
+                'created_by' => 'admin',
+                'updated_by' => 'unknown',
+                'deleted_by' => NULL,
+                'deleted_at' => NULL,
+                'created_at' => '2025-02-24 21:53:11',
+                'updated_at' => '2025-02-24 21:53:11',
+            ),
         ));
         
         

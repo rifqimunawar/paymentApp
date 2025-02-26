@@ -397,6 +397,222 @@ class WargaTagihanPeriodeTableSeeder extends Seeder
                 'created_at' => '2025-02-21 22:34:08',
                 'updated_at' => '2025-02-21 22:34:08',
             ),
+            42 => 
+            array (
+                'id' => 195,
+                'warga_id' => 4,
+                'umum_id' => 7,
+                'periode_id' => 13,
+                'created_at' => '2025-02-24 22:08:27',
+                'updated_at' => '2025-02-24 22:08:27',
+            ),
+            43 => 
+            array (
+                'id' => 196,
+                'warga_id' => 4,
+                'umum_id' => 8,
+                'periode_id' => 13,
+                'created_at' => '2025-02-24 22:08:27',
+                'updated_at' => '2025-02-24 22:08:27',
+            ),
+            44 => 
+            array (
+                'id' => 197,
+                'warga_id' => 4,
+                'umum_id' => 9,
+                'periode_id' => 13,
+                'created_at' => '2025-02-24 22:08:27',
+                'updated_at' => '2025-02-24 22:08:27',
+            ),
+            45 => 
+            array (
+                'id' => 198,
+                'warga_id' => 5,
+                'umum_id' => 7,
+                'periode_id' => 13,
+                'created_at' => '2025-02-24 22:08:27',
+                'updated_at' => '2025-02-24 22:08:27',
+            ),
+            46 => 
+            array (
+                'id' => 199,
+                'warga_id' => 5,
+                'umum_id' => 8,
+                'periode_id' => 13,
+                'created_at' => '2025-02-24 22:08:27',
+                'updated_at' => '2025-02-24 22:08:27',
+            ),
+            47 => 
+            array (
+                'id' => 200,
+                'warga_id' => 5,
+                'umum_id' => 9,
+                'periode_id' => 13,
+                'created_at' => '2025-02-24 22:08:27',
+                'updated_at' => '2025-02-24 22:08:27',
+            ),
+            48 => 
+            array (
+                'id' => 201,
+                'warga_id' => 6,
+                'umum_id' => 7,
+                'periode_id' => 13,
+                'created_at' => '2025-02-24 22:08:27',
+                'updated_at' => '2025-02-24 22:08:27',
+            ),
+            49 => 
+            array (
+                'id' => 202,
+                'warga_id' => 6,
+                'umum_id' => 8,
+                'periode_id' => 13,
+                'created_at' => '2025-02-24 22:08:27',
+                'updated_at' => '2025-02-24 22:08:27',
+            ),
+            50 => 
+            array (
+                'id' => 203,
+                'warga_id' => 6,
+                'umum_id' => 9,
+                'periode_id' => 13,
+                'created_at' => '2025-02-24 22:08:27',
+                'updated_at' => '2025-02-24 22:08:27',
+            ),
+            51 => 
+            array (
+                'id' => 204,
+                'warga_id' => 7,
+                'umum_id' => 7,
+                'periode_id' => 13,
+                'created_at' => '2025-02-24 22:08:27',
+                'updated_at' => '2025-02-24 22:08:27',
+            ),
+            52 => 
+            array (
+                'id' => 205,
+                'warga_id' => 7,
+                'umum_id' => 8,
+                'periode_id' => 13,
+                'created_at' => '2025-02-24 22:08:27',
+                'updated_at' => '2025-02-24 22:08:27',
+            ),
+            53 => 
+            array (
+                'id' => 206,
+                'warga_id' => 7,
+                'umum_id' => 9,
+                'periode_id' => 13,
+                'created_at' => '2025-02-24 22:08:27',
+                'updated_at' => '2025-02-24 22:08:27',
+            ),
+            54 => 
+            array (
+                'id' => 207,
+                'warga_id' => 8,
+                'umum_id' => 7,
+                'periode_id' => 13,
+                'created_at' => '2025-02-24 22:08:27',
+                'updated_at' => '2025-02-24 22:08:27',
+            ),
+            55 => 
+            array (
+                'id' => 208,
+                'warga_id' => 8,
+                'umum_id' => 8,
+                'periode_id' => 13,
+                'created_at' => '2025-02-24 22:08:27',
+                'updated_at' => '2025-02-24 22:08:27',
+            ),
+            56 => 
+            array (
+                'id' => 209,
+                'warga_id' => 8,
+                'umum_id' => 9,
+                'periode_id' => 13,
+                'created_at' => '2025-02-24 22:08:27',
+                'updated_at' => '2025-02-24 22:08:27',
+            ),
+            57 => 
+            array (
+                'id' => 210,
+                'warga_id' => 9,
+                'umum_id' => 7,
+                'periode_id' => 13,
+                'created_at' => '2025-02-24 22:08:27',
+                'updated_at' => '2025-02-24 22:08:27',
+            ),
+            58 => 
+            array (
+                'id' => 211,
+                'warga_id' => 9,
+                'umum_id' => 8,
+                'periode_id' => 13,
+                'created_at' => '2025-02-24 22:08:27',
+                'updated_at' => '2025-02-24 22:08:27',
+            ),
+            59 => 
+            array (
+                'id' => 212,
+                'warga_id' => 9,
+                'umum_id' => 9,
+                'periode_id' => 13,
+                'created_at' => '2025-02-24 22:08:27',
+                'updated_at' => '2025-02-24 22:08:27',
+            ),
+            60 => 
+            array (
+                'id' => 213,
+                'warga_id' => 11,
+                'umum_id' => 7,
+                'periode_id' => 13,
+                'created_at' => '2025-02-24 22:08:27',
+                'updated_at' => '2025-02-24 22:08:27',
+            ),
+            61 => 
+            array (
+                'id' => 214,
+                'warga_id' => 11,
+                'umum_id' => 8,
+                'periode_id' => 13,
+                'created_at' => '2025-02-24 22:08:27',
+                'updated_at' => '2025-02-24 22:08:27',
+            ),
+            62 => 
+            array (
+                'id' => 215,
+                'warga_id' => 11,
+                'umum_id' => 9,
+                'periode_id' => 13,
+                'created_at' => '2025-02-24 22:08:27',
+                'updated_at' => '2025-02-24 22:08:27',
+            ),
+            63 => 
+            array (
+                'id' => 216,
+                'warga_id' => 12,
+                'umum_id' => 7,
+                'periode_id' => 13,
+                'created_at' => '2025-02-24 22:08:27',
+                'updated_at' => '2025-02-24 22:08:27',
+            ),
+            64 => 
+            array (
+                'id' => 217,
+                'warga_id' => 12,
+                'umum_id' => 8,
+                'periode_id' => 13,
+                'created_at' => '2025-02-24 22:08:27',
+                'updated_at' => '2025-02-24 22:08:27',
+            ),
+            65 => 
+            array (
+                'id' => 218,
+                'warga_id' => 12,
+                'umum_id' => 9,
+                'periode_id' => 13,
+                'created_at' => '2025-02-24 22:08:27',
+                'updated_at' => '2025-02-24 22:08:27',
+            ),
         ));
         
         

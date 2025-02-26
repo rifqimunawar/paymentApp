@@ -141,6 +141,13 @@ class PembayaranController extends Controller
       Alert::success('Success', 'Data berhasil diupdate');
       return redirect()->route('indexByPeriode', ['warga_id' => $warga_id, 'periode_id' => $periode_id]);
     }
+    $lastId = Pembayaran::max('id');
+    $newId = $lastId ? $lastId + 1 : 1;
+    $data['id_qrcode'] = substr(hash('sha256', $newId), 0, 16); //hash 16 carakter
+
+    // Buat no_pembayaran dengan format 0XXXXX (total 9 digit)
+    $data['no_pembayaran'] = sprintf('%05d', $newId);
+
 
     $data['created_by'] = Auth::user()->username;
     Pembayaran::create($data);
@@ -188,6 +195,11 @@ class PembayaranController extends Controller
       Alert::success('Success', 'Data berhasil diupdate');
       return redirect()->route('pembayaran_pam', ['warga_id' => $warga_id]);
     }
+    $lastId = Pembayaran::max('id');
+    $newId = $lastId ? $lastId + 1 : 1;
+    $data['id_qrcode'] = substr(hash('sha256', $newId), 0, 16); //hash 16 carakter
+    // Buat no_pembayaran dengan format 0XXXXX (total 9 digit)
+    $data['no_pembayaran'] = sprintf('%05d', $newId);
 
     $data['created_by'] = Auth::user()->username;
     Pembayaran::create($data);
@@ -233,6 +245,11 @@ class PembayaranController extends Controller
       Alert::success('Success', 'Data berhasil diupdate');
       return redirect()->route('pembayaran_denda', ['warga_id' => $warga_id]);
     }
+    $lastId = Pembayaran::max('id');
+    $newId = $lastId ? $lastId + 1 : 1;
+    $data['id_qrcode'] = substr(hash('sha256', $newId), 0, 16); //hash 16 carakter
+    // Buat no_pembayaran dengan format 0XXXXX (total 9 digit)
+    $data['no_pembayaran'] = sprintf('%05d', $newId);
 
     $data['created_by'] = Auth::user()->username;
     Pembayaran::create($data);
@@ -245,8 +262,8 @@ class PembayaranController extends Controller
     $title = '';
     $data = Pembayaran::find($id);
 
-    $route = route('invoiceVerifikasi', $id);
-    // return $data;
+    $route = route('invoiceVerifikasi', $data->id_qrcode);
+    // return $route;
     $qrCode = QrCode::size(80)->generate($route);
     return view(
       'pembayaran::/pembayaran/invoice',
@@ -258,10 +275,10 @@ class PembayaranController extends Controller
     );
   }
 
-  public function invoiceVerifikasi($id)
+  public function invoiceVerifikasi($id_qrcode)
   {
     $title = '';
-    $data = Pembayaran::find($id);
+    $data = Pembayaran::find($id_qrcode);
 
     if ($data) {
       $periode = !empty($data->periode_nama) ? "untuk periode {$data->periode_nama}" : "";

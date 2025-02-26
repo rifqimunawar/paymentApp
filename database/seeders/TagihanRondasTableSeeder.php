@@ -79,6 +79,21 @@ class TagihanRondasTableSeeder extends Seeder
                 'created_at' => '2025-02-21 20:42:04',
                 'updated_at' => '2025-02-21 20:42:04',
             ),
+            4 => 
+            array (
+                'id' => 7,
+                'ronda_id' => 4,
+                'warga_id' => 12,
+                'tgl_absen_ronda' => '2025-02-23 00:00:00',
+                'nominal_tagihan' => 10000,
+                'status_denda' => 0,
+                'created_by' => 'unknown',
+                'updated_by' => 'unknown',
+                'deleted_by' => NULL,
+                'deleted_at' => NULL,
+                'created_at' => '2025-02-24 22:01:58',
+                'updated_at' => '2025-02-24 22:01:58',
+            ),
         ));
         
         

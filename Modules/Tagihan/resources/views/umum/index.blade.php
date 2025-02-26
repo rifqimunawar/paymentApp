@@ -24,9 +24,9 @@
       <a href="{{ route('umum.create') }}" class="btn btn-primary btn-sm">Tambah &ensp;<i class="fa fa-plus-square"
           aria-hidden="true" style="font-size: 12px"></i></a>
       <div style="display: flex; gap: 10px;">
-        <a href="{{ route('umum.export') }}" class="btn btn-warning btn-sm">
+        {{-- <a href="{{ route('umum.export') }}" class="btn btn-warning btn-sm">
           <i class="fa fa-file-excel" style="font-size: 12px"></i> Export XLS
-        </a>
+        </a> --}}
 
         {{-- <a href="javascript:void(0)" class="btn btn-warning btn-sm"
                 onclick="printPage('{{ route('role.print') }}', )">
@@ -37,9 +37,9 @@
                 <i class="fa fa-print" style="font-size: 12px"></i> Print
             </a> --}}
 
-        <a href="{{ route('umum.pdf') }}" class="btn btn-warning btn-sm">
+        {{-- <a href="{{ route('umum.pdf') }}" class="btn btn-warning btn-sm">
           <i class="fa fa-file-pdf" style="font-size: 12px"></i> Export PDF
-        </a>
+        </a> --}}
 
       </div>
     </div>

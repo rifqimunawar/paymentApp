@@ -183,9 +183,9 @@ class MenusTableSeeder extends Seeder
                 'caret' => 0,
                 'aktif' => 1,
                 'parent_id' => 8,
-                'deleted_at' => NULL,
+                'deleted_at' => '2025-02-25 13:29:58',
                 'created_at' => '2024-12-21 17:29:39',
-                'updated_at' => '2025-01-18 22:52:20',
+                'updated_at' => '2025-02-25 13:29:58',
             ),
             12 => 
             array (
@@ -452,6 +452,20 @@ class MenusTableSeeder extends Seeder
                 'deleted_at' => NULL,
                 'created_at' => '2025-02-03 11:35:48',
                 'updated_at' => '2025-02-03 11:36:22',
+            ),
+            31 => 
+            array (
+                'id' => 32,
+                'title' => 'Laporan Pembayaran',
+                'url' => '/lap/pembayaran',
+                'route-name' => NULL,
+                'icon' => NULL,
+                'caret' => 0,
+                'aktif' => 1,
+                'parent_id' => 8,
+                'deleted_at' => NULL,
+                'created_at' => '2025-02-25 13:24:53',
+                'updated_at' => '2025-02-25 13:24:53',
             ),
         ));
         

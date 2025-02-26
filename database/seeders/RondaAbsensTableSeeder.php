@@ -109,6 +109,21 @@ class RondaAbsensTableSeeder extends Seeder
                 'created_at' => '2025-02-18 20:37:25',
                 'updated_at' => '2025-02-18 20:37:25',
             ),
+            6 => 
+            array (
+                'id' => 7,
+                'ronda_id' => 4,
+                'warga_id' => 12,
+                'absen' => 1,
+                'waktu_absen' => NULL,
+                'catatan' => NULL,
+                'created_by' => 'admin',
+                'updated_by' => 'unknown',
+                'deleted_by' => NULL,
+                'deleted_at' => NULL,
+                'created_at' => '2025-02-24 21:52:12',
+                'updated_at' => '2025-02-24 21:52:12',
+            ),
         ));
         
         

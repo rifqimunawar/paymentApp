@@ -1,11 +1,17 @@
-PR:
+PR
+Website
+- membuat module tagihanku, rincian semua tagihan by user warga
+- history pembayaranku
+- membuat module identitas yang isinya informasi identitas warga yang login dan crud keluarga (osional)
+- dashboard a.jumlah warga b.total rutin c. total pam d.total denda ronda dengan periode
 
-1.
-membuat dropdown alamat dynamis
 
 
-2.
-membuat 5 halaman mobile
 
-3.
-fitur export dan print excel
+Mobile
+#home
+
+#halaman 2? statistik data warga
+
+#ronda
+absen ronda, dengan foto dan lokasi

@@ -31,7 +31,15 @@ class ProfileController extends Controller
 
   public function store(Request $request)
   {
-    $data = $request->all();
+    // Validasi input
+    $request->validate([
+      'username' => 'required|string|max:255|unique:users,username,' . $request->id,
+      'email' => 'required|email|max:255|unique:users,email,' . $request->id,
+      'img' => 'nullable|image|mimes:jpg,png,jpeg|max:2048', // Hanya gambar dengan ukuran max 2MB
+      'password' => $request->id ? 'nullable|min:6' : 'required|min:6', // Wajib jika buat baru, opsional jika edit
+    ]);
+
+    $data = $request->except('password', 'img');
 
     if ($request->filled('password')) {
       $data['password'] = bcrypt($request->password);
@@ -53,11 +61,12 @@ class ProfileController extends Controller
       $updateData = User::findOrFail($request->id);
       $updateData->update($data);
       Alert::success('Success', 'Data berhasil diupdate');
-      return redirect()->route('profile.index');
+    } else {
+      User::create($data);
+      Alert::success('Success', 'Data berhasil disimpan');
     }
 
-    User::create($data);
-    Alert::success('Success', 'Data berhasil disimpan');
     return redirect()->route('profile.index');
   }
+
 }

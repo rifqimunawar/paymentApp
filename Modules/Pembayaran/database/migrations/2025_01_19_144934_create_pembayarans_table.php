@@ -31,6 +31,8 @@ return new class extends Migration {
       $table->unsignedBigInteger('parameter_pam')->nullable();
       $table->string('tgl_absen_ronda')->nullable();
 
+      $table->string('id_qrcode')->nullable();
+      $table->string('no_pembayaran')->nullable();
       $table->string('created_by')->default('unknown');
       $table->string('updated_by')->default('unknown');
       $table->string('deleted_by')->nullable();

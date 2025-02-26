@@ -36,4 +36,4 @@ Route::prefix('pembayaran_denda')->middleware('auth')->group(function () {
 });
 
 Route::get('/{id}/invoice', [PembayaranController::class, 'invoice'])->name('invoice');
-Route::get('/{id}/invoice_verif', [PembayaranController::class, 'invoiceVerifikasi'])->name('invoiceVerifikasi');
+Route::get('/invoice_verif/{id_qrcode}', [PembayaranController::class, 'invoiceVerifikasi'])->name('invoiceVerifikasi');
