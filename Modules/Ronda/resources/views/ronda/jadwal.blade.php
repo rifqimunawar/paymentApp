@@ -1,5 +1,7 @@
 @extends('ronda::layouts.master')
-
+@php
+  use App\Helpers\Fungsi;
+@endphp
 @section('module-content')
   <div class="panel panel-inverse">
     <div class="panel-heading">
@@ -22,6 +24,21 @@
             style="margin: 10px"></div>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="card" style="width: 100%;">
+    <div class="card-body">
+      <h5 class="card-title">
+        Jadwal Ronda Hari Ini: {{ $ronda_hari_ini->first()->tanggal_ronda ?? 'Tidak Ada' }}
+      </h5>
+
+      @forelse ($ronda_hari_ini as $ronda)
+        @foreach ($ronda->wargas as $item)
+          <li>{{ $item->nama }}</li>
+        @endforeach
+      @empty
+        <li>Tidak ada jadwal ronda hari ini</li>
+      @endforelse
     </div>
   </div>
 @endsection

@@ -39,7 +39,7 @@ class UsersTableSeeder extends Seeder
                 'id' => 4,
                 'name' => 'munawar',
                 'username' => 'munawar',
-                'warga_id' => 9,
+                'warga_id' => 1,
                 'img' => 'profile.png',
                 'email' => 'munawar@gmail.com',
                 'email_verified_at' => NULL,

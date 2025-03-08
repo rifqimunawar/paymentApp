@@ -38,5 +38,6 @@ class DatabaseSeeder extends Seeder
     $this->call(TagihanRondasTableSeeder::class);
     $this->call(ParametersTableSeeder::class);
     $this->call(WargaTagihanPeriodeTableSeeder::class);
-  }
+      $this->call(KeluargasTableSeeder::class);
+    }
 }

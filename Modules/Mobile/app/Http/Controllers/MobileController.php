@@ -8,6 +8,8 @@ use Modules\Ronda\Models\Ronda;
 use Modules\Master\Models\Warga;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Modules\Keluarga\Models\Keluarga;
+use Modules\Pembayaran\Models\Pembayaran;
 
 class MobileController extends Controller
 {
@@ -20,40 +22,51 @@ class MobileController extends Controller
     $ronda_belum_dibayar = Warga::RondaBelumDibayar($userLogin->warga_id);
 
 
-    $total_tagihan_rutin = 0;
-    $total_pam = 0;
-    $total_ronda = 0;
+    $tagihan_rutin = 0;
+    $pam = 0;
+    $ronda = 0;
 
     foreach ($tagihan_rutin_belum_dibayar as $item) {
-      $total_tagihan_rutin += $item->nominal;
+      $tagihan_rutin += $item->nominal;
     }
 
     foreach ($pam_belum_dibayar as $item) {
-      $total_pam += $item->nominal;
+      $pam += $item->nominal;
     }
 
     foreach ($ronda_belum_dibayar as $item) {
-      $total_ronda += $item->nominal_tagihan;
+      $ronda += $item->nominal_tagihan;
     }
 
+    $total_tagihan_rutin = $tagihan_rutin;
+    $total_pam = $pam;
+    $total_ronda = $ronda;
     // Total keseluruhan
-    $total_semua = $total_tagihan_rutin + $total_pam + $total_ronda;
+    $total_semua = $tagihan_rutin + $pam + $ronda;
 
+    $history = Pembayaran::where('warga_id', $userLogin->warga_id)->latest()->get();
 
-
-    // return $ronda_belum_dibayar;
+    // return $history;
     return view('mobile::home', [
       'data' => $userLogin,
       'tagihan_rutin_belum_dibayar' => $tagihan_rutin_belum_dibayar,
       'pam_belum_dibayar' => $pam_belum_dibayar,
       'ronda_belum_dibayar' => $ronda_belum_dibayar,
-      'total_semua' => $total_semua
+      'total_tagihan_rutin' => $total_tagihan_rutin,
+      'total_ronda' => $total_ronda,
+      'total_semua' => $total_semua,
+      'total_pam' => $total_pam,
+      'history' => $history
     ]);
   }
 
   public function tagihan()
   {
-    return view('mobile::tagihan');
+    $userLogin = Auth::user();
+    $history = Pembayaran::where('warga_id', $userLogin->warga_id)->latest()->get();
+    return view('mobile::tagihan', [
+      'history' => $history
+    ]);
   }
   public function ronda()
   {
@@ -66,9 +79,14 @@ class MobileController extends Controller
       'ronda_hari_ini' => $ronda_hari_ini
     ]);
   }
-  public function history()
+  public function keluarga()
   {
-    return view('mobile::history');
+    $userLogin = Auth::user();
+    $data['kepala'] = Warga::cari_warga($userLogin->warga_id);
+    $data['anggota'] = Keluarga::with('warga')->where('warga_id', $userLogin->warga_id)->get();
+    return view('mobile::keluarga', [
+      'data' => $data
+    ]);
   }
   public function settings()
   {

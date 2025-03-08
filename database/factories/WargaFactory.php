@@ -34,7 +34,7 @@ class WargaFactory extends Factory
       'pendidikan' => $this->faker->numberBetween(1, 7), // 1 - 7
       'pekerjaan' => $this->faker->numberBetween(1, 20), // 1 - 20
       'status_perkawinan' => $this->faker->numberBetween(1, 4), // 1 - 4
-      'status_keluarga' => $this->faker->numberBetween(1, 4), // 1 - 4
+      'status_keluarga' => $this->faker->numberBetween(1), // 1 - 4
       'created_by' => 'admin',
       'updated_by' => 'admin',
       'deleted_by' => null,

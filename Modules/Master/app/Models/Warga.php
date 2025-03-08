@@ -2,6 +2,7 @@
 
 namespace Modules\Master\Models;
 
+use Modules\Keluarga\Models\Keluarga;
 use Modules\Ronda\Models\Ronda;
 use Modules\Tagihan\Models\Pam;
 use Modules\Tagihan\Models\Umum;
@@ -202,4 +203,15 @@ class Warga extends Model
   {
     return WargaFactory::new();
   }
+
+  public function keluargas()
+  {
+    return $this->hasMany(Keluarga::class, 'warga_id');
+  }
+
+  public static function cari_warga($warga_id)
+  {
+    return DB::table('wargas')->where('id', $warga_id)->first();
+  }
+
 }

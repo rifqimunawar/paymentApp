@@ -537,6 +537,20 @@ class MenusTableSeeder extends Seeder
                 'created_at' => '2025-03-08 15:35:25',
                 'updated_at' => '2025-03-08 16:27:27',
             ),
+            37 => 
+            array (
+                'id' => 38,
+                'title' => 'Keluargaku',
+                'url' => '/keluarga',
+                'route-name' => NULL,
+                'icon' => 'fa fa-users',
+                'caret' => 0,
+                'aktif' => 1,
+                'parent_id' => NULL,
+                'deleted_at' => NULL,
+                'created_at' => '2025-03-08 22:48:19',
+                'updated_at' => '2025-03-08 22:48:19',
+            ),
         ));
         
         

@@ -75,10 +75,10 @@
         <strong>Ronda</strong>
       </div>
     </a>
-    <a href="{{ route('mobile.history') }}" class="item {{ Request::is('mobile/history*') ? 'active' : '' }}">
+    <a href="{{ route('mobile.keluarga') }}" class="item {{ Request::is('mobile/keluarga*') ? 'active' : '' }}">
       <div class="col">
         <ion-icon name="card-outline"></ion-icon>
-        <strong>History</strong>
+        <strong>Keluarga</strong>
       </div>
     </a>
     <a href="{{ route('mobile.settings') }}" class="item {{ Request::is('mobile/settings*') ? 'active' : '' }}">

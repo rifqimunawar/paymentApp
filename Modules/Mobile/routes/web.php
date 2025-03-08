@@ -25,6 +25,6 @@ Route::prefix('mobile')->middleware('auth')->group(function () {
   Route::get('/home', [MobileController::class, 'home'])->name('mobile.home');
   Route::get('/tagihan', [MobileController::class, 'tagihan'])->name('mobile.tagihan');
   Route::get('/ronda', [MobileController::class, 'ronda'])->name('mobile.ronda');
-  Route::get('/history', [MobileController::class, 'history'])->name('mobile.history');
+  Route::get('/keluarga', [MobileController::class, 'keluarga'])->name('mobile.keluarga');
   Route::get('/settings', [MobileController::class, 'settings'])->name('mobile.settings');
 });

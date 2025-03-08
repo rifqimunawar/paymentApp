@@ -43,7 +43,7 @@
                   </select>
                 </div>
 
-                {{-- <div class="form-group mb-2">
+                <div class="form-group mb-2">
                   <label for="status_keluarga">Status Dalam Keluarga</label>
                   <select class="form-select" name="status_keluarga" aria-label="Default select example">
                     <option disabled selected> - pilih - </option>
@@ -53,7 +53,7 @@
                     <option value="Istri" {{ $data->status_keluarga == 'Istri' ? 'selected' : '' }}>Istri</option>
                     <option value="Anak" {{ $data->status_keluarga == 'Anak' ? 'selected' : '' }}>Anak</option>
                   </select>
-                </div> --}}
+                </div>
 
                 <div class="form-group mb-2">
                   <label for="telp">Telpon WhatsApp</label>

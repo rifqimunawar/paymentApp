@@ -10,7 +10,7 @@
       <div class="widget widget-stats bg-blue">
         <div class="stats-icon"><i class="fa fa-desktop"></i></div>
         <div class="stats-info">
-          <h4>TOTAL WARGA</h4>
+          <h4>TOTAL KK</h4>
           <p>{{ $data['total_warga'] }} Jiwa</p>
         </div>
         <div class="stats-link">

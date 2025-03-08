@@ -47,21 +47,8 @@ class PeriodesTableSeeder extends Seeder
             ),
             2 => 
             array (
-                'id' => 13,
-                'nama_periode' => 'Maret 2025',
-                'tanggal_mulai' => '2025-03-01',
-                'tanggal_akhir' => '2025-03-31',
-                'created_by' => 'admin',
-                'updated_by' => 'unknown',
-                'deleted_by' => NULL,
-                'deleted_at' => '2025-03-03 23:29:20',
-                'created_at' => '2025-02-24 22:08:27',
-                'updated_at' => '2025-03-03 23:29:20',
-            ),
-            3 => 
-            array (
                 'id' => 14,
-                'nama_periode' => 'Maret',
+                'nama_periode' => 'Maret 2025',
                 'tanggal_mulai' => '2025-03-01',
                 'tanggal_akhir' => '2025-03-31',
                 'created_by' => 'admin',

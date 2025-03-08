@@ -2,6 +2,7 @@
 
 namespace Modules\Ronda\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Helpers\Fungsi;
 use Illuminate\Http\Request;
 use Modules\Ronda\Models\Ronda;
@@ -25,6 +26,7 @@ class RondaController extends Controller
 
     $title = '';
     $data = Ronda::with(['wargas', 'absens'])->latest()->get();
+    $ronda_hari_ini = $data->where('tanggal_ronda', Carbon::today()->toDateString());
 
     // dd($data);
     return view(
@@ -32,6 +34,7 @@ class RondaController extends Controller
       [
         'title' => $title,
         'data' => $data,
+        'ronda_hari_ini' => $ronda_hari_ini,
       ]
     );
   }

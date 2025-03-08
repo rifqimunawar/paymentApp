@@ -1,65 +1,55 @@
 @extends('mobile::layouts.layout')
 
+@php
+  use App\Helpers\Fungsi;
+@endphp
 @section('content-mobile')
   <!-- App Capsule -->
   <div id="appCapsule">
 
-    <!-- Wallet Card -->
-    <div class="section wallet-card-section pt-1">
-      <div class="wallet-card">
-
-        <div class="accordion" id="accordionExample2">
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#accordion001">
-                <ion-icon name="wallet-outline"></ion-icon>
-                Item 1
-              </button>
-            </h2>
-            <div id="accordion001" class="accordion-collapse collapse" data-bs-parent="#accordionExample2">
-              <div class="accordion-body">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at augue eleifend,
-                lacinia ex quis, condimentum erat. Nullam a ipsum lorem.
-              </div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#accordion002">
-                <ion-icon name="card-outline"></ion-icon>
-                Item 2
-              </button>
-            </h2>
-            <div id="accordion002" class="accordion-collapse collapse" data-bs-parent="#accordionExample2">
-              <div class="accordion-body">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at augue eleifend,
-                lacinia ex quis, condimentum erat. Nullam a ipsum lorem.
-              </div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#accordion003">
-                <ion-icon name="cash-outline"></ion-icon>
-                Item 3
-              </button>
-            </h2>
-            <div id="accordion003" class="accordion-collapse collapse" data-bs-parent="#accordionExample2">
-              <div class="accordion-body">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at augue eleifend,
-                lacinia ex quis, condimentum erat. Nullam a ipsum lorem.
-              </div>
-            </div>
-
-
-          </div>
-        </div>
+    <!-- Transactions -->
+    <div class="section mt-4 mb-4">
+      <div class="section-heading">
+        <h2 class="title">Transactions</h2>
       </div>
-      <!-- Wallet Card -->
+      <div class="transactions">
+        <!-- item -->
+
+        @forelse ($history->take(3) as $item)
+          <a href="javascript:void(0);" onclick="printInvoice('{{ route('invoice', $item->id) }}')" class="item">
+            <div class="detail">
+              <img src="assets/img/sample/brand/bayar.png" alt="img" class="image-block imaged w48">
+              <div>
+                <strong>{{ $item->tagihan_nama }}</strong>
+                <p>{{ $item->tagihan_nama }}</p>
+              </div>
+            </div>
+            <div class="right">
+              <div class="price text-danger"> - {{ Fungsi::rupiah($item->nominal_dibayar) }}</div>
+            </div>
+          </a>
+        @empty
+          <div class="detail"><strong>Tidak ada data</strong></div>
+        @endforelse
+
+        <!-- * item -->
+
+      </div>
     </div>
-    {{-- @include('mobile::layouts.footer') --}}
+    <!-- * Transactions -->
+
+
+    @include('mobile::layouts.footer')
     <!-- * App Capsule -->
+    <iframe id="printFrame" style="display:none;"></iframe>
+    <script>
+      // Untuk Print
+      function printInvoice(url) {
+        var iframe = document.getElementById('printFrame');
+        iframe.src = url;
+        iframe.onload = function() {
+          iframe.contentWindow.print();
+        };
+      }
+    </script>
   @endsection

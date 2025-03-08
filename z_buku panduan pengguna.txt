@@ -17,4 +17,5 @@ Mobile
 absen ronda, dengan foto dan lokasi
 
 ############ bug
-/tagihan/pam/106/view
+- /tagihan/pam/106/view
+- bug di pembayaran setelah memilih periode seakan-akan id periode dan warga tidak syncron

@@ -73,7 +73,7 @@
                     <option value="4">Cerai Mati</option>
                   </select>
                 </div>
-                {{-- <div class="form-group mb-2">
+                <div class="form-group mb-2">
                   <label for="status_keluarga">Status Dalam Keluarga</label>
                   <select class="form-select" name="status_keluarga" aria-label="Default select example">
                     <option disabled selected> - pilih - </option>
@@ -82,7 +82,7 @@
                     <option value="3">Istri</option>
                     <option value="4">Anak</option>
                   </select>
-                </div> --}}
+                </div>
 
                 <div class="form-group mb-2">
                   <label for="telp">Telpon WhatsApp</label>

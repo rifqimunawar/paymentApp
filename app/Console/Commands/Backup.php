@@ -107,6 +107,9 @@ class Backup extends Command
       'warga_tagihan_periode' => [
         'warga_tagihan_periode',
       ],
+      'keluargas' => [
+        'keluargas',
+      ],
       // 'provinsis' => [
       //   'provinsis',
       // ],

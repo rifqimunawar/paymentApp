@@ -235,40 +235,66 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Exchange Money</h5>
+            <h5 class="modal-title">Bayar Sekarang</h5>
           </div>
           <div class="modal-body">
             <div class="action-sheet-content">
-              <table width="100%" style="border-collapse: collapse; text-align: left;">
-                <tr>
-                  <th style="padding: 10px;">Kas Mesjid</th>
-                  <th style="padding: 10px;">1000</th>
-                  <th style="padding: 10px;">Lunas</th>
-                </tr>
-                <tr>
-                  <th style="padding: 10px;">Kas Mesjid</th>
-                  <th style="padding: 10px;">1000</th>
-                  <th style="padding: 10px;">Lunas</th>
-                </tr>
-                <tr>
-                  <th style="padding: 10px;">Kas Mesjid</th>
-                  <th style="padding: 10px;">1000</th>
-                  <th style="padding: 10px;">Lunas</th>
-                </tr>
-                <tr>
-                  <th style="padding: 10px;">Kas Mesjid</th>
-                  <th style="padding: 10px;">1000</th>
-                  <th style="padding: 10px;">Lunas</th>
-                </tr>
-                <tr>
-                  <th style="padding: 10px;">Kas Mesjid</th>
-                  <th style="padding: 10px;">1000</th>
-                  <th style="padding: 10px;">Lunas</th>
-                </tr>
-              </table>
 
+              <table width="100%" style="border-collapse: collapse; text-align: left;">
+                <thead>
+                  <tr>
+                    <th style="padding: 10px;">Tagihan</th>
+                    <th style="padding: 10px;">Nominal</th>
+                    <th style="padding: 10px;">Pilih</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style="padding: 10px;">Tagihan Rutin</td>
+                    <td style="padding: 10px;">{{ Fungsi::rupiah($total_tagihan_rutin) }}</td>
+                    <td style="padding: 10px;">
+                      <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="checkRutin"
+                          data-nominal="{{ $total_tagihan_rutin }}">
+                        <label class="form-check-label" for="checkRutin"></label>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 10px;">Tagihan Pam</td>
+                    <td style="padding: 10px;">{{ Fungsi::rupiah($total_pam) }}</td>
+                    <td style="padding: 10px;">
+                      <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="checkPam"
+                          data-nominal="{{ $total_pam }}">
+                        <label class="form-check-label" for="checkPam"></label>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 10px;">Denda Ronda</td>
+                    <td style="padding: 10px;">{{ Fungsi::rupiah($total_ronda) }}</td>
+                    <td style="padding: 10px;">
+                      <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="checkRonda"
+                          data-nominal="{{ $total_ronda }}">
+                        <label class="form-check-label" for="checkRonda"></label>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td style="padding: 10px; text-align: right;"><strong>Total:</strong></td>
+                    <td style="padding: 10px;"><strong id="totalNominal">{{ Fungsi::rupiah(0) }}</strong></td>
+                    <td></td>
+                  </tr>
+                </tfoot>
+              </table>
               <div class="form-group basic mt-3">
-                <button type="button" class="btn btn-primary btn-block btn-lg" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary btn-block btn-lg premium-alert"
+                  data-bs-dismiss="modal">Metode
+                  Pembayaran</button>
               </div>
             </div>
 
@@ -279,7 +305,7 @@
     <!-- * modalBayar -->
 
     <!-- Stats -->
-    <div class="section">
+    {{-- <div class="section">
       <div class="row mt-2">
         <div class="col-6">
           <div class="stat-box">
@@ -294,7 +320,7 @@
           </div>
         </div>
       </div>
-      {{-- <div class="row mt-2">
+       <div class="row mt-2">
         <div class="col-6">
           <div class="stat-box">
             <div class="title">Total Bills</div>
@@ -307,77 +333,42 @@
             <div class="value">$ 120.99</div>
           </div>
         </div>
-      </div> --}}
-    </div>
+      </div>
+    </div> --}}
     <!-- * Stats -->
-    {{--
+
     <!-- Transactions -->
     <div class="section mt-4">
       <div class="section-heading">
         <h2 class="title">Transactions</h2>
-        <a href="app-transactions.html" class="link">View All</a>
+        <a href="{{ route('mobile.tagihan') }}" class="link">View All</a>
       </div>
       <div class="transactions">
         <!-- item -->
-        <a href="app-transaction-detail.html" class="item">
-          <div class="detail">
-            <img src="assets/img/sample/brand/1.jpg" alt="img" class="image-block imaged w48">
-            <div>
-              <strong>Amazon</strong>
-              <p>Shopping</p>
+
+        @forelse ($history->take(3) as $item)
+          <a href="javascript:void(0);" onclick="printInvoice('{{ route('invoice', $item->id) }}')" class="item">
+            <div class="detail">
+              <img src="assets/img/sample/brand/bayar.png" alt="img" class="image-block imaged w48">
+              <div>
+                <strong>{{ $item->tagihan_nama }}</strong>
+                <p>{{ $item->tagihan_nama }}</p>
+              </div>
             </div>
-          </div>
-          <div class="right">
-            <div class="price text-danger"> - $ 150</div>
-          </div>
-        </a>
-        <!-- * item -->
-        <!-- item -->
-        <a href="app-transaction-detail.html" class="item">
-          <div class="detail">
-            <img src="assets/img/sample/brand/2.jpg" alt="img" class="image-block imaged w48">
-            <div>
-              <strong>Apple</strong>
-              <p>Appstore Purchase</p>
+            <div class="right">
+              <div class="price text-danger"> - {{ Fungsi::rupiah($item->nominal_dibayar) }}</div>
             </div>
-          </div>
-          <div class="right">
-            <div class="price text-danger">- $ 29</div>
-          </div>
-        </a>
+          </a>
+        @empty
+          <div class="detail"><strong>Tidak ada data</strong></div>
+        @endforelse
+
         <!-- * item -->
-        <!-- item -->
-        <a href="app-transaction-detail.html" class="item">
-          <div class="detail">
-            <img src="assets/img/sample/avatar/avatar3.jpg" alt="img" class="image-block imaged w48">
-            <div>
-              <strong>Alex Ljung</strong>
-              <p>Transfer</p>
-            </div>
-          </div>
-          <div class="right">
-            <div class="price">+ $ 1,000</div>
-          </div>
-        </a>
-        <!-- * item -->
-        <!-- item -->
-        <a href="app-transaction-detail.html" class="item">
-          <div class="detail">
-            <img src="assets/img/sample/avatar/avatar4.jpg" alt="img" class="image-block imaged w48">
-            <div>
-              <strong>Beatriz Brito</strong>
-              <p>Transfer</p>
-            </div>
-          </div>
-          <div class="right">
-            <div class="price text-danger">- $ 186</div>
-          </div>
-        </a>
-        <!-- * item -->
+
       </div>
     </div>
     <!-- * Transactions -->
-
+    {{--
     <!-- my cards -->
     <div class="section full mt-4">
       <div class="section-heading padding">
@@ -794,4 +785,48 @@
     @include('mobile::layouts.footer')
   </div>
   <!-- * App Capsule -->
+  <iframe id="printFrame" style="display:none;"></iframe>
+  <script>
+    // Untuk Print
+    function printInvoice(url) {
+      var iframe = document.getElementById('printFrame');
+      iframe.src = url;
+      iframe.onload = function() {
+        iframe.contentWindow.print();
+      };
+    }
+
+    // function downloadInvoice(url) {
+    //   const link = document.createElement('a');
+    //   link.href = url;
+    //   link.download = 'invoice.pdf';
+    //   document.body.appendChild(link);
+    //   link.click();
+    //   document.body.removeChild(link);
+    // }
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+      const checkboxes = document.querySelectorAll(".form-check-input");
+      const totalNominalElement = document.getElementById("totalNominal");
+
+      function formatRupiah(angka) {
+        return "Rp " + angka.toLocaleString("id-ID");
+      }
+
+      function updateTotal() {
+        let total = 0;
+        checkboxes.forEach(checkbox => {
+          if (checkbox.checked) {
+            total += parseInt(checkbox.getAttribute("data-nominal"));
+          }
+        });
+        totalNominalElement.textContent = formatRupiah(total);
+      }
+
+      checkboxes.forEach(checkbox => {
+        checkbox.addEventListener("change", updateTotal);
+      });
+    });
+  </script>
 @endsection
