@@ -21,6 +21,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="{{ GetSettings::getLogo() }}">
   <link rel="stylesheet" href="{{ asset('mobile/assets/css/style.css') }}">
   <link rel="manifest" href="__manifest.json">
+  <script src="https://maps.googleapis.com/maps/api/js"></script>
 </head>
 
 <body>

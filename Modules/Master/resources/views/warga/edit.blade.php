@@ -33,17 +33,17 @@
                   <label for="status_perkawinan">Status Perkawinan</label>
                   <select class="form-select" name="status_perkawinan" aria-label="Default select example">
                     <option disabled selected> - pilih - </option>
-                    <option value="Belum Menikah" {{ $data->status_perkawinan == 'Belum Menikah' ? 'selected' : '' }}>
+                    <option value="1" {{ $data->status_perkawinan == '1' ? 'selected' : '' }}>
                       Belum Menikah</option>
-                    <option value="Menikah" {{ $data->status_perkawinan == 'Menikah' ? 'selected' : '' }}>Menikah</option>
-                    <option value="Cerai Hidup" {{ $data->status_perkawinan == 'Cerai Hidup' ? 'selected' : '' }}>Cerai
+                    <option value="2" {{ $data->status_perkawinan == '2' ? 'selected' : '' }}>Menikah</option>
+                    <option value="3" {{ $data->status_perkawinan == '3' ? 'selected' : '' }}>Cerai
                       Hidup</option>
-                    <option value="Cerai Mati" {{ $data->status_perkawinan == 'Cerai Mati' ? 'selected' : '' }}>Cerai Mati
+                    <option value="4" {{ $data->status_perkawinan == '4' ? 'selected' : '' }}>Cerai Mati
                     </option>
                   </select>
                 </div>
 
-                <div class="form-group mb-2">
+                {{-- <div class="form-group mb-2">
                   <label for="status_keluarga">Status Dalam Keluarga</label>
                   <select class="form-select" name="status_keluarga" aria-label="Default select example">
                     <option disabled selected> - pilih - </option>
@@ -53,7 +53,7 @@
                     <option value="Istri" {{ $data->status_keluarga == 'Istri' ? 'selected' : '' }}>Istri</option>
                     <option value="Anak" {{ $data->status_keluarga == 'Anak' ? 'selected' : '' }}>Anak</option>
                   </select>
-                </div>
+                </div> --}}
 
                 <div class="form-group mb-2">
                   <label for="telp">Telpon WhatsApp</label>
@@ -88,10 +88,10 @@
                   <label for="agama">Agama</label>
                   <select class="form-select" name="agama" aria-label="Default select example">
                     <option disabled selected> - pilih - </option>
-                    <option value="Islam" {{ $data->agama == 'Islam' ? 'selected' : '' }}>Islam</option>
-                    <option value="Kristen" {{ $data->agama == 'Kristen' ? 'selected' : '' }}>Kristen</option>
-                    <option value="Hindu" {{ $data->agama == 'Hindu' ? 'selected' : '' }}>Hindu</option>
-                    <option value="Budha" {{ $data->agama == 'Budha' ? 'selected' : '' }}>Budha</option>
+                    <option value="1" {{ $data->agama == '1' ? 'selected' : '' }}>Islam</option>
+                    <option value="2" {{ $data->agama == '2' ? 'selected' : '' }}>Kristen</option>
+                    <option value="3" {{ $data->agama == '3' ? 'selected' : '' }}>Hindu</option>
+                    <option value="4" {{ $data->agama == '4' ? 'selected' : '' }}>Budha</option>
                   </select>
                 </div>
 
@@ -99,67 +99,57 @@
                   <label for="pendidikan">Pendidikan</label>
                   <select class="form-select" name="pendidikan" aria-label="Default select example">
                     <option disabled selected> - pilih - </option>
-                    <option value="SD/Sederajat" {{ $data->pendidikan == 'SD/Sederajat' ? 'selected' : '' }}>SD/Sederajat
+                    <option value="1" {{ $data->pendidikan == '1' ? 'selected' : '' }}>SD/Sederajat
                     </option>
-                    <option value="SMP/Sederajat" {{ $data->pendidikan == 'SMP/Sederajat' ? 'selected' : '' }}>
+                    <option value="2" {{ $data->pendidikan == '2' ? 'selected' : '' }}>
                       SMP/Sederajat</option>
-                    <option value="SMA/Sederajat" {{ $data->pendidikan == 'SMA/Sederajat' ? 'selected' : '' }}>
+                    <option value="3" {{ $data->pendidikan == '3' ? 'selected' : '' }}>
                       SMA/Sederajat</option>
-                    <option value="D3/Sederajat" {{ $data->pendidikan == 'D3/Sederajat' ? 'selected' : '' }}>
+                    <option value="4" {{ $data->pendidikan == '4' ? 'selected' : '' }}>
                       D3/Sederajat</option>
-                    <option value="S1/Sederajat" {{ $data->pendidikan == 'S1/Sederajat' ? 'selected' : '' }}>
+                    <option value="5" {{ $data->pendidikan == '5' ? 'selected' : '' }}>
                       S1/Sederajat</option>
-                    <option value="S2/Sederajat" {{ $data->pendidikan == 'S2/Sederajat' ? 'selected' : '' }}>
-                      S2/Sederajat</option>
-                    <option value="S3/Sederajat" {{ $data->pendidikan == 'S3/Sederajat' ? 'selected' : '' }}>
-                      S3/Sederajat</option>
+                    <option value="6" {{ $data->pendidikan == '6' ? 'selected' : '' }}>
+                      S2 dan Lebih Tinggi</option>
                   </select>
                 </div>
                 <div class="form-group mb-2">
                   <label for="pekerjaan">Pekerjaan</label>
                   <select class="form-select" name="pekerjaan" aria-label="Default select example">
                     <option disabled selected> - pilih - </option>
-                    <option value="Pegawai Negeri Sipil (PNS)"
-                      {{ $data->pekerjaan == 'Pegawai Negeri Sipil (PNS)' ? 'selected' : '' }}>Pegawai Negeri Sipil (PNS)
+                    <option value="1" {{ $data->pekerjaan == '1' ? 'selected' : '' }}>Pegawai Negeri Sipil (PNS)
                     </option>
-                    <option value="Karyawan Swasta" {{ $data->pekerjaan == 'Karyawan Swasta' ? 'selected' : '' }}>
+                    <option value="2" {{ $data->pekerjaan == '2' ? 'selected' : '' }}>
                       Karyawan Swasta</option>
-                    <option value="Wiraswasta / Pengusaha"
-                      {{ $data->pekerjaan == 'Wiraswasta / Pengusaha' ? 'selected' : '' }}>Wiraswasta / Pengusaha
+                    <option value="3" {{ $data->pekerjaan == '3' ? 'selected' : '' }}>Wiraswasta / Pengusaha
                     </option>
-                    <option value="Petani" {{ $data->pekerjaan == 'Petani' ? 'selected' : '' }}>Petani</option>
-                    <option value="Nelayan" {{ $data->pekerjaan == 'Nelayan' ? 'selected' : '' }}>Nelayan</option>
-                    <option value="Buruh / Pekerja Lepas"
-                      {{ $data->pekerjaan == 'Buruh / Pekerja Lepas' ? 'selected' : '' }}>Buruh / Pekerja Lepas</option>
-                    <option value="Guru / Dosen" {{ $data->pekerjaan == 'Guru / Dosen' ? 'selected' : '' }}>Guru / Dosen
+                    <option value="4" {{ $data->pekerjaan == '4' ? 'selected' : '' }}>Petani</option>
+                    <option value="5" {{ $data->pekerjaan == '5' ? 'selected' : '' }}>Nelayan</option>
+                    <option value="6" {{ $data->pekerjaan == '6' ? 'selected' : '' }}>Buruh / Pekerja Lepas
                     </option>
-                    <option value="Dokter / Tenaga Medis"
-                      {{ $data->pekerjaan == 'Dokter / Tenaga Medis' ? 'selected' : '' }}>Dokter / Tenaga Medis</option>
-                    <option value="TNI / Polri" {{ $data->pekerjaan == 'TNI / Polri' ? 'selected' : '' }}>TNI / Polri
+                    <option value="7" {{ $data->pekerjaan == '7' ? 'selected' : '' }}>Guru / Dosen
                     </option>
-                    <option value="Ojek Online / Sopir"
-                      {{ $data->pekerjaan == 'Ojek Online / Sopir' ? 'selected' : '' }}>Ojek Online / Sopir</option>
-                    <option value="Ibu Rumah Tangga" {{ $data->pekerjaan == 'Ibu Rumah Tangga' ? 'selected' : '' }}>Ibu
+                    <option value="8" {{ $data->pekerjaan == '8' ? 'selected' : '' }}>Dokter / Tenaga Medis
+                    </option>
+                    <option value="9" {{ $data->pekerjaan == '9' ? 'selected' : '' }}>TNI / Polri
+                    </option>
+                    <option value="10" {{ $data->pekerjaan == '10' ? 'selected' : '' }}>Ojek Online / Sopir</option>
+                    <option value="11" {{ $data->pekerjaan == '11' ? 'selected' : '' }}>Ibu
                       Rumah Tangga</option>
-                    <option value="Mahasiswa / Pelajar"
-                      {{ $data->pekerjaan == 'Mahasiswa / Pelajar' ? 'selected' : '' }}>Mahasiswa / Pelajar</option>
-                    <option value="Pensiunan" {{ $data->pekerjaan == 'Pensiunan' ? 'selected' : '' }}>Pensiunan</option>
-                    <option value="Teknisi / Mekanik" {{ $data->pekerjaan == 'Teknisi / Mekanik' ? 'selected' : '' }}>
+                    <option value="12" {{ $data->pekerjaan == '12' ? 'selected' : '' }}>Mahasiswa / Pelajar</option>
+                    <option value="13" {{ $data->pekerjaan == '13' ? 'selected' : '' }}>Pensiunan</option>
+                    <option value="14" {{ $data->pekerjaan == '14' ? 'selected' : '' }}>
                       Teknisi / Mekanik</option>
-                    <option value="Seniman / Pekerja Kreatif"
-                      {{ $data->pekerjaan == 'Seniman / Pekerja Kreatif' ? 'selected' : '' }}>Seniman / Pekerja Kreatif
+                    <option value="15" {{ $data->pekerjaan == '15' ? 'selected' : '' }}>Seniman / Pekerja Kreatif
                     </option>
-                    <option value="Programmer / IT Specialist"
-                      {{ $data->pekerjaan == 'Programmer / IT Specialist' ? 'selected' : '' }}>Programmer / IT Specialist
+                    <option value="16" {{ $data->pekerjaan == '16' ? 'selected' : '' }}>Programmer / IT Specialist
                     </option>
-                    <option value="Pengacara / Notaris"
-                      {{ $data->pekerjaan == 'Pengacara / Notaris' ? 'selected' : '' }}>Pengacara / Notaris</option>
-                    <option value="Akuntan / Konsultan Keuangan"
-                      {{ $data->pekerjaan == 'Akuntan / Konsultan Keuangan' ? 'selected' : '' }}>Akuntan / Konsultan
+                    <option value="17" {{ $data->pekerjaan == '17' ? 'selected' : '' }}>Pengacara / Notaris</option>
+                    <option value="18" {{ $data->pekerjaan == '18' ? 'selected' : '' }}>Akuntan / Konsultan
                       Keuangan</option>
-                    <option value="Pedagang / Penjual" {{ $data->pekerjaan == 'Pedagang / Penjual' ? 'selected' : '' }}>
+                    <option value="19" {{ $data->pekerjaan == '19' ? 'selected' : '' }}>
                       Pedagang / Penjual</option>
-                    <option value="Lainnya" {{ $data->pekerjaan == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
+                    <option value="20" {{ $data->pekerjaan == '20' ? 'selected' : '' }}>Lainnya</option>
                   </select>
                 </div>
 

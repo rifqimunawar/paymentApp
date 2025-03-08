@@ -278,8 +278,8 @@ class PembayaranController extends Controller
   public function invoiceVerifikasi($id_qrcode)
   {
     $title = '';
-    $data = Pembayaran::find($id_qrcode);
-
+    $data = Pembayaran::where('id_qrcode', $id_qrcode)->first();
+    // return $data;
     if ($data) {
       $periode = !empty($data->periode_nama) ? "untuk periode {$data->periode_nama}" : "";
       $pesan = "Verifikasi pembayaran berhasil! Nota pembayaran ini adalah bukti sah atas pembayaran '{$data->tagihan_nama}' {$periode}.

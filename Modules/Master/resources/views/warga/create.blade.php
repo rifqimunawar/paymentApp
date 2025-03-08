@@ -67,22 +67,22 @@
                   <label for="status_perkawinan">Status Perkawinan</label>
                   <select class="form-select" name="status_perkawinan" aria-label="Default select example">
                     <option disabled selected> - pilih - </option>
-                    <option value="Belum Menikah">Belum Menikah</option>
-                    <option value="Menikah">Menikah</option>
-                    <option value="Cerai Hidup">Cerai Hidup</option>
-                    <option value="Cerai Mati">Cerai Mati</option>
+                    <option value="1">Belum Menikah</option>
+                    <option value="2">Menikah</option>
+                    <option value="3">Cerai Hidup</option>
+                    <option value="4">Cerai Mati</option>
                   </select>
                 </div>
-                <div class="form-group mb-2">
+                {{-- <div class="form-group mb-2">
                   <label for="status_keluarga">Status Dalam Keluarga</label>
                   <select class="form-select" name="status_keluarga" aria-label="Default select example">
                     <option disabled selected> - pilih - </option>
-                    <option value="Kepala Keluarga">Kepala Keluarga</option>
-                    <option value="Suami">Suami</option>
-                    <option value="Istri">Istri</option>
-                    <option value="Anak">Anak</option>
+                    <option value="1">Kepala Keluarga</option>
+                    <option value="2">Suami</option>
+                    <option value="3">Istri</option>
+                    <option value="4">Anak</option>
                   </select>
-                </div>
+                </div> --}}
 
                 <div class="form-group mb-2">
                   <label for="telp">Telpon WhatsApp</label>
@@ -114,49 +114,49 @@
                   <label for="agama">Agama</label>
                   <select class="form-select" name="agama" aria-label="Default select example">
                     <option disabled selected> - pilih - </option>
-                    <option value="Islam">Islam</option>
-                    <option value="Kristen">Kristen</option>
-                    <option value="Hindu">Hindu</option>
-                    <option value="Budha">Budha</option>
+                    <option value="1">Islam</option>
+                    <option value="2">Kristen</option>
+                    <option value="3">Hindu</option>
+                    <option value="4">Budha</option>
                   </select>
                 </div>
                 <div class="form-group mb-2">
                   <label for="pendidikan">Pendidikan</label>
                   <select class="form-select" name="pendidikan" aria-label="Default select example">
                     <option disabled selected> - pilih - </option>
-                    <option value="SD/Sederajat">SD/Sederajat</option>
-                    <option value="SMP/Sederajat">SMP/Sederajat</option>
-                    <option value="SMA/Sederajat">SMA/Sederajat</option>
-                    <option value="D3/Sederajat">D3/Sederajat</option>
-                    <option value="S1/Sederajat">S1/Sederajat</option>
-                    <option value="S2/Sederajat">S2/Sederajat</option>
-                    <option value="S3/Sederajat">S3/Sederajat</option>
+                    <option value="1">SD/Sederajat</option>
+                    <option value="2">SMP/Sederajat</option>
+                    <option value="3">SMA/Sederajat</option>
+                    <option value="4">D3/Sederajat</option>
+                    <option value="5">S1/Sederajat</option>
+                    <option value="6">S2/Sederajat</option>
+                    <option value="7">S3/Sederajat</option>
                   </select>
                 </div>
                 <div class="form-group mb-2">
                   <label for="pekerjaan">Pekerjaan</label>
                   <select class="form-select" name="pekerjaan" aria-label="Default select example">
                     <option disabled selected> - pilih - </option>
-                    <option value="Pegawai Negeri Sipil (PNS)">Pegawai Negeri Sipil (PNS)</option>
-                    <option value="Karyawan Swasta">Karyawan Swasta</option>
-                    <option value="Wiraswasta / Pengusaha">Wiraswasta / Pengusaha</option>
-                    <option value="Petani">Petani</option>
-                    <option value="Nelayan">Nelayan</option>
-                    <option value="Buruh / Pekerja Lepas">Buruh / Pekerja Lepas</option>
-                    <option value="Guru / Dosen">Guru / Dosen</option>
-                    <option value="Dokter / Tenaga Medis">Dokter / Tenaga Medis</option>
-                    <option value="TNI / Polri">TNI / Polri</option>
-                    <option value="Ojek Online / Sopir">Ojek Online / Sopir</option>
-                    <option value="Ibu Rumah Tangga">Ibu Rumah Tangga</option>
-                    <option value="Mahasiswa / Pelajar">Mahasiswa / Pelajar</option>
-                    <option value="Pensiunan">Pensiunan</option>
-                    <option value="Teknisi / Mekanik">Teknisi / Mekanik</option>
-                    <option value="Seniman / Pekerja Kreatif">Seniman / Pekerja Kreatif</option>
-                    <option value="Programmer / IT Specialist">Programmer / IT Specialist</option>
-                    <option value="Pengacara / Notaris">Pengacara / Notaris</option>
-                    <option value="Akuntan / Konsultan Keuangan">Akuntan / Konsultan Keuangan</option>
-                    <option value="Pedagang / Penjual">Pedagang / Penjual</option>
-                    <option value="Lainnya">Lainnya</option>
+                    <option value="1">Pegawai Negeri Sipil (PNS)</option>
+                    <option value="2">Karyawan Swasta</option>
+                    <option value="3">Wiraswasta / Pengusaha</option>
+                    <option value="4">Petani</option>
+                    <option value="5">Nelayan</option>
+                    <option value="6">Buruh / Pekerja Lepas</option>
+                    <option value="7">Guru / Dosen</option>
+                    <option value="8">Dokter / Tenaga Medis</option>
+                    <option value="9">TNI / Polri</option>
+                    <option value="10">Ojek Online / Sopir</option>
+                    <option value="11">Ibu Rumah Tangga</option>
+                    <option value="12">Mahasiswa / Pelajar</option>
+                    <option value="13">Pensiunan</option>
+                    <option value="14">Teknisi / Mekanik</option>
+                    <option value="15">Seniman / Pekerja Kreatif</option>
+                    <option value="16">Programmer / IT Specialist</option>
+                    <option value="17">Pengacara / Notaris</option>
+                    <option value="18">Akuntan / Konsultan Keuangan</option>
+                    <option value="19">Pedagang / Penjual</option>
+                    <option value="20">Lainnya</option>
                   </select>
                 </div>
 

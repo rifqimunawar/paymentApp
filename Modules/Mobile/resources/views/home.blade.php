@@ -1,5 +1,9 @@
 @extends('mobile::layouts.layout')
 
+@php
+  use App\Helpers\Fungsi;
+@endphp
+
 @section('content-mobile')
   <!-- App Capsule -->
   <div id="appCapsule">
@@ -10,8 +14,8 @@
         <!-- Balance -->
         <div class="balance">
           <div class="left">
-            <span class="title">Total Balance</span>
-            <h1 class="total">$ 2,562.50</h1>
+            <span class="title">Total Tagihan</span>
+            <h1 class="total">{{ Fungsi::rupiah($total_semua) }}</h1>
           </div>
           <div class="right">
             {{-- <a href="#" class="button" data-bs-toggle="modal" data-bs-target="#ronda">
@@ -71,31 +75,36 @@
           <div class="modal-body">
             <div class="action-sheet-content">
               <table width="100%" style="border-collapse: collapse; text-align: left;">
-                <tr>
-                  <th style="padding: 10px;">Kas Mesjid</th>
-                  <th style="padding: 10px;">1000</th>
-                  <th style="padding: 10px;">Lunas</th>
-                </tr>
-                <tr>
-                  <th style="padding: 10px;">Kas Mesjid</th>
-                  <th style="padding: 10px;">1000</th>
-                  <th style="padding: 10px;">Lunas</th>
-                </tr>
-                <tr>
-                  <th style="padding: 10px;">Kas Mesjid</th>
-                  <th style="padding: 10px;">1000</th>
-                  <th style="padding: 10px;">Lunas</th>
-                </tr>
-                <tr>
-                  <th style="padding: 10px;">Kas Mesjid</th>
-                  <th style="padding: 10px;">1000</th>
-                  <th style="padding: 10px;">Lunas</th>
-                </tr>
-                <tr>
-                  <th style="padding: 10px;">Kas Mesjid</th>
-                  <th style="padding: 10px;">1000</th>
-                  <th style="padding: 10px;">Lunas</th>
-                </tr>
+                <thead>
+                  <tr>
+                    <th style="padding: 10px;">Nama Tagihan</th>
+                    <th style="padding: 10px;">Periode</th>
+                    <th style="padding: 10px;">Nominal</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @php $total = 0; @endphp
+                  @forelse ($tagihan_rutin_belum_dibayar as $item)
+                    @php $total += $item->nominal; @endphp
+                    <tr>
+                      <td style="padding: 10px;">{{ $item->nama_tagihan }}</td>
+                      <td style="padding: 10px;">{{ $item->nama_periode }}</td>
+                      <td style="padding: 10px;">{{ Fungsi::rupiah($item->nominal) }}</td>
+                    </tr>
+                  @empty
+                    <tr>
+                      <td colspan="3" style="padding: 10px; text-align: center;">Tidak ada data</td>
+                    </tr>
+                  @endforelse
+                </tbody>
+                @if (count($tagihan_rutin_belum_dibayar) > 0)
+                  <tfoot>
+                    <tr>
+                      <td colspan="2" style="padding: 10px; text-align: right;"><strong>Total:</strong></td>
+                      <td style="padding: 10px;"><strong>{{ Fungsi::rupiah($total) }}</strong></td>
+                    </tr>
+                  </tfoot>
+                @endif
               </table>
 
               <div class="form-group basic mt-3">
@@ -119,33 +128,44 @@
           <div class="modal-body">
             <div class="action-sheet-content">
               <table width="100%" style="border-collapse: collapse; text-align: left;">
-                <tr>
-                  <th style="padding: 10px;">Kas Mesjid</th>
-                  <th style="padding: 10px;">1000</th>
-                  <th style="padding: 10px;">Lunas</th>
-                </tr>
-                <tr>
-                  <th style="padding: 10px;">Kas Mesjid</th>
-                  <th style="padding: 10px;">1000</th>
-                  <th style="padding: 10px;">Lunas</th>
-                </tr>
-                <tr>
-                  <th style="padding: 10px;">Kas Mesjid</th>
-                  <th style="padding: 10px;">1000</th>
-                  <th style="padding: 10px;">Lunas</th>
-                </tr>
-                <tr>
-                  <th style="padding: 10px;">Kas Mesjid</th>
-                  <th style="padding: 10px;">1000</th>
-                  <th style="padding: 10px;">Lunas</th>
-                </tr>
-                <tr>
-                  <th style="padding: 10px;">Kas Mesjid</th>
-                  <th style="padding: 10px;">1000</th>
-                  <th style="padding: 10px;">Lunas</th>
-                </tr>
+                <thead>
+                  <tr>
+                    <th style="padding: 10px;">Tanggal Pengecekan</th>
+                    <th style="padding: 10px;">Penggunaan (m³)</th>
+                    <th style="padding: 10px;">Nominal</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @php
+                    $total_parameter = 0;
+                    $total_nominal = 0;
+                  @endphp
+                  @forelse ($pam_belum_dibayar as $item)
+                    @php
+                      $total_parameter += $item->parameter;
+                      $total_nominal += $item->nominal;
+                    @endphp
+                    <tr>
+                      <td style="padding: 10px;">{{ Fungsi::format_tgl($item->tanggal_input) }}</td>
+                      <td style="padding: 10px;">{{ $item->parameter }} (m³)</td>
+                      <td style="padding: 10px;">{{ Fungsi::rupiah($item->nominal) }}</td>
+                    </tr>
+                  @empty
+                    <tr>
+                      <td colspan="3" style="padding: 10px; text-align: center;">Tidak ada data</td>
+                    </tr>
+                  @endforelse
+                </tbody>
+                @if (count($pam_belum_dibayar) > 0)
+                  <tfoot>
+                    <tr>
+                      <td style="padding: 10px; text-align: right;"><strong>Total:</strong></td>
+                      <td style="padding: 10px;"><strong>{{ $total_parameter }} (m³)</strong></td>
+                      <td style="padding: 10px;"><strong>{{ Fungsi::rupiah($total_nominal) }}</strong></td>
+                    </tr>
+                  </tfoot>
+                @endif
               </table>
-
               <div class="form-group basic mt-3">
                 <button type="button" class="btn btn-primary btn-block btn-lg" data-bs-dismiss="modal">Close</button>
               </div>
@@ -166,33 +186,39 @@
           <div class="modal-body">
             <div class="action-sheet-content">
               <table width="100%" style="border-collapse: collapse; text-align: left;">
-                <tr>
-                  <th style="padding: 10px;">Kas Mesjid</th>
-                  <th style="padding: 10px;">1000</th>
-                  <th style="padding: 10px;">Lunas</th>
-                </tr>
-                <tr>
-                  <th style="padding: 10px;">Kas Mesjid</th>
-                  <th style="padding: 10px;">1000</th>
-                  <th style="padding: 10px;">Lunas</th>
-                </tr>
-                <tr>
-                  <th style="padding: 10px;">Kas Mesjid</th>
-                  <th style="padding: 10px;">1000</th>
-                  <th style="padding: 10px;">Lunas</th>
-                </tr>
-                <tr>
-                  <th style="padding: 10px;">Kas Mesjid</th>
-                  <th style="padding: 10px;">1000</th>
-                  <th style="padding: 10px;">Lunas</th>
-                </tr>
-                <tr>
-                  <th style="padding: 10px;">Kas Mesjid</th>
-                  <th style="padding: 10px;">1000</th>
-                  <th style="padding: 10px;">Lunas</th>
-                </tr>
+                <thead>
+                  <tr>
+                    <th style="padding: 10px;">Tanggal Ronda</th>
+                    <th style="padding: 10px;">Nominal Tagihan</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @php
+                    $total_nominal = 0;
+                  @endphp
+                  @forelse ($ronda_belum_dibayar as $item)
+                    @php
+                      $total_nominal += $item->nominal_tagihan;
+                    @endphp
+                    <tr>
+                      <td style="padding: 10px;">{{ Fungsi::format_tgl($item->tanggal_ronda) }}</td>
+                      <td style="padding: 10px;">{{ Fungsi::rupiah($item->nominal_tagihan) }}</td>
+                    </tr>
+                  @empty
+                    <tr>
+                      <td colspan="2" style="padding: 10px; text-align: center;">Tidak ada data</td>
+                    </tr>
+                  @endforelse
+                </tbody>
+                @if (count($ronda_belum_dibayar) > 0)
+                  <tfoot>
+                    <tr>
+                      <td style="padding: 10px; text-align: right;"><strong>Total:</strong></td>
+                      <td style="padding: 10px;"><strong>{{ Fungsi::rupiah($total_nominal) }}</strong></td>
+                    </tr>
+                  </tfoot>
+                @endif
               </table>
-
               <div class="form-group basic mt-3">
                 <button type="button" class="btn btn-primary btn-block btn-lg" data-bs-dismiss="modal">Close</button>
               </div>

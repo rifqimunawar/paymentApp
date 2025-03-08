@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Helpers\Fungsi;
 use Illuminate\Http\Request;
 use Modules\Ronda\Models\Ronda;
+use Modules\Master\Models\Warga;
 use App\Http\Controllers\Controller;
 use Modules\Master\Models\Parameter;
 use Modules\Tagihan\Models\TagihanRonda;
@@ -53,19 +54,76 @@ class DashboardController extends Controller
     }
     // setiap login lakukan pengecekan tagihan ronda END
 
-    return view('dashboard::index');
+
+    // kebutuhan data untuk dashboard
+    $data['last_30_days'] = [];
+
+    for ($i = 0; $i < 30; $i++) {
+      $date = Carbon::now()->subDays($i);
+
+      $data['last_30_days'][] = [
+        'date' => $date->toDateString(),
+        'date_month' => $date->format('M-d'),
+        'day' => $date->format('l'),
+        'payment_rutin' => Pembayaran::where('pembayaran_tipe', 1)
+          ->whereDate('created_at', $date)
+          ->sum('nominal_dibayar'),
+        'payment_pam' => Pembayaran::where('pembayaran_tipe', 2)
+          ->whereDate('created_at', $date)
+          ->sum('nominal_dibayar'),
+        'payment_ronda' => Pembayaran::where('pembayaran_tipe', 3)
+          ->whereDate('created_at', $date)
+          ->sum('nominal_dibayar')
+      ];
+    }
+
+    $startDate = Carbon::now()->subDays(30);
+    $endDate = Carbon::now();
+    $data['total_warga'] = Warga::count();
+    $data['total_pembayaran_rutin'] = Pembayaran::where('pembayaran_tipe', 1)
+      ->whereBetween('created_at', [$startDate, $endDate])
+      ->sum('nominal_dibayar');
+    $data['total_pembayaran_pam'] = Pembayaran::where('pembayaran_tipe', 2)
+      ->whereBetween('created_at', [$startDate, $endDate])
+      ->sum('nominal_dibayar');
+    $data['total_pembayaran_ronda'] = Pembayaran::where('pembayaran_tipe', 3)
+      ->whereBetween('created_at', [$startDate, $endDate])
+      ->sum('nominal_dibayar');
+
+    return view('dashboard::index', ['data' => $data]);
   }
 
   public function statistik()
   {
-    $data = Pembayaran::latest()->get();
+    $data['last_30_days'] = [];
 
+
+    for ($i = 29; $i >= 0; $i--) {
+      $date = Carbon::now()->subDays($i);
+
+      $data['last_30_days'][] = [
+        'date' => $date->toDateString(),
+        'date_month' => $date->format('M-d'),
+        'day' => $date->format('l'),
+        'payment_rutin' => Pembayaran::where('pembayaran_tipe', 1)
+          ->whereDate('created_at', $date)
+          ->sum('nominal_dibayar'),
+        'payment_pam' => Pembayaran::where('pembayaran_tipe', 2)
+          ->whereDate('created_at', $date)
+          ->sum('nominal_dibayar'),
+        'payment_ronda' => Pembayaran::where('pembayaran_tipe', 3)
+          ->whereDate('created_at', $date)
+          ->sum('nominal_dibayar')
+      ];
+    }
+
+    return $data;
     // Response JSON untuk DataTables
-    return response()->json([
-      // 'draw' => $request->input('draw'),
-      // 'recordsTotal' => $totalData,
-      // 'recordsFiltered' => $totalData,
-      'data' => $data
-    ]);
+    // return response()->json([
+    // 'draw' => $request->input('draw'),
+    // 'recordsTotal' => $totalData,
+    // 'recordsFiltered' => $totalData,
+    // 'data' => $data
+    // ]);
   }
 }

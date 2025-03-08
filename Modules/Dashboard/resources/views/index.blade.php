@@ -1,5 +1,7 @@
 @extends('dashboard::layouts.master')
-
+@php
+  use App\Helpers\Fungsi;
+@endphp
 @section('content')
   <!-- BEGIN row -->
   <div class="row">
@@ -8,11 +10,11 @@
       <div class="widget widget-stats bg-blue">
         <div class="stats-icon"><i class="fa fa-desktop"></i></div>
         <div class="stats-info">
-          <h4>TOTAL VISITORS</h4>
-          <p>3,291,922</p>
+          <h4>TOTAL WARGA</h4>
+          <p>{{ $data['total_warga'] }} Jiwa</p>
         </div>
         <div class="stats-link">
-          <a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+          <a href="javascript:;">&emsp;<i class="fa fa-arrow-alt-circle-right"></i></a>
         </div>
       </div>
     </div>
@@ -22,11 +24,11 @@
       <div class="widget widget-stats bg-info">
         <div class="stats-icon"><i class="fa fa-link"></i></div>
         <div class="stats-info">
-          <h4>BOUNCE RATE</h4>
-          <p>20.44%</p>
+          <h4>TOTAL PEMBAYARAN TAGIHAN RUTIN</h4>
+          <p>{{ Fungsi::rupiah($data['total_pembayaran_rutin']) }}</p>
         </div>
         <div class="stats-link">
-          <a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+          <a href="javascript:;">30 Hari Terakhir <i class="fa fa-arrow-alt-circle-right"></i></a>
         </div>
       </div>
     </div>
@@ -36,11 +38,11 @@
       <div class="widget widget-stats bg-orange">
         <div class="stats-icon"><i class="fa fa-users"></i></div>
         <div class="stats-info">
-          <h4>UNIQUE VISITORS</h4>
-          <p>1,291,922</p>
+          <h4>TOTAL PEMBAYARAN TAGIHAN PAM</h4>
+          <p>{{ Fungsi::rupiah($data['total_pembayaran_pam']) }}</p>
         </div>
         <div class="stats-link">
-          <a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+          <a href="javascript:;">30 Hari Terakhir <i class="fa fa-arrow-alt-circle-right"></i></a>
         </div>
       </div>
     </div>
@@ -50,11 +52,11 @@
       <div class="widget widget-stats bg-red">
         <div class="stats-icon"><i class="fa fa-clock"></i></div>
         <div class="stats-info">
-          <h4>AVG TIME ON SITE</h4>
-          <p>00:12:23</p>
+          <h4>TOTAL PEMBAYARAN DENDA RONDA</h4>
+          <p>{{ Fungsi::rupiah($data['total_pembayaran_ronda']) }}</p>
         </div>
         <div class="stats-link">
-          <a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+          <a href="javascript:;">30 Hari Terakhir <i class="fa fa-arrow-alt-circle-right"></i></a>
         </div>
       </div>
     </div>
@@ -63,23 +65,13 @@
   <!-- END row -->
 
   <!-- BEGIN row -->
-  <div class="row mb-2">
-    <div class="col-lg-12">
-      <div id="advance-daterange" class="btn btn-primary btn-sm d-flex text-center align-items-center">
-        <span class="flex-1" id="selected-date">&emsp;</span>
-        <i class="fa fa-caret-down" style="margin-left: 5px"></i>
-      </div>
-    </div>
-  </div>
-
-  <!-- BEGIN row -->
   <div class="row">
     <!-- BEGIN col-8 -->
     <div class="col-xl-12">
       <!-- BEGIN panel -->
       <div class="panel panel-inverse" data-sortable-id="index-1">
         <div class="panel-heading">
-          <h4 class="panel-title">Website Analytics (Last 7 Days)</h4>
+          <h4 class="panel-title">30 Hari Terakhir </h4>
           <div class="panel-heading-btn">
             <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i
                 class="fa fa-expand"></i></a>
@@ -93,11 +85,16 @@
         </div>
         <div class="panel-body pe-1">
           <div id="interactive-chart" class="h-300px"></div>
+
+        </div>
+        <div class="m-3">
+          <span style="font-style: italic, margin-top:25px;">Baca dari kanan ke kiri</span>
         </div>
       </div>
       <!-- END panel -->
     </div>
   </div>
+  {{-- {{ $data['last_30_days'] }} --}}
 @endsection
 <script>
   var handleInteractiveChart = function() {
@@ -110,120 +107,206 @@
         left: x - 55
       }).appendTo("body").fadeIn(200);
     }
-
     if ($('#interactive-chart').length !== 0) {
-      $.ajax({
-        url: '{{ route('statistik') }}', // Pastikan ini dalam file Blade, bukan .js terpisah
-        type: 'GET',
-        dataType: 'json',
-        success: function(response) {
-          console.log("Data Statistik:", response);
 
-          var data1 = response.data1;
-          var data2 = response.data2;
-          var data3 = response.data3;
-          var xLabel = response.xLabel;
+      var last30Days = {!! json_encode($data['last_30_days']) !!};
 
-          // Render Chart setelah data diterima
-          $.plot($("#interactive-chart"), [{
-              data: data1,
-              label: "Page Views",
-              color: app.color.blue,
-              lines: {
-                show: true,
-                fill: false,
-                lineWidth: 2
-              },
-              points: {
-                show: true,
-                radius: 3,
-                fillColor: app.color.componentBg
-              },
-              shadowSize: 0
-            },
-            {
-              data: data2,
-              label: "Visitors",
-              color: app.color.green,
-              lines: {
-                show: true,
-                fill: false,
-                lineWidth: 2
-              },
-              points: {
-                show: true,
-                radius: 3,
-                fillColor: app.color.componentBg
-              },
-              shadowSize: 0
-            },
-            {
-              data: data3,
-              label: "Visitors2",
-              color: app.color.blue,
-              lines: {
-                show: true,
-                fill: false,
-                lineWidth: 2
-              },
-              points: {
-                show: true,
-                radius: 3,
-                fillColor: app.color.componentBg
-              },
-              shadowSize: 0
-            }
-          ], {
-            xaxis: {
-              ticks: xLabel,
-              tickDecimals: 0,
-              tickColor: 'rgba(' + app.color.darkRgb + ', .2)'
-            },
-            yaxis: {
-              ticks: 10,
-              tickColor: 'rgba(' + app.color.darkRgb + ', .2)',
-              min: 0,
-              max: 200
-            },
-            grid: {
-              hoverable: true,
-              clickable: true,
-              tickColor: 'rgba(' + app.color.darkRgb + ', .2)',
-              borderWidth: 1,
-              backgroundColor: 'transparent',
-              borderColor: 'rgba(' + app.color.darkRgb + ', .2)'
-            },
-            legend: {
-              labelBoxBorderColor: 'rgba(' + app.color.darkRgb + ', .2)',
-              margin: 10,
-              noColumns: 1,
-              show: true
-            }
-          });
+      var data1 = last30Days.map((item, index) => {
+        return [(index + 1), (index % 2 === 0 ? item.payment_rutin : '')];
+      });
+      var data2 = last30Days.map((item, index) => {
+        return [(index + 1), (index % 2 === 0 ? item.payment_pam : '')];
+      });
+      var data3 = last30Days.map((item, index) => {
+        return [(index + 1), (index % 2 === 0 ? item.payment_ronda : '')];
+      });
+      var xLabel = last30Days.map((item, index) => {
+        return [(index + 1), (index % 2 === 0 ? item.date_month : '')];
+      });
 
-          // Tooltip Handler
-          var previousPoint = null;
-          $("#interactive-chart").bind("plothover", function(event, pos, item) {
-            $("#x").text(pos.x.toFixed(2));
-            $("#y").text(pos.y.toFixed(2));
-            if (item) {
-              if (previousPoint !== item.dataIndex) {
-                previousPoint = item.dataIndex;
-                $("#tooltip").remove();
-                var y = item.datapoint[1].toFixed(2);
-                var content = item.series.label + " " + y;
-                showTooltip(item.pageX, item.pageY, content);
-              }
-            } else {
-              $("#tooltip").remove();
-              previousPoint = null;
-            }
-            event.preventDefault();
-          });
+
+      // var data1 = [
+      //   [1, 40],
+      //   [2, 50],
+      //   [3, 60],
+      //   [4, 60],
+      //   [5, 60],
+      //   [6, 65],
+      //   [7, 75],
+      //   [8, 90],
+      //   [9, 100],
+      //   [10, 105],
+      //   [11, 110],
+      //   [12, 110],
+      //   [13, 120],
+      //   [14, 130],
+      //   [15, 135],
+      //   [16, 145],
+      //   [17, 132],
+      //   [18, 123],
+      //   [19, 135],
+      //   [20, 150]
+      // ];
+      // var data2 = [
+      //   [1, 10],
+      //   [2, 6],
+      //   [3, 10],
+      //   [4, 12],
+      //   [5, 18],
+      //   [6, 20],
+      //   [7, 25],
+      //   [8, 23],
+      //   [9, 24],
+      //   [10, 25],
+      //   [11, 18],
+      //   [12, 30],
+      //   [13, 25],
+      //   [14, 25],
+      //   [15, 30],
+      //   [16, 27],
+      //   [17, 20],
+      //   [18, 18],
+      //   [19, 31],
+      //   [20, 23]
+      // ];
+      // var data3 = [
+      //   [1, 15],
+      //   [2, 5],
+      //   [3, 15],
+      //   [4, 15],
+      //   [5, 20],
+      //   [6, 25],
+      //   [7, 25],
+      //   [8, 25],
+      //   [9, 25],
+      //   [10, 25],
+      //   [11, 20],
+      //   [12, 30],
+      //   [13, 25],
+      //   [14, 25],
+      //   [15, 30],
+      //   [16, 25],
+      //   [17, 20],
+      //   [18, 20],
+      //   [19, 30],
+      //   [20, 25]
+      // ];
+      // var xLabel = [
+      //   [1, ''],
+      //   [2, ''],
+      //   [3, 'May 15'],
+      //   [4, ''],
+      //   [5, ''],
+      //   [6, 'May 19'],
+      //   [7, ''],
+      //   [8, ''],
+      //   [9, 'May 22'],
+      //   [10, ''],
+      //   [11, ''],
+      //   [12, 'May 25'],
+      //   [13, ''],
+      //   [14, ''],
+      //   [15, 'May 28'],
+      //   [16, ''],
+      //   [17, ''],
+      //   [18, 'May 31'],
+      //   [19, ''],
+      //   [20, '']
+      // ];
+      $.plot($("#interactive-chart"), [{
+        data: data1,
+        label: "Rutin",
+        color: app.color.blue,
+        lines: {
+          show: true,
+          fill: false,
+          lineWidth: 2
         },
-        error: function(xhr, status, error) {
-          console.error("Gagal mengambil data statistik:", error);
+        points: {
+          show: true,
+          radius: 3,
+          fillColor: app.color.componentBg
+        },
+        shadowSize: 0
+      }, {
+        data: data2,
+        label: 'Pam Swadaya',
+        color: app.color.green,
+        lines: {
+          show: true,
+          fill: false,
+          lineWidth: 2
+        },
+        points: {
+          show: true,
+          radius: 3,
+          fillColor: app.color.componentBg
+        },
+        shadowSize: 0
+      }, {
+        data: data3,
+        label: 'Denda Ronda',
+        color: app.color.yellow,
+        lines: {
+          show: true,
+          fill: false,
+          lineWidth: 2
+        },
+        points: {
+          show: true,
+          radius: 3,
+          fillColor: app.color.componentBg
+        },
+        shadowSize: 0
+      }], {
+        xaxis: {
+          ticks: xLabel,
+          tickDecimals: 0,
+          tickColor: 'rgba(' + app.color.darkRgb + ', .2)'
+        },
+        yaxis: {
+          ticks: 10,
+          tickColor: 'rgba(' + app.color.darkRgb + ', .2)',
+          min: 0,
+          max: 200
+        },
+        grid: {
+          hoverable: true,
+          clickable: true,
+          tickColor: 'rgba(' + app.color.darkRgb + ', .2)',
+          borderWidth: 1,
+          backgroundColor: 'transparent',
+          borderColor: 'rgba(' + app.color.darkRgb + ', .2)'
+        },
+        legend: {
+          labelBoxBorderColor: 'rgba(' + app.color.darkRgb + ', .2)',
+          margin: 10,
+          noColumns: 1,
+          show: true
         }
+      });
+      var previousPoint = null;
+      $("#interactive-chart").bind("plothover", function(event, pos, item) {
+        $("#x").text(pos.x.toFixed(2));
+        $("#y").text(pos.y.toFixed(2));
+        if (item) {
+          if (previousPoint !== item.dataIndex) {
+            previousPoint = item.dataIndex;
+            $("#tooltip").remove();
+            // var y = item.datapoint[1].toFixed(2);
+            var y = 'Rp ' + item.datapoint[1].toLocaleString('id-ID', {
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 0
+            });
+
+            var content = item.series.label + " " + y;
+            showTooltip(item.pageX, item.pageY, content);
+          }
+        } else {
+          $("#tooltip").remove();
+          previousPoint = null;
+        }
+        event.preventDefault();
       });
     }
   };

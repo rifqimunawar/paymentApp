@@ -1,9 +1,9 @@
 PR
 Website
-- membuat module tagihanku, rincian semua tagihan by user warga
+- membuat module tagihanku, rincian semua tagihan by user warga (mulai dikerjakan)
 - history pembayaranku
-- membuat module identitas yang isinya informasi identitas warga yang login dan crud keluarga (osional)
-- dashboard a.jumlah warga b.total rutin c. total pam d.total denda ronda dengan periode
+- membuat module identitas yang isinya informasi identitas warga yang login dan crud keluarga (opsional)
+- dashboard a.jumlah warga b.total rutin c. total pam d.total denda ronda dengan periode ✅ (clear)
 
 
 
@@ -15,3 +15,6 @@ Mobile
 
 #ronda
 absen ronda, dengan foto dan lokasi
+
+############ bug
+/tagihan/pam/106/view
