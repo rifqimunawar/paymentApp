@@ -105,11 +105,22 @@ class PembayaranController extends Controller
     $title = 'Tagihan Rutin Pada Bulan ' . $periode->nama_periode;
 
     $data = Warga::with([
-      'tagihans' => function ($query) use ($periode_id) {
+      'tagihans' => function ($query) use ($periode_id, $warga_id) {
         $query->wherePivot('periode_id', $periode_id)
-          ->with(['pembayaran', 'periodes']);
+          ->wherePivot('warga_id', $warga_id)
+          ->with([
+            'pembayaran' => function ($q) use ($periode_id, $warga_id) {
+              $q->where('periode_id', $periode_id)
+                ->where('warga_id', $warga_id);
+            },
+            'periodes' => function ($q) use ($periode_id, $warga_id) {
+              $q->wherePivot('periode_id', $periode_id)
+                ->wherePivot('warga_id', $warga_id);
+            }
+          ]);
       }
     ])->find($warga_id);
+    // return $data;
     return view(
       'pembayaran::/pembayaran/indexByPeriode',
       [

@@ -15,62 +15,165 @@
           <div class="row">
             <table>
               <tr>
-                <td>Nama</td>
+                <td style="padding-bottom: 10px">Nama</td>
                 <td>:</td>
                 <td>{{ $data->nama }}</td>
               </tr>
               <tr>
-                <td>NIK</td>
+                <td style="padding-bottom: 10px">NIK</td>
                 <td>:</td>
                 <td>{{ $data->nik }}</td>
               </tr>
               <tr>
-                <td>Usia</td>
+                <td style="padding-bottom: 10px">Usia</td>
                 <td>:</td>
                 <td>{{ Fungsi::usia($data->tgl_lahir) }}</td>
               </tr>
               <tr>
-                <td>Jenis Kelamin</td>
+                <td style="padding-bottom: 10px">Jenis Kelamin</td>
                 <td>:</td>
                 <td>{{ $data->jk }}</td>
               </tr>
               <tr>
-                <td>Kota Kelahiran</td>
+                <td style="padding-bottom: 10px">Kota Kelahiran</td>
                 <td>:</td>
                 <td>{{ $data->kota_kelahiran }}</td>
               </tr>
               <tr>
-                <td>Agama</td>
+                <td style="padding-bottom: 10px">Agama</td>
                 <td>:</td>
-                <td>{{ $data->agama }}</td>
+                <td>
+                  @if ($data->agama == 1)
+                    Islam
+                  @elseif($data->agama == 2)
+                    Kristen
+                  @elseif($data->agama == 3)
+                    Hindu
+                  @elseif($data->agama == 4)
+                    Budha
+                  @else
+                    -
+                  @endif
+                </td>
               </tr>
+
               <tr>
-                <td>Pendidikan</td>
+                <td style="padding-bottom: 10px">Pendidikan</td>
                 <td>:</td>
-                <td>{{ $data->pendidikan }}</td>
+                <td>
+                  @if ($data->pendidikan == 1)
+                    SD/Sederajat
+                  @elseif($data->pendidikan == 2)
+                    SMP/Sederajat
+                  @elseif($data->pendidikan == 3)
+                    SMA/Sederajat
+                  @elseif($data->pendidikan == 4)
+                    D3/Sederajat
+                  @elseif($data->pendidikan == 5)
+                    S1/Sederajat
+                  @elseif($data->pendidikan == 6)
+                    S2/Sederajat
+                  @elseif($data->pendidikan == 7)
+                    S3/Sederajat
+                  @else
+                    -
+                  @endif
+                </td>
               </tr>
+
               <tr>
-                <td>Pekerjaan</td>
+                <td style="padding-bottom: 10px">Pekerjaan</td>
                 <td>:</td>
-                <td>{{ $data->pekerjaan }}</td>
+                <td>
+                  @if ($data->pekerjaan == 1)
+                    Pegawai Negeri Sipil (PNS)
+                  @elseif($data->pekerjaan == 2)
+                    Karyawan Swasta
+                  @elseif($data->pekerjaan == 3)
+                    Wiraswasta / Pengusaha
+                  @elseif($data->pekerjaan == 4)
+                    Petani
+                  @elseif($data->pekerjaan == 5)
+                    Nelayan
+                  @elseif($data->pekerjaan == 6)
+                    Buruh / Pekerja Lepas
+                  @elseif($data->pekerjaan == 7)
+                    Guru / Dosen
+                  @elseif($data->pekerjaan == 8)
+                    Dokter / Tenaga Medis
+                  @elseif($data->pekerjaan == 9)
+                    TNI / Polri
+                  @elseif($data->pekerjaan == 10)
+                    Ojek Online / Sopir
+                  @elseif($data->pekerjaan == 11)
+                    Ibu Rumah Tangga
+                  @elseif($data->pekerjaan == 12)
+                    Mahasiswa / Pelajar
+                  @elseif($data->pekerjaan == 13)
+                    Pensiunan
+                  @elseif($data->pekerjaan == 14)
+                    Teknisi / Mekanik
+                  @elseif($data->pekerjaan == 15)
+                    Seniman / Pekerja Kreatif
+                  @elseif($data->pekerjaan == 16)
+                    Programmer / IT Specialist
+                  @elseif($data->pekerjaan == 17)
+                    Pengacara / Notaris
+                  @elseif($data->pekerjaan == 18)
+                    Akuntan / Konsultan Keuangan
+                  @elseif($data->pekerjaan == 19)
+                    Pedagang / Penjual
+                  @elseif($data->pekerjaan == 20)
+                    Lainnya
+                  @else
+                    -
+                  @endif
+                </td>
               </tr>
+
               <tr>
-                <td>Status Perkawinan</td>
+                <td style="padding-bottom: 10px">Status Perkawinan</td>
                 <td>:</td>
-                <td>{{ $data->status_perkawinan }}</td>
+                <td>
+                  @if ($data->status_perkawinan == 1)
+                    Belum Menikah
+                  @elseif($data->status_perkawinan == 2)
+                    Menikah
+                  @elseif($data->status_perkawinan == 3)
+                    Cerai Hidup
+                  @elseif($data->status_perkawinan == 4)
+                    Cerai Mati
+                  @else
+                    -
+                  @endif
+                </td>
               </tr>
+
               <tr>
-                <td>Status Keluarga</td>
+                <td style="padding-bottom: 10px">Status Keluarga</td>
                 <td>:</td>
-                <td>{{ $data->status_keluarga }}</td>
+                <td>
+                  @if ($data->status_keluarga == 1)
+                    Kepala Keluarga
+                  @elseif($data->status_keluarga == 2)
+                    Suami
+                  @elseif($data->status_keluarga == 3)
+                    Istri
+                  @elseif($data->status_keluarga == 4)
+                    Anak
+                  @else
+                    -
+                  @endif
+                </td>
               </tr>
+
               <tr>
-                <td>Alamat</td>
+                <td style="padding-bottom: 10px">Alamat</td>
                 <td>:</td>
                 <td>{{ $data->alamat }}</td>
               </tr>
               <tr>
-                <td>Telpon/Wa</td>
+                <td style="padding-bottom: 10px">Telpon/Wa</td>
                 <td>:</td>
                 <td>{{ $data->telp }}</td>
               </tr>
@@ -113,7 +216,8 @@
 
                 <label for="parameter_hari_ini">Parameter Hari Ini</label> <br>
                 <div class="input-group">
-                  <input oninput="numberInput(this)" type="text" name="total_parameter" class="form-control" />
+                  <input oninput="numberInput(this)" type="text" required name="total_parameter"
+                    class="form-control" />
                   <span class="input-group-text"> m3</span>
                 </div>
                 <p class="text-danger italic" style="font-style: italic">
