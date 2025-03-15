@@ -751,7 +751,7 @@
           <ul class="splide__list">
 
             <li class="splide__slide">
-              <a href="app-blog-post.html">
+              <a href="/mobile/blog1">
                 <div class="blog-card">
                   <img src="{{ asset('img/keuangan_yayasan.jpg') }}" alt="image" class="imaged w-100">
                   <div class="text">
@@ -764,7 +764,7 @@
             </li>
 
             <li class="splide__slide">
-              <a href="app-blog-post.html">
+              <a href="/mobile/blog2">
                 <div class="blog-card">
                   <img src="{{ asset('img/rtonline.jpg') }}" alt="image" class="imaged w-100">
                   <div class="text">

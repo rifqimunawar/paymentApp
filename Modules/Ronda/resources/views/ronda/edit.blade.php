@@ -4,7 +4,7 @@
 @endphp
 @section('module-content')
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
       <div class="card">
         <div class="card-header">
           <div class="card-title">Form Elements</div>
@@ -41,7 +41,7 @@
                   </div>
                 @endif
                 <div class="card-action">
-                  <input type="hidden" name="id">
+                  <input type="hidden" value="{{ $data->id }}" name="id">
                   <button class="btn btn-success btn-sm" type="submit">Simpan</button>
                   <a href="{{ route('jadwalkan.index') }}" class="btn btn-warning btn-sm">Kembali</a>
                 </div>
@@ -54,7 +54,7 @@
       </div>
     </div>
     {{-- Absen --}}
-    <div class="col-md-6">
+    {{-- <div class="col-md-6">
       <div class="card">
         <div class="card-header">
           <div class="card-title">{{ Fungsi::format_tgl($data->tanggal) }}</div>
@@ -90,29 +90,6 @@
                       </tr>
                     @endforelse
                   </tbody>
-                  {{-- <tbody>
-                    @forelse ($data_jadwal_ronda as $item)
-                      @foreach (array_merge($item->wargas->toArray(), $item->absens->toArray()) as $data)
-                        <tr>
-                          <td>{{ $data['nama'] ?? $data['id'] }}</td>
-                          <td>
-                            <input type="radio" name="absen[{{ $data['id'] }}]" value="2"
-                              class="form-check-input" @if ($data['absen'] == 2) checked @endif>
-                            <label class="form-check-label">Hadir</label>
-                            <input type="radio" name="absen[{{ $data['id'] }}]" value="1"
-                              class="form-check-input" @if ($data['absen'] == 1) checked @endif>
-                            <label class="form-check-label">Tidak</label>
-                          </td>
-                        </tr>
-                      @endforeach
-                    @empty
-                      <tr>
-                        <td colspan="2" class="text-center">Data Kosong</td>
-                      </tr>
-                    @endforelse
-                  </tbody> --}}
-
-
                 </table>
                 <div class="card-action d-flex justify-content-center">
                   <input type="hidden" name="ronda_id" value="{{ $data->id }}">
@@ -123,7 +100,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> --}}
   </div>
 @endsection
 <script>

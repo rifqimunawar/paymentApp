@@ -32,11 +32,25 @@
                   <input type="text" class="form-control" required id="denda_ronda_display"
                     value="{{ $data->denda_ronda ?? '' }}" placeholder="Denda ronda / malam"
                     oninput="formatCurrency(this, 'denda_ronda')" />
-
                   <input type="hidden" name="denda_ronda" id="denda_ronda" value="{{ $data->denda_ronda ?? '' }}" />
                 </div>
 
 
+                <div class="form-group mb-2">
+                  <label for="latitude_ronda">Latitude</label>
+                  <input type="text" class="form-control" required name="latitude_ronda" id="latitude_ronda"
+                    placeholder="latitude tikoordinat ronda" value="{{ $data->latitude_ronda ?? '' }}" />
+                </div>
+                <div class="form-group mb-2">
+                  <label for="longitude_ronda">Longitude</label>
+                  <input type="text" class="form-control" required name="longitude_ronda" id="longitude_ronda"
+                    placeholder="longitude tikoordinat ronda" value="{{ $data->longitude_ronda ?? '' }}" />
+                </div>
+                <div class="form-group mb-2">
+                  <label for="jam_awal_ronda">Jam Awal Ronda</label>
+                  <input type="time" class="form-control" required name="jam_awal_ronda" id="jam_awal_ronda"
+                    placeholder="waktu minimal absen ronda" value="{{ $data->jam_awal_ronda ?? '' }}" />
+                </div>
                 <div class="card-action">
                   <input type="hidden" name="id" value="1">
                   <button class="btn btn-success btn-sm" type="submit">Simpan</button>

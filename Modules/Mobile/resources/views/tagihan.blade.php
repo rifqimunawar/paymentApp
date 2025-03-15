@@ -39,7 +39,7 @@
     <!-- * Transactions -->
 
 
-    @include('mobile::layouts.footer')
+    {{-- @include('mobile::layouts.footer') --}}
     <!-- * App Capsule -->
     <iframe id="printFrame" style="display:none;"></iframe>
     <script>

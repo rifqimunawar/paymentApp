@@ -16,6 +16,9 @@ return new class extends Migration {
       $table->string('nama_rt');
       $table->unsignedBigInteger('biaya_pam');
       $table->unsignedBigInteger('denda_ronda');
+      $table->string('latitude_ronda')->nullable();
+      $table->string('longitude_ronda')->nullable();
+      $table->string('jam_awal_ronda')->nullable();
 
       $table->string('created_by')->default('unknown');
       $table->string('updated_by')->default('unknown');

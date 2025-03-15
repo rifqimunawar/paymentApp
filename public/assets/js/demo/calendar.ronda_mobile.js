@@ -11,25 +11,23 @@ document.addEventListener('DOMContentLoaded', function () {
               }));
           }).flat();
 
-          var calendar = new FullCalendar.Calendar(calendarElm, {
-              headerToolbar: {
-                  left: 'prev,next',
-                  center: 'title',
-                  right: 'today'
-              },
-              buttonText: {
-                  today: 'Today',
-                  week: 'Week',
-                  day: 'Day'
-              },
-              initialView: 'dayGridMonth',
-              editable: true,
-              droppable: true,
-              themeSystem: 'bootstrap',
-              events: events
-          });
 
-          calendar.render();
+          var calendar = new FullCalendar.Calendar(calendarElm, {
+            headerToolbar: {
+                left: '',
+                center: 'title',
+                right: ''
+            },
+            initialView: 'dayGridMonth',
+            editable: true,
+            droppable: true,
+            themeSystem: 'bootstrap',
+            events: events
+        });
+
+        calendar.render();
+
+
       })
       .catch(error => console.error('Error fetching ronda data:', error));
 });

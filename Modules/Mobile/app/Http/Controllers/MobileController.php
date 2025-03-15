@@ -9,7 +9,9 @@ use Modules\Master\Models\Warga;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Modules\Keluarga\Models\Keluarga;
+use Modules\Master\Models\Parameter;
 use Modules\Pembayaran\Models\Pembayaran;
+use Modules\Ronda\Models\RondaAbsen;
 
 class MobileController extends Controller
 {
@@ -74,9 +76,13 @@ class MobileController extends Controller
     // Filter data hanya untuk tanggal hari ini
     $ronda_hari_ini = $data->where('tanggal_ronda', Carbon::today()->toDateString());
 
+    $sudah_absen = RondaAbsen::with('warga')->where('absen', 2)->whereDate('waktu_absen', Carbon::today())->get();
+
+    // ->where('absen', 2)
     // return $ronda_hari_ini;
     return view('mobile::ronda', [
-      'ronda_hari_ini' => $ronda_hari_ini
+      'ronda_hari_ini' => $ronda_hari_ini,
+      'sudah_absen' => $sudah_absen
     ]);
   }
   public function keluarga()
@@ -93,4 +99,123 @@ class MobileController extends Controller
     return view('mobile::settings');
   }
   // Fitur eksklusif ini hanya tersedia di versi Premium! Tingkatkan aplikasi Anda sekarang untuk pengalaman terbaik dan akses fitur unggulan!
+  private function haversineDistance($lat1, $lon1, $lat2, $lon2)
+  {
+    $earthRadius = 6371000; // Radius bumi dalam meter
+
+    // Konversi derajat ke radian
+    $lat1 = deg2rad($lat1);
+    $lon1 = deg2rad($lon1);
+    $lat2 = deg2rad($lat2);
+    $lon2 = deg2rad($lon2);
+
+    // Selisih koordinat
+    $deltaLat = $lat2 - $lat1;
+    $deltaLon = $lon2 - $lon1;
+
+    // Rumus Haversine
+    $a = sin($deltaLat / 2) * sin($deltaLat / 2) +
+      cos($lat1) * cos($lat2) *
+      sin($deltaLon / 2) * sin($deltaLon / 2);
+    $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+
+    // Jarak dalam meter
+    return $earthRadius * $c;
+  }
+  public function absen(Request $request)
+  {
+    $userLogin = Auth::user();
+    $warga_id = $userLogin->warga_id;
+    $today = Carbon::today()->toDateString();
+    $latitudeRef = Parameter::pluck('latitude_ronda')->first();
+    $longitudeRef = Parameter::pluck('longitude_ronda')->first();
+    $waktu_awal_absen = Parameter::pluck('jam_awal_ronda')->first();
+
+    // Cari ronda berdasarkan tanggal hari ini
+    $ronda_hari_ini = Ronda::where('tanggal_ronda', $today)->first();
+    if (!$ronda_hari_ini) {
+      return response()->json([
+        'title' => 'Maaf!',
+        'icon' => 'error',
+        'message' => 'Jadwal ronda tidak ditemukan untuk hari ini.',
+      ]);
+    }
+
+    // Cek apakah user memiliki jadwal ronda hari ini
+    $id_ronda_hari_ini = $ronda_hari_ini->id;
+    $rondaAbsen = RondaAbsen::where('ronda_id', $id_ronda_hari_ini)
+      ->where('warga_id', $warga_id)
+      ->first();
+    if (!$rondaAbsen) {
+      return response()->json([
+        'title' => 'Maaf!',
+        'message' => 'Jadwal ronda Anda bukan hari ini.',
+        'icon' => 'error',
+      ]);
+    }
+
+    // Hitung jarak dengan Haversine Formula
+    $latitudeUser = $request->latitude;
+    $longitudeUser = $request->longitude;
+    $distance = $this->haversineDistance($latitudeRef, $longitudeRef, $latitudeUser, $longitudeUser);
+    if ($distance > 10) {
+      return response()->json([
+        'title' => 'Maaf!',
+        'icon' => 'error',
+        'message' => 'Anda berada di luar zona absen (lebih dari 10 meter).',
+      ]);
+    }
+
+    // waktu absen
+    $waktu_absen = Carbon::now()->format('H:i');
+    $waktu_akhir_absen = "23:59";
+    if (!($waktu_absen >= $waktu_awal_absen && $waktu_absen <= $waktu_akhir_absen)) {
+      return response()->json([
+        'title' => 'Maaf!',
+        'message' => 'Belum masuk waktu absen.',
+        'icon' => 'error',
+      ]);
+    }
+
+    // pengolahan gambar
+    $img = null;
+    if ($request->hasFile('img')) {
+      $file = $request->file('img');
+      if (!$file->isValid()) {
+        return response()->json([
+          'title' => 'Error!',
+          'message' => 'Gagal mengunggah gambar.',
+          'icon' => 'error',
+        ]);
+      }
+      $extension = $file->getClientOriginalExtension();
+      $newFileName = $userLogin->username . '_' . now()->timestamp . '.' . $extension;
+      $file->move(public_path('img/absen'), $newFileName);
+      $img = $newFileName;
+    }
+
+    // simpan data ke db
+    $rondaAbsen->absen = 2;
+    $rondaAbsen->waktu_absen = Carbon::now();
+    $rondaAbsen->latitude = $latitudeUser;
+    $rondaAbsen->longitude = $longitudeUser;
+    $rondaAbsen->img = $img;
+    $rondaAbsen->save();
+
+    return response()->json([
+      'title' => 'Success!',
+      'message' => 'Absen berhasil, Anda tercatat hadir.',
+      'icon' => 'success',
+    ]);
+  }
+
+  public function blog1()
+  {
+    return view('mobile::blog1');
+  }
+  public function blog2()
+  {
+    return view('mobile::blog2');
+  }
+
 }

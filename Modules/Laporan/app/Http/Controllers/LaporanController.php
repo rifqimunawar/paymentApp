@@ -5,11 +5,13 @@ namespace Modules\Laporan\Http\Controllers;
 use Log;
 use Carbon\Carbon;
 use App\Helpers\Fungsi;
+use App\Helpers\GetSettings;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
 use Modules\Laporan\Exports\PembayaranExport;
 use Modules\Pembayaran\Models\Pembayaran;
+use Modules\Ronda\Models\RondaAbsen;
 
 class LaporanController extends Controller
 {
@@ -120,4 +122,33 @@ class LaporanController extends Controller
     $mpdf->Output($fileName, 'D');
     $mpdf->Output();
   }
+
+
+  public function absen()
+  {
+    Fungsi::hakAkses('/lap/absen');
+    $title = 'Absen';
+    $data = RondaAbsen::where('absen', 2)->with('warga')->paginate(25);
+
+    return view(
+      'laporan::/absen/index',
+      [
+        'title' => $title,
+        'data' => $data,
+      ]
+    );
+  }
+  public function view($id)
+  {
+    $data = RondaAbsen::where('absen', 2)->with('warga')->findOrFail($id);
+    // $url = config('app.url');
+    $url = GetSettings::getBaseUrl();
+
+    $image = $url . 'img/absen/' . $data->img;
+
+    return response()->json([
+      'image' => $image,
+    ]);
+  }
+
 }

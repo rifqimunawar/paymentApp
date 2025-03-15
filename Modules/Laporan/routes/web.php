@@ -24,4 +24,7 @@ Route::prefix('lap')->middleware('auth')->group(function () {
   Route::get('/get_data_pembayaran', [LaporanController::class, 'get_ajx_pembayaran']);
   Route::get('/pembayaran/export', [LaporanController::class, 'export'])->name('lap_pembayaran.export');
   Route::get('/pembayaran/pdf', [LaporanController::class, 'pdf'])->name('lap_pembayaran.pdf');
+
+  Route::get('/absen', [LaporanController::class, 'absen'])->name('laporan.absen');
+  Route::get('/view/{id}', [LaporanController::class, 'view'])->name('laporan.view');
 });

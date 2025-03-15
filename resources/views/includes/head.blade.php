@@ -16,8 +16,8 @@
 <link href="{{ asset('assets/css/vendor.min.css') }}" rel="stylesheet" />
 <link href="{{ asset('assets/css/default/app.min.css') }}" rel="stylesheet" />
 <!-- ================== END BASE CSS STYLE ================== -->
-
 <!-- ================== BEGIN page-css ================== -->
+<link href="{{ asset('/assets/plugins/bootstrap-icons/font/bootstrap-icons.css') }}" rel="stylesheet" />
 <link href="{{ asset('assets/plugins/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet" />
 <link href="{{ asset('assets/plugins/select2/dist/css/select2.min.css') }}" rel="stylesheet" />
 <link href="{{ asset('assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css') }}" rel="stylesheet" />

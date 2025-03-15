@@ -105,7 +105,7 @@
 
 
 
-  @include('mobile::layouts.footer')
+  {{-- @include('mobile::layouts.footer') --}}
 
   </div>
   <!-- * App Capsule -->

@@ -56,7 +56,7 @@ class PeriodesTableSeeder extends Seeder
                 'deleted_by' => NULL,
                 'deleted_at' => NULL,
                 'created_at' => '2025-03-03 23:29:37',
-                'updated_at' => '2025-03-09 03:13:19',
+                'updated_at' => '2025-03-15 21:37:58',
             ),
         ));
         

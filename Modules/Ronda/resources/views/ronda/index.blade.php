@@ -82,15 +82,21 @@
                 </ul>
               </td>
               <td>
-                <a href="{{ route('jadwalkan.edit', $item->id) }}">
-                  <i class="fa fa-pencil-square" style="font-size: 14px; margin-right:5px"></i>
-                </a>
-                <a href="{{ route('jadwalkan.destroy', $item->id) }}" data-confirm-delete="true">
-                  <i class="fa fa-trash mx-2" style="font-size: 14px"></i>
-                </a>
-                {{-- <a href="{{ route('jadwalkan.view', $item->id) }}">
-                                    <i class="fa fa-eye mx-2" style="font-size: 14px"></i>
-                                </a> --}}
+                @php
+                  $tanggalRonda = \Carbon\Carbon::parse($item->tanggal_ronda);
+                  $hariIni = \Carbon\Carbon::today();
+                  $besok = $hariIni->copy()->addDay();
+                @endphp
+
+                @if ($tanggalRonda->gt($besok))
+                  <a href="{{ route('jadwalkan.edit', $item->id) }}">
+                    <i class="fa fa-pencil-square" style="font-size: 14px; margin-right:5px"></i>
+                  </a>
+                  <a href="{{ route('jadwalkan.destroy', $item->id) }}" data-confirm-delete="true">
+                    <i class="fa fa-trash mx-2" style="font-size: 14px"></i>
+                  </a>
+                @endif
+
               </td>
             </tr>
           @endforeach

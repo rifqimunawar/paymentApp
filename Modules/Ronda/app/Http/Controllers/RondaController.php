@@ -75,24 +75,35 @@ class RondaController extends Controller
 
   public function store(Request $request)
   {
-    $request->validate([
-      'tanggal_ronda' => 'required|date|unique:rondas,tanggal_ronda',
-    ], [
+    // Jika request mengandung ID (update case), abaikan validasi unique
+    $rules = [
+      'tanggal_ronda' => 'required|date',
+    ];
+
+    if (empty($request->id)) {
+      $rules['tanggal_ronda'] .= '|unique:rondas,tanggal_ronda';
+    }
+
+    $request->validate($rules, [
       'tanggal_ronda.unique' => 'Tanggal sudah diisi, pilih tanggal lain.',
     ]);
+
     $data = $request->except('warga_id');
 
+    // Proses upload gambar ke public/img
     if ($request->hasFile('img')) {
       $extension = $request->img->getClientOriginalExtension();
-      $newFileName = 'Ronda' . '_' . now()->timestamp . '.' . $extension;
+      $newFileName = 'Ronda_' . now()->timestamp . '.' . $extension;
       $request->file('img')->move(public_path('/img'), $newFileName);
       $data['img'] = $newFileName;
     }
 
+    // Proses Update
     if (!empty($request->id)) {
       $updateData = Ronda::findOrFail($request->id);
       $data['updated_by'] = Auth::user()->username;
       $updateData->update($data);
+
       $wargaIds = $request->warga_id;
       if (!empty($wargaIds)) {
         $updateData->wargas()->sync($wargaIds);
@@ -103,12 +114,15 @@ class RondaController extends Controller
           );
         }
       }
+
       Alert::success('Success', 'Data berhasil diupdate');
       return redirect()->route('jadwalkan.index');
     }
 
+    // Proses Create
     $data['created_by'] = Auth::user()->username;
     $newRonda = Ronda::create($data);
+
     $wargaIds = $request->warga_id;
     if (!empty($wargaIds)) {
       $newRonda->wargas()->sync($wargaIds);
@@ -121,9 +135,11 @@ class RondaController extends Controller
         ]);
       }
     }
+
     Alert::success('Success', 'Data berhasil disimpan');
     return redirect()->route('jadwalkan.index');
   }
+
 
   public function edit($id)
   {

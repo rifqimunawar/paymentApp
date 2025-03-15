@@ -50,6 +50,8 @@
   <div id="appCapsule">
 
     <div class="section mt-2 text-center">
+      <img src="{{ $getLogo }}" alt="logo"
+        style="width: 5rem; height:auto; border-radius:20px; margin-bottom:3rem;">
       <h1>Log in</h1>
       <h4>Fill the form to log in</h4>
     </div>
@@ -85,9 +87,9 @@
 
         <div class="form-links mt-2">
           <div>
-            <a href="app-register.html">Register Now</a>
+            {{-- <a href="app-register.html">Register Now</a> --}}
           </div>
-          <div><a href="app-forgot-password.html" class="text-muted">Forgot Password?</a></div>
+          {{-- <div><a href="app-forgot-password.html" class="text-muted">Forgot Password?</a></div> --}}
         </div>
 
         <div class="form-button-group  transparent">

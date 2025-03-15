@@ -17,6 +17,9 @@ return new class extends Migration {
       $table->integer('absen')->default(1);
       $table->timestamp('waktu_absen')->nullable();
       $table->text('catatan')->nullable();
+      $table->string('latitude')->nullable();
+      $table->string('longitude')->nullable();
+      $table->string('img')->nullable();
 
       $table->string('created_by')->default('unknown');
       $table->string('updated_by')->default('unknown');
