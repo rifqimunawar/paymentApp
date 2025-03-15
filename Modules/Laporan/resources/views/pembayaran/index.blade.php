@@ -1,6 +1,8 @@
 @extends('laporan::layouts.master')
 @php
   use App\Helpers\Fungsi;
+  use App\Helpers\GetSettings;
+  $getBaseUrl = App\Helpers\GetSettings::getBaseUrl();
 @endphp
 @section('module-content')
   <!-- BEGIN panel -->
@@ -79,16 +81,18 @@
     </div>
   </div>
 
+  <input type="hidden" id="baseUrl" value="{{ $getBaseUrl }}">
 
   <script>
     $(document).ready(function() {
+      let baseUrl = document.getElementById("baseUrl").value;
       let table = $('#dt_table_pembayaran').DataTable({
         processing: true,
         serverSide: false,
         responsive: true,
         destroy: true,
         ajax: {
-          url: 'http://127.0.0.1:8000/lap/get_data_pembayaran/',
+          url: baseUrl + 'lap/get_data_pembayaran/',
           type: 'GET',
           data: function(d) {
             d.start_date = $('#start-date').val();
