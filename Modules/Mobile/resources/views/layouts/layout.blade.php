@@ -22,6 +22,33 @@
   <link rel="stylesheet" href="{{ asset('mobile/assets/css/style.css') }}">
   <link rel="manifest" href="__manifest.json">
   <script src="https://maps.googleapis.com/maps/api/js"></script>
+
+  <style>
+    .loader {
+      width: 180px;
+      height: 12px;
+      border-radius: 20px;
+      background: linear-gradient(orange 0 0) 0/0% no-repeat lightblue;
+      animation: loadingAnimation 3s infinite steps(10);
+    }
+
+    @keyframes loadingAnimation {
+      100% {
+        background-size: 110%;
+      }
+    }
+
+    /* Tambahan untuk posisi & visibilitas */
+    #loading {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      display: none;
+      /* Awalnya tersembunyi */
+    }
+  </style>
 </head>
 
 <body>

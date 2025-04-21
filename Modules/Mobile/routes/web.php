@@ -28,6 +28,7 @@ Route::prefix('mobile')->middleware('auth')->group(function () {
   Route::post('/absen', [MobileController::class, 'absen'])->name('mobile.absen');
   Route::get('/keluarga', [MobileController::class, 'keluarga'])->name('mobile.keluarga');
   Route::get('/settings', [MobileController::class, 'settings'])->name('mobile.settings');
+  Route::get('/invoice/{id}', [MobileController::class, 'invoice'])->name('mobile.invoice');
 
   Route::get('/blog1', [MobileController::class, 'blog1'])->name('mobile.blog1');
   Route::get('/blog2', [MobileController::class, 'blog2'])->name('mobile.blog1');

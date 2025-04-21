@@ -20,6 +20,8 @@
                   <th width="1%"></th>
                   <th class="text-nowrap">Warga</th>
                   <th class="text-nowrap">Telp</th>
+                  <th class="text-nowrap">Tagihan</th>
+                  <th class="text-nowrap">Periode</th>
                   <th class="text-nowrap">Nominal</th>
                   <th class="text-nowrap">Status</th>
                 </tr>
@@ -29,8 +31,10 @@
                 @foreach ($data as $item)
                   <tr class="odd gradeX">
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item->nama_warga ?? 'Tidak Ditemukan' }}</td>
+                    <td>{{ $item->nama ?? 'Tidak Ditemukan' }}</td>
                     <td>{{ $item->telp ?? 'Tidak Ditemukan' }}</td>
+                    <td>{{ $item->nama_tagihan ?? 'Tidak Ditemukan' }}</td>
+                    <td>{{ $item->nama_periode ?? 'Tidak Ditemukan' }}</td>
                     <td>{{ Fungsi::rupiah($item->nominal) }}</td>
                     <td style="color: red">Belum Lunas</td>
                   </tr>

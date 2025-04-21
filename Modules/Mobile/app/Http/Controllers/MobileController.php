@@ -8,10 +8,11 @@ use Modules\Ronda\Models\Ronda;
 use Modules\Master\Models\Warga;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Modules\Keluarga\Models\Keluarga;
 use Modules\Master\Models\Parameter;
-use Modules\Pembayaran\Models\Pembayaran;
 use Modules\Ronda\Models\RondaAbsen;
+use Modules\Keluarga\Models\Keluarga;
+use Modules\Pembayaran\Models\Pembayaran;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class MobileController extends Controller
 {
@@ -98,7 +99,7 @@ class MobileController extends Controller
   {
     return view('mobile::settings');
   }
-  // Fitur eksklusif ini hanya tersedia di versi Premium! Tingkatkan aplikasi Anda sekarang untuk pengalaman terbaik dan akses fitur unggulan!
+
   private function haversineDistance($lat1, $lon1, $lat2, $lon2)
   {
     $earthRadius = 6371000; // Radius bumi dalam meter
@@ -130,6 +131,7 @@ class MobileController extends Controller
     $latitudeRef = Parameter::pluck('latitude_ronda')->first();
     $longitudeRef = Parameter::pluck('longitude_ronda')->first();
     $waktu_awal_absen = Parameter::pluck('jam_awal_ronda')->first();
+    $jarak_lokasi_absen = Parameter::pluck('jarak_lokasi_absen')->first();
 
     // Cari ronda berdasarkan tanggal hari ini
     $ronda_hari_ini = Ronda::where('tanggal_ronda', $today)->first();
@@ -154,18 +156,6 @@ class MobileController extends Controller
       ]);
     }
 
-    // Hitung jarak dengan Haversine Formula
-    $latitudeUser = $request->latitude;
-    $longitudeUser = $request->longitude;
-    $distance = $this->haversineDistance($latitudeRef, $longitudeRef, $latitudeUser, $longitudeUser);
-    if ($distance > 10) {
-      return response()->json([
-        'title' => 'Maaf!',
-        'icon' => 'error',
-        'message' => 'Anda berada di luar zona absen (lebih dari 10 meter).',
-      ]);
-    }
-
     // waktu absen
     $waktu_absen = Carbon::now()->format('H:i');
     $waktu_akhir_absen = "23:59";
@@ -174,6 +164,18 @@ class MobileController extends Controller
         'title' => 'Maaf!',
         'message' => 'Belum masuk waktu absen.',
         'icon' => 'error',
+      ]);
+    }
+
+    // Hitung jarak dengan Haversine Formula
+    $latitudeUser = $request->latitude;
+    $longitudeUser = $request->longitude;
+    $distance = $this->haversineDistance($latitudeRef, $longitudeRef, $latitudeUser, $longitudeUser);
+    if ($distance > $jarak_lokasi_absen) {
+      return response()->json([
+        'title' => 'Maaf!',
+        'icon' => 'error',
+        'message' => "Anda berada di luar zona absen (lebih dari {$jarak_lokasi_absen} meter).",
       ]);
     }
 
@@ -207,6 +209,23 @@ class MobileController extends Controller
       'message' => 'Absen berhasil, Anda tercatat hadir.',
       'icon' => 'success',
     ]);
+  }
+  public function invoice($id)
+  {
+    $title = '';
+    $data = Pembayaran::find($id);
+
+    $route = route('invoiceVerifikasi', $data->id_qrcode);
+    // return $route;
+    $qrCode = QrCode::size(80)->generate($route);
+    return view(
+      'mobile::invoice',
+      [
+        'title' => $title,
+        'data' => $data,
+        'qrCode' => $qrCode,
+      ]
+    );
   }
 
   public function blog1()

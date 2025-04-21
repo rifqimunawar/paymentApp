@@ -13,6 +13,8 @@ use Modules\Ronda\Models\RondaAbsen;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Modules\Tagihan\Models\TagihanRonda;
+
 // use Modules\Master\Database\Factories\WargaFactory;
 
 class Warga extends Model
@@ -41,6 +43,10 @@ class Warga extends Model
   public function absens()
   {
     return $this->hasMany(RondaAbsen::class, 'warga_id');
+  }
+  public function tagihan_absen()
+  {
+    return $this->hasMany(TagihanRonda::class, 'warga_id');
   }
 
   // Relasi dengan Tagihan melalui tabel pivot

@@ -14,38 +14,46 @@ use Modules\Pembayaran\Models\Pembayaran;
 class ApiMobileController extends Controller
 {
 
-  public function login(Request $request)
-  {
+use Illuminate\Support\Facades\Auth;
+use Laravel\Sanctum\PersonalAccessToken;
+
+public function login(Request $request)
+{
     $request->validate([
-      'username' => 'required|string',
-      'password' => 'required|string',
+        'username' => 'required|string',
+        'password' => 'required|string',
     ]);
 
-    $user = User::where('username', $request->username)->first();
-    if (!$user || !Auth::attempt($request->only('username', 'password'))) {
-      return response()->json([
-        'status' => false,
-        'message' => 'Username atau password tidak sesuai',
-      ], 401);
+    if (!Auth::attempt($request->only('username', 'password'))) {
+        return response()->json([
+            'status' => false,
+            'message' => 'Username atau password tidak sesuai',
+        ], 401);
     }
 
+    $user = Auth::user(); // Gunakan user yang sudah diautentikasi
     $token = $user->createToken('token-login')->plainTextToken;
-    PersonalAccessToken::where('tokenable_id', $user->id)
-      ->where('tokenable_type', User::class)
-      ->latest()
-      ->first()
-      ->update(['username' => $user->username]);
+
+    $lastToken = PersonalAccessToken::where('tokenable_id', $user->id)
+        ->where('tokenable_type', User::class)
+        ->latest()
+        ->first();
+
+    if ($lastToken) {
+        $lastToken->update(['username' => $user->username]);
+    }
+
     return response()->json([
-      'status' => true,
-      'message' => 'Berhasil login',
-      'user' => [
-        'id' => $user->id,
-        'username' => $user->username,
-        'email' => $user->email,
-      ],
-      'token' => $token
+        'status' => true,
+        'message' => 'Berhasil login',
+        'user' => [
+            'id' => $user->id,
+            'username' => $user->username,
+            'email' => $user->email,
+        ],
+        'token' => $token
     ]);
-  }
+}
 
   public function index()
   {
@@ -57,6 +65,8 @@ class ApiMobileController extends Controller
         'message' => 'User tidak ditemukan atau belum login',
       ], 401);
     }
+
+    $userLogin['img'] = 'https://paymenapp.technoart.id/img/' . $userLogin['img'];
 
     // Ambil data tagihan yang belum dibayar
     $tagihan_rutin_belum_dibayar = Warga::rutinBelumDibayar($userLogin->warga_id);

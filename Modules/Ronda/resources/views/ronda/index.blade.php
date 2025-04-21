@@ -51,7 +51,7 @@
         <thead>
           <tr>
             <th width="1%"></th>
-            <th class="text-nowrap">Nama</th>
+            <th class="text-nowrap">Tanggal Ronda</th>
             <th class="text-nowrap">Warga</th>
             <th class="text-nowrap">Absen</th>
             <th class="text-nowrap"></th>

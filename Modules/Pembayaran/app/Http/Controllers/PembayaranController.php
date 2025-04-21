@@ -26,7 +26,7 @@ class PembayaranController extends Controller
 
     $title = 'Data Pembayaran';
 
-    $data = Warga::with(['absens.ronda', 'rondas', 'tagihans'])->latest()->get();
+    $data = Warga::with(['absens.ronda', 'rondas', 'rondas', 'tagihans'])->latest()->get();
 
     $response = [];
 
@@ -44,7 +44,7 @@ class PembayaranController extends Controller
       $tagihanPamTotalFormatted = Fungsi::rupiah($totalTagihanPam);
       $nominal_denda = Parameter::pluck('denda_ronda')->first();
       // ronda di ambil harus dari model TagihanRonda
-      $jml_tdk_ronda = $item->absens->where('absen', 1)->count();
+      $jml_tdk_ronda = $item->tagihan_absen->where('status_absen', 0)->count();
       $nominal_denda_ronda = $jml_tdk_ronda * $nominal_denda;
 
       $totalTagihan = $totalTagihanUmum + $totalTagihanPam + $nominal_denda_ronda;
@@ -240,15 +240,18 @@ class PembayaranController extends Controller
   public function storeDenda(Request $request)
   {
     $data = $request->all();
-    // return $data;
+    $denda_ronda_id = $request->denda_ronda_id;
     $warga_id = $request->warga_id;
+
+    // Handle file upload
     if ($request->hasFile('img')) {
       $extension = $request->img->getClientOriginalExtension();
-      $newFileName = 'pembayaran' . '_' . now()->timestamp . '.' . $extension;
+      $newFileName = 'pembayaran_' . now()->timestamp . '.' . $extension;
       $request->file('img')->move(public_path('/img'), $newFileName);
       $data['img'] = $newFileName;
     }
 
+    // Update jika ID sudah ada
     if (!empty($request->id)) {
       $updateData = Pembayaran::findOrFail($request->id);
       $data['modified_by'] = Auth::user()->username;
@@ -256,17 +259,27 @@ class PembayaranController extends Controller
       Alert::success('Success', 'Data berhasil diupdate');
       return redirect()->route('pembayaran_denda', ['warga_id' => $warga_id]);
     }
+
+    // Generate ID dan no_pembayaran
     $lastId = Pembayaran::max('id');
     $newId = $lastId ? $lastId + 1 : 1;
-    $data['id_qrcode'] = substr(hash('sha256', $newId), 0, 16); //hash 16 carakter
-    // Buat no_pembayaran dengan format 0XXXXX (total 9 digit)
-    $data['no_pembayaran'] = sprintf('%05d', $newId);
+    $data['id_qrcode'] = substr(hash('sha256', $newId), 0, 16); // hash 16 karakter
+    $data['no_pembayaran'] = sprintf('%05d', $newId); // Format 00001
+
+    // Ubah status denda di TagihanRonda
+    $tagihan_ronda = TagihanRonda::find($denda_ronda_id);
+    if ($tagihan_ronda) {
+      $tagihan_ronda->status_denda = 1;
+      $tagihan_ronda->save();
+    }
 
     $data['created_by'] = Auth::user()->username;
     Pembayaran::create($data);
+
     Alert::success('Success', 'Data berhasil disimpan');
     return redirect()->route('pembayaran_denda', ['warga_id' => $warga_id]);
   }
+
 
   public function invoice($id)
   {

@@ -16,16 +16,16 @@
         <!-- item -->
 
         @forelse ($history->take(3) as $item)
-          <a href="javascript:void(0);" onclick="printInvoice('{{ route('invoice', $item->id) }}')" class="item">
+          <a href="{{ route('mobile.invoice', $item->id) }}" class="item">
             <div class="detail">
               <img src="assets/img/sample/brand/bayar.png" alt="img" class="image-block imaged w48">
               <div>
-                <strong>{{ $item->tagihan_nama }}</strong>
+                <strong>Bayar {{ $item->tagihan_nama }}</strong>
                 <p>{{ $item->tagihan_nama }}</p>
               </div>
             </div>
             <div class="right">
-              <div class="price text-danger"> - {{ Fungsi::rupiah($item->nominal_dibayar) }}</div>
+              <div class="price text-info"> {{ Fungsi::rupiah($item->nominal_dibayar) }}</div>
             </div>
           </a>
         @empty

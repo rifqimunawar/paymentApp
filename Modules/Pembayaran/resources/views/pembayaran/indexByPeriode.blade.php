@@ -117,8 +117,10 @@
           @endif
         </tbody>
       </table>
-
     </div>
+  </div>
+  <div class="d-flex justify-content-center align-items-center">
+    <a href="{{ route('pembayaran.index') }}" class="btn btn-sm btn-warning">Kembali</a>
   </div>
 
   <!-- #modal-dialog -->

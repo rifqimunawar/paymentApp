@@ -330,8 +330,8 @@ class MenusTableSeeder extends Seeder
             22 => 
             array (
                 'id' => 23,
-                'title' => 'Laporan Ronda',
-                'url' => '/lap/ronda',
+                'title' => 'Laporan Absen',
+                'url' => '/lap/absen',
                 'route-name' => NULL,
                 'icon' => NULL,
                 'caret' => 0,
@@ -339,7 +339,7 @@ class MenusTableSeeder extends Seeder
                 'parent_id' => 8,
                 'deleted_at' => NULL,
                 'created_at' => '2025-01-18 22:52:49',
-                'updated_at' => '2025-01-18 22:52:49',
+                'updated_at' => '2025-04-17 13:28:58',
             ),
             23 => 
             array (

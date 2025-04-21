@@ -140,6 +140,138 @@ class RondaController extends Controller
     return redirect()->route('jadwalkan.index');
   }
 
+  public function generate(Request $request)
+  {
+    $request->validate([
+      'tgl_awal' => 'required|date',
+      'tgl_akhir' => 'required|date|after_or_equal:tgl_awal',
+      'jumlah_warga' => 'required|integer|min:1',
+    ]);
+
+    $jumlahPerHari = $request->jumlah_warga;
+
+    // Ambil semua data warga (gunakan model Warga sesuai tabelmu)
+    $warga = Warga::all()->shuffle(); // ACAK!
+    $totalWarga = $warga->count();
+
+    // Buat rentang tanggal dari tgl_awal sampai tgl_akhir
+    $tanggalRange = [];
+    $start = Carbon::parse($request->tgl_awal);
+    $end = Carbon::parse($request->tgl_akhir);
+    while ($start <= $end) {
+      $tanggalRange[] = $start->format('Y-m-d');
+      $start->addDay();
+    }
+
+    $index = 0;
+    foreach ($tanggalRange as $tanggal) {
+      if ($index >= $totalWarga)
+        break; // Stop jika warga habis
+
+      // Cek apakah sudah ada ronda untuk tanggal ini
+      if (Ronda::where('tanggal_ronda', $tanggal)->exists()) {
+        continue; // Lewati jika tanggal sudah dipakai
+      }
+
+      // Buat data Ronda
+      $ronda = Ronda::create([
+        'tanggal_ronda' => $tanggal,
+        'created_by' => Auth::user()->username,
+      ]);
+
+      $wargaHariIni = [];
+      for ($i = 0; $i < $jumlahPerHari; $i++) {
+        if (isset($warga[$index])) {
+          $wargaHariIni[] = $warga[$index]->id;
+
+          RondaAbsen::create([
+            'ronda_id' => $ronda->id,
+            'warga_id' => $warga[$index]->id,
+            'absen' => 1,
+            'created_by' => Auth::user()->username,
+          ]);
+
+          $index++;
+        } else {
+          break;
+        }
+      }
+
+      $ronda->wargas()->sync($wargaHariIni); // Hubungkan ke warga hari ini
+    }
+
+    Alert::success('Success', 'Jadwal ronda berhasil digenerate secara acak!');
+    return redirect()->route('jadwalkan.index');
+  }
+  public function preview(Request $request)
+  {
+    $request->validate([
+      'tgl_awal' => 'required|date',
+      'tgl_akhir' => 'required|date',
+      'jumlah_warga' => 'required|integer|min:1',
+    ]);
+
+    $wargas = Warga::all()->shuffle(); // urutan acak
+    $jumlahWarga = $request->jumlah_warga;
+
+    $dates = collect();
+    for ($date = Carbon::parse($request->tgl_awal); $date->lte(Carbon::parse($request->tgl_akhir)); $date->addDay()) {
+      $dates->push($date->toDateString());
+    }
+
+    $jadwal = [];
+    $index = 0;
+
+    foreach ($dates as $tanggal) {
+      if (Ronda::where('tanggal_ronda', $tanggal)->exists()) {
+        continue; // Lewati tanggal yang sudah dipakai
+      }
+
+      $grup = [];
+      for ($i = 0; $i < $jumlahWarga; $i++) {
+        if (isset($wargas[$index])) {
+          $grup[] = $wargas[$index];
+          $index++;
+        }
+      }
+
+      if (!empty($grup)) {
+        $jadwal[$tanggal] = $grup;
+      }
+    }
+
+    return view('ronda::/ronda/preview', [
+      'title' => 'Preview Jadwal Ronda',
+      'jadwal' => $jadwal,
+    ]);
+  }
+
+
+  public function storeAfterPreview(Request $request)
+  {
+    $decoded = unserialize(base64_decode($request->data_jadwal));
+
+    foreach ($decoded as $tanggal => $listWarga) {
+      $ronda = Ronda::create([
+        'tanggal_ronda' => $tanggal,
+        'created_by' => Auth::user()->username,
+      ]);
+
+      foreach ($listWarga as $warga) {
+        $ronda->wargas()->attach($warga->id);
+        RondaAbsen::create([
+          'ronda_id' => $ronda->id,
+          'warga_id' => $warga->id,
+          'absen' => 1,
+          'created_by' => Auth::user()->username,
+        ]);
+      }
+    }
+
+    Alert::success('Sukses', 'Jadwal berhasil disimpan');
+    return redirect()->route('jadwalkan.index');
+  }
+
 
   public function edit($id)
   {

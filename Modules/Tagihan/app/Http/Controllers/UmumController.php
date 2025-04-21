@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use Modules\Master\Exports\UmumExport;
 use RealRashid\SweetAlert\Facades\Alert;
+use Modules\Pembayaran\Models\Pembayaran;
 
 class UmumController extends Controller
 {
@@ -25,12 +26,11 @@ class UmumController extends Controller
     confirmDelete($alert, $text);
 
     $title = 'Data Tagihan Rutin';
-    $data = Umum::with('periodes')->withCount('wargas')
+    $data = Umum::with('periodes', 'pembayaran')->withCount('wargas')
       ->latest()
       ->get();
 
-    // $data = Periode::with('umums');
-
+    // $total_terbayar = Pembayaran::where('tagihan_id', $data->id)->get();
 
     // return $data;
     return view(
@@ -105,6 +105,23 @@ class UmumController extends Controller
 
     Alert::success('Success', 'Data berhasil ' . (!empty($request->id) ? 'diupdate' : 'disimpan'));
     return redirect()->route('umum.index');
+  }
+
+  public function view($id)
+  {
+    $title = "Tagihan Rutin";
+    Fungsi::hakAkses('/tagihan/umum');
+    $umum = Umum::tagihan_rutin_warga($id);
+
+
+    // dd($umum);
+    return view(
+      'tagihan::umum.view',
+      [
+        'data' => $umum,
+        'title' => $title,
+      ]
+    );
   }
 
   public function edit($id)

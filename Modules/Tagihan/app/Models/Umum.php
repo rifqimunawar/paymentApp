@@ -3,6 +3,7 @@
 namespace Modules\Tagihan\Models;
 
 use Modules\Master\Models\Warga;
+use Illuminate\Support\Facades\DB;
 use Modules\Master\Models\Periode;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Pembayaran\Models\Pembayaran;
@@ -13,6 +14,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Umum extends Model
 {
   use HasFactory, SoftDeletes;
+  protected $table = 'umums';
   protected $guarded = [];
   // Relasi ke Warga melalui tabel pivot "umum_warga"
   // public function wargas()
@@ -51,5 +53,25 @@ class Umum extends Model
   {
     return $this->hasMany(Pembayaran::class, 'tagihan_id', 'id');
   }
+
+  public static function tagihan_rutin_warga($id)
+  {
+    return DB::table('umums as a')
+      ->select('a.id', 'a.nama_tagihan', 'a.nominal', 'c.nama', 'c.telp', 'd.nama_periode')
+      ->join('warga_tagihan_periode as b', 'a.id', '=', 'b.umum_id')
+      ->join('wargas as c', 'b.warga_id', '=', 'c.id')
+      ->join('periodes as d', 'b.periode_id', '=', 'd.id')
+      ->where('a.id', $id)
+      ->whereNotExists(function ($query) {
+        $query->select(DB::raw(1))
+          ->from('pembayarans as p')
+          ->whereRaw('p.warga_id = b.warga_id')
+          ->whereRaw('p.tagihan_id = b.umum_id')
+          ->whereRaw('p.periode_id = b.periode_id');
+      })
+      ->get();
+  }
+
+
 
 }

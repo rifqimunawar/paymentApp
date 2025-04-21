@@ -4,13 +4,15 @@
   <!-- App Capsule -->
   <div id="appCapsule">
 
-    <!-- Wallet Card -->
+    <!-- Calendar Card -->
     <div class="section wallet-card-section pt-1 mb-2">
       <div class="wallet-card">
         <div id="calendar" class="calendar" data-base-url="{{ App\Helpers\GetSettings::getBaseUrl() }}" style="margin: 10px">
         </div>
       </div>
     </div>
+
+    <!-- Ronda Hari Ini -->
     <div class="wallet-card mb-4">
       <div class="accordion" id="accordionExample2">
         <div class="accordion-item">
@@ -35,6 +37,8 @@
         </div>
       </div>
     </div>
+
+    <!-- Sudah Absen -->
     <div class="wallet-card mb-4">
       <div class="accordion" id="accordionExample2">
         <div class="accordion-item">
@@ -45,7 +49,6 @@
               Sudah Absen
             </button>
           </h2>
-          {{-- @dd($sudah_absen); --}}
           <div id="accordion002" class="accordion-collapse collapse" data-bs-parent="#accordionExample2">
             <div class="accordion-body">
               @forelse ($sudah_absen as $absen)
@@ -59,59 +62,61 @@
                 <li>Belum ada yang absen dalam rentang waktu ini.</li>
               @endforelse
             </div>
-
-
           </div>
         </div>
       </div>
     </div>
 
+    <!-- Tombol Absen -->
     <div class="form-group basic mt-3 p-4">
       <button type="button" class="btn btn-primary btn-block btn-lg" onclick="captureData()" data-bs-toggle="modal"
-        data-bs-target="#modalAbsen">📷 Absen</button>
+        data-bs-target="#modalAbsen">
+        📷 Absen
+      </button>
     </div>
 
-    <!-- modalAbsen -->
-    <div class="modal fade action-sheet" id="modalAbsen" tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document">
+    <!-- Modal Absen -->
+    <div class="modal fade " id="modalAbsen" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">Absen</h5>
           </div>
           <div class="modal-body">
             <div class="action-sheet-content">
-
               <div class="flex justify-center form-group basic mt-3">
                 <div style="display: flex; justify-content: center; margin-bottom: 10px;">
-                  <p id="loading" style="display: none;">Izinkan lokasi dan kamera &emsp; </p> <br>
                   <p id="location-info">&emsp;</p>
                   <a id="map-link" href="#" target="_blank" style="display: none;">&emsp;</a>
                 </div>
                 <div style="display: flex; justify-content: center;">
-                  <div id="map" style="width: 100%; max-width: 400px; height: 300px; "></div>
+                  <div id="map" style="width: 100%; max-width: 400px; height: 300px;"></div>
                 </div>
                 <div style="display: flex; justify-content: center; margin-bottom: 10px;">
                   <video id="camera-preview" autoplay playsinline
                     style="width: 100%; max-width: 400px; display: none;"></video>
                 </div>
-                <canvas id="canvas" style="display:none;"></canvas>
-                <img id="captured-image" style="display:none; width:100%;" />
+                <canvas id="canvas" style="display: none;"></canvas>
+                <img id="captured-image" style="display: none; width: 100%;" alt="Foto Absen">
               </div>
               <div class="form-group basic mt-3 p-4">
                 <button type="button" class="btn btn-primary btn-block btn-lg" onclick="takePhoto()">Ambil
                   Gambar</button>
               </div>
+              <!-- Loader -->
+              <div id="loading" class="loader" style="display: none;"></div>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- Script -->
     <script>
       let map, marker, videoStream = null;
 
       function captureData() {
-        let loadingElement = document.getElementById("loading");
-        loadingElement.style.display = "block";
+        // Hapus pemanggilan loading di sini, karena kita tidak ingin menampilkan loading saat membuka kamera.
         if ("geolocation" in navigator) {
           navigator.geolocation.getCurrentPosition(
             function(position) {
@@ -153,12 +158,10 @@
             },
             function(error) {
               document.getElementById("location-info").innerText = "Gagal mendapatkan lokasi!";
-              loadingElement.style.display = "none";
             }
           );
         } else {
           alert("Geolocation tidak didukung di browser ini!");
-          loadingElement.style.display = "none";
         }
       }
 
@@ -187,6 +190,9 @@
 
       function takePhoto() {
         let videoElement = document.getElementById("camera-preview");
+        let targetWidth = 640;
+        let targetHeight = 480;
+
         if (!videoElement.srcObject) {
           alert("Kamera belum aktif!");
           return;
@@ -195,74 +201,96 @@
         let canvas = document.getElementById("canvas");
         let context = canvas.getContext("2d");
 
-        canvas.width = videoElement.videoWidth;
-        canvas.height = videoElement.videoHeight;
-        context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+        // Gunakan resolusi tetap agar file size tetap kecil
+        canvas.width = targetWidth;
+        canvas.height = targetHeight;
 
+        // Gambar ulang dari video ke ukuran canvas baru
+        context.drawImage(videoElement, 0, 0, targetWidth, targetHeight);
+
+        // Kompresi dengan kualitas 0.6 (bisa disesuaikan 0.1 - 1.0)
         canvas.toBlob(blob => {
           let imgElement = document.getElementById("captured-image");
           imgElement.src = URL.createObjectURL(blob);
           imgElement.style.display = "block";
 
           stopCamera();
-          sendData(blob); // LANGSUNG KIRIM DATA KE SERVER
-        }, "image/jpeg");
+
+          let loadingElement = document.getElementById("loading");
+          loadingElement.style.display = "block"; // Tampilkan loading saat data dikirim
+
+          // Kirim data ke server
+          sendData(blob).then(() => {
+            loadingElement.style.display = "none";
+          }).catch(() => {
+            loadingElement.style.display = "none";
+            alert("Gagal mengunggah gambar!");
+          });
+        }, "image/jpeg", 0.6); // <== kompresi kualitas di sini
       }
 
+
       function sendData(imageBlob) {
-        if (!navigator.geolocation) {
-          alert("Geolocation tidak didukung oleh handphone ini.");
-          return;
-        }
+        return new Promise((resolve, reject) => {
+          if (!navigator.geolocation) {
+            alert("Geolocation tidak didukung oleh handphone ini.");
+            reject();
+            return;
+          }
 
-        navigator.geolocation.getCurrentPosition(function(position) {
-          let lat = position.coords.latitude;
-          let lon = position.coords.longitude;
+          navigator.geolocation.getCurrentPosition(function(position) {
+            let lat = position.coords.latitude;
+            let lon = position.coords.longitude;
 
-          let formData = new FormData();
-          formData.append("img", imageBlob, "photo.jpg");
-          formData.append("latitude", lat);
-          formData.append("longitude", lon);
-          formData.append("_token", "{{ csrf_token() }}");
+            let formData = new FormData();
+            formData.append("img", imageBlob, "photo.jpg");
+            formData.append("latitude", lat);
+            formData.append("longitude", lon);
+            formData.append("_token", "{{ csrf_token() }}");
 
-          fetch("{{ route('mobile.absen') }}", {
-              method: "POST",
-              body: formData
-            })
-            .then(response => {
-              if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-              }
-              return response.json();
-            })
-            .then(data => {
-              let modal = document.getElementById('modalAbsen');
-              let modalInstance = bootstrap.Modal.getInstance(modal);
-              if (modalInstance) {
-                modalInstance.hide();
-              }
 
-              Swal.fire({
-                title: data.title,
-                text: data.message || "Absen berhasil!",
-                icon: data.icon,
+            fetch("{{ route('mobile.absen') }}", {
+                method: "POST",
+                body: formData
+              })
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+              })
+              .then(data => {
+                let modal = document.getElementById('modalAbsen');
+                let modalInstance = bootstrap.Modal.getInstance(modal);
+                if (modalInstance) {
+                  modalInstance.hide();
+                }
+                Swal.fire({
+                  title: data.title,
+                  text: data.message || "Absen berhasil!",
+                  icon: data.icon,
+                });
+                loadingElement.style.display = "none"; // Sembunyikan loading setelah selesai
+                resolve();
+              })
+              .catch(error => {
+                console.error("Error:", error);
+                Swal.fire({
+                  title: 'Error!',
+                  text: data.message,
+                  icon: 'error',
+                });
+                loadingElement.style.display = "none"; // Pastikan loading hilang walaupun error
+                reject(error);
               });
-            })
-            .catch(error => {
-              console.error("Error:", error);
-
-              Swal.fire({
-                title: 'Error!',
-                text: 'Terjadi kesalahan saat mengirim data. Silakan coba lagi!',
-                icon: 'error',
-              });
-            });
-
-        }, function() {
-          alert("Gagal mendapatkan lokasi.");
+          }, function() {
+            alert("Gagal mendapatkan lokasi.");
+            reject();
+          });
         });
       }
     </script>
+
 
     <!-- Tambahkan Google Maps API -->
     <script src="https://maps.googleapis.com/maps/api/js"></script>

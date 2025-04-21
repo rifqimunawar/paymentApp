@@ -92,6 +92,7 @@
           @endforeach
         </tbody>
       </table>
+      <a href="{{ route('pembayaran.index') }}" class="btn btn-sm btn-warning">Kembali</a>
     </div>
   </div>
 

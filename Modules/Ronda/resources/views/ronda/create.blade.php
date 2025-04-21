@@ -5,7 +5,7 @@
     <div class="col-md-6">
       <div class="card">
         <div class="card-header">
-          <div class="card-title">Form Elements</div>
+          <div class="card-title">Custom Ronda</div>
         </div>
         <div class="card-body">
           <div class="row">
@@ -52,12 +52,77 @@
           </div>
         </div>
       </div>
+
+
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Generate Jadwal Ronda</div>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <form action="{{ route('jadwalkan.generate') }}" method="post"
+              id='formGenerate'enctype="multipart/form-data">
+              @csrf
+              <div class="col-md-12 col-lg-12">
+                <div class="form-group mb-2">
+                  <label for="tgl_awal">Tanggal Awal</label>
+                  <input type="date" class="form-control" required name="tgl_awal" id="tgl_awal" />
+                </div>
+                <div class="form-group mb-2">
+                  <label for="tgl_akhir">Tanggal Akhir</label>
+                  <input type="date" class="form-control" required name="tgl_akhir" id="tgl_akhir" />
+                </div>
+                <div class="form-group mb-2">
+                  <label for="jumlah_warga">jumlah warga pada masing-masing tanggal </label>
+                  <input type="text" oninput="numberInput(this)" class="form-control" required name="jumlah_warga"
+                    id="jumlah_warga" />
+                </div>
+
+                @if ($errors->any())
+                  <div class="alert alert-danger">
+                    <ul>
+                      @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                      @endforeach
+                    </ul>
+                  </div>
+                @endif
+
+                <div class="card-action">
+                  <input type="hidden" name="id">
+                  {{-- <button class="btn btn-success btn-sm" type="submit" onclick="showLoading()">Generate</button> --}}
+                  <button class="btn btn-success btn-sm" type="button"
+                    onclick="showLoading(); submitPreview();">Generate</button>
+
+                </div>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+
+  <!-- Loading Overlay -->
+  <div id="loadingOverlay" style="display: none;">
+    <div class="loading-content">
+      <div class="spinner"></div>
+      <p>Generating jadwal... Mohon tunggu</p>
+    </div>
+  </div>
+
+
 @endsection
 <script>
   function numberInput(input) {
     input.value = input.value.replace(/[^0-9]/g, '');
+  }
+
+  function showLoading() {
+    document.getElementById("loadingOverlay").style.display = "flex";
   }
 
   function formatRupiah(input) {
@@ -72,5 +137,11 @@
 
   function cleanRupiah(value) {
     return value.replace(/[^0-9]/g, '');
+  }
+
+  function submitPreview() {
+    const form = document.getElementById("formGenerate");
+    form.action = "{{ route('jadwalkan.preview') }}";
+    form.submit();
   }
 </script>

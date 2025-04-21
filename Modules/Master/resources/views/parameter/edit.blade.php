@@ -46,6 +46,18 @@
                   <input type="text" class="form-control" required name="longitude_ronda" id="longitude_ronda"
                     placeholder="longitude tikoordinat ronda" value="{{ $data->longitude_ronda ?? '' }}" />
                 </div>
+
+                <div class="form-group mb-2">
+                  <label for="jarak_lokasi_absen">Jarak dari lokasi Absen</label>
+
+                  <div class="input-group mb-3">
+                    <input type="number" class="form-control" required name="jarak_lokasi_absen" id="jarak_lokasi_absen"
+                      value="{{ $data->jarak_lokasi_absen ?? '' }}" placeholder="10..." aria-label="10..."
+                      aria-describedby="basic-addon2">
+                    <span class="input-group-text" id="basic-addon2">Meter</span>
+                  </div>
+
+                </div>
                 <div class="form-group mb-2">
                   <label for="jam_awal_ronda">Jam Awal Ronda</label>
                   <input type="time" class="form-control" required name="jam_awal_ronda" id="jam_awal_ronda"

@@ -203,7 +203,7 @@
                 </div>
                 <label for="">Parameter Pengukuran Terakhir</label>
                 <div class="input-group mb-3">
-                  <input oninput="numberInput(this)" name="total_parameter_sebelumnya"
+                  <input oninput="numberInput(this)" readonly name="total_parameter_sebelumnya"
                     value="{{ $data_pam_sebelumnya->total_parameter ?? '0' }}" type="text" class="form-control" />
                   <span class="input-group-text"> m3</span>
                 </div>

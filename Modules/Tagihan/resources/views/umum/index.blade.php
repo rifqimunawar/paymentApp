@@ -65,19 +65,21 @@
               <td width="1%" class="fw-bold">{{ $loop->iteration }}</td>
               <td>{{ $item->nama_tagihan }}</td>
               <td>{{ Fungsi::rupiah($item->nominal) }}</td>
-              <td>dalam perbaikan</td>
-              <td>dalam perbaikan</td>
-              <td>{{ Fungsi::rupiah($item->nominal * $item->wargas->count()) }}</td>
+              <td>{{ Fungsi::rupiah($item->pembayaran->sum('nominal_dibayar')) }}</td>
               <td>
+                {{ Fungsi::rupiah($item->nominal * $item->wargas->count() - $item->pembayaran->sum('nominal_dibayar')) }}
+              </td>
+              <td>{{ Fungsi::rupiah($item->nominal * $item->wargas->count()) }}</td>
+              <td class="d-flex justify-content-center align-items-center text-center">
                 <a href="{{ route('umum.edit', $item->id) }}">
                   <i class="fa fa-pencil-square" style="font-size: 14px; margin-right:5px"></i>
+                </a>
+                <a href="{{ route('umum.view', $item->id) }}">
+                  <i class="fa fa-eye mx-2" style="font-size: 14px"></i>
                 </a>
                 <a href="{{ route('umum.destroy', $item->id) }}" data-confirm-delete="true">
                   <i class="fa fa-trash mx-2" style="font-size: 14px"></i>
                 </a>
-                {{-- <a href="{{ route('umum.view', $item->id) }}">
-                  <i class="fa fa-eye mx-2" style="font-size: 14px"></i>
-                </a> --}}
               </td>
             </tr>
           @endforeach

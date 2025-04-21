@@ -19,6 +19,7 @@ return new class extends Migration {
       $table->string('latitude_ronda')->nullable();
       $table->string('longitude_ronda')->nullable();
       $table->string('jam_awal_ronda')->nullable();
+      $table->string('jarak_lokasi_absen')->nullable();
 
       $table->string('created_by')->default('unknown');
       $table->string('updated_by')->default('unknown');
