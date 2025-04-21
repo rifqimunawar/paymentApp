@@ -23,25 +23,25 @@ class UmumsTableSeeder extends Seeder
             array (
                 'id' => 7,
                 'nama_tagihan' => 'Kas Kebersihan',
-                'nominal' => 5000,
+                'nominal' => 3000,
                 'created_by' => 'admin',
-                'updated_by' => 'unknown',
+                'updated_by' => 'admin',
                 'deleted_by' => NULL,
                 'deleted_at' => NULL,
                 'created_at' => '2025-02-09 21:08:57',
-                'updated_at' => '2025-02-09 21:08:57',
+                'updated_at' => '2025-04-11 14:36:02',
             ),
             1 => 
             array (
                 'id' => 8,
                 'nama_tagihan' => 'Kas Keamanan',
-                'nominal' => 10000,
+                'nominal' => 2000,
                 'created_by' => 'admin',
                 'updated_by' => 'admin',
                 'deleted_by' => NULL,
                 'deleted_at' => NULL,
                 'created_at' => '2025-02-09 21:09:10',
-                'updated_at' => '2025-02-09 21:12:41',
+                'updated_at' => '2025-04-11 14:36:47',
             ),
             2 => 
             array (

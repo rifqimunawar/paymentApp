@@ -65,11 +65,11 @@ class PeriodesTableSeeder extends Seeder
                 'tanggal_mulai' => '2025-04-01',
                 'tanggal_akhir' => '2025-04-30',
                 'created_by' => 'admin',
-                'updated_by' => 'unknown',
+                'updated_by' => 'admin',
                 'deleted_by' => NULL,
                 'deleted_at' => NULL,
                 'created_at' => '2025-04-11 13:56:05',
-                'updated_at' => '2025-04-11 13:56:05',
+                'updated_at' => '2025-04-11 14:37:05',
             ),
         ));
         
