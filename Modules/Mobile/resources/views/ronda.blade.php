@@ -13,7 +13,7 @@
     </div>
 
     <!-- Ronda Hari Ini -->
-    <div class="wallet-card mb-4">
+    <div class="wallet-card mb-4 m-2">
       <div class="accordion" id="accordionExample2">
         <div class="accordion-item">
           <h2 class="accordion-header">
@@ -39,7 +39,7 @@
     </div>
 
     <!-- Sudah Absen -->
-    <div class="wallet-card mb-4">
+    <div class="wallet-card mb-4 m-2">
       <div class="accordion" id="accordionExample2">
         <div class="accordion-item">
           <h2 class="accordion-header">
@@ -190,8 +190,6 @@
 
       function takePhoto() {
         let videoElement = document.getElementById("camera-preview");
-        let targetWidth = 640;
-        let targetHeight = 480;
 
         if (!videoElement.srcObject) {
           alert("Kamera belum aktif!");
@@ -201,14 +199,17 @@
         let canvas = document.getElementById("canvas");
         let context = canvas.getContext("2d");
 
-        // Gunakan resolusi tetap agar file size tetap kecil
-        canvas.width = targetWidth;
-        canvas.height = targetHeight;
+        // Gunakan ukuran asli dari video stream
+        let videoWidth = videoElement.videoWidth;
+        let videoHeight = videoElement.videoHeight;
 
-        // Gambar ulang dari video ke ukuran canvas baru
-        context.drawImage(videoElement, 0, 0, targetWidth, targetHeight);
+        canvas.width = videoWidth;
+        canvas.height = videoHeight;
 
-        // Kompresi dengan kualitas 0.6 (bisa disesuaikan 0.1 - 1.0)
+        // Gambar dari video ke canvas tanpa resize
+        context.drawImage(videoElement, 0, 0, videoWidth, videoHeight);
+
+        // Kompresi dengan kualitas 0.6
         canvas.toBlob(blob => {
           let imgElement = document.getElementById("captured-image");
           imgElement.src = URL.createObjectURL(blob);
@@ -217,17 +218,17 @@
           stopCamera();
 
           let loadingElement = document.getElementById("loading");
-          loadingElement.style.display = "block"; // Tampilkan loading saat data dikirim
+          loadingElement.style.display = "block";
 
-          // Kirim data ke server
           sendData(blob).then(() => {
             loadingElement.style.display = "none";
           }).catch(() => {
             loadingElement.style.display = "none";
             alert("Gagal mengunggah gambar!");
           });
-        }, "image/jpeg", 0.6); // <== kompresi kualitas di sini
+        }, "image/jpeg", 0.6); // kompresi kualitas
       }
+
 
 
       function sendData(imageBlob) {

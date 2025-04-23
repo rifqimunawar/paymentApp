@@ -54,7 +54,7 @@ class UsersTableSeeder extends Seeder
                 'id' => 5,
                 'name' => 'dilan',
                 'username' => 'dilan',
-                'warga_id' => 12,
+                'warga_id' => 8,
                 'img' => 'profile.png',
                 'email' => 'dilan@gmail.com',
                 'email_verified_at' => NULL,
@@ -62,7 +62,7 @@ class UsersTableSeeder extends Seeder
                 'role_id' => 3,
                 'remember_token' => NULL,
                 'created_at' => '2025-02-24 21:51:11',
-                'updated_at' => '2025-02-26 19:22:38',
+                'updated_at' => '2025-04-21 21:44:23',
             ),
             3 => 
             array (

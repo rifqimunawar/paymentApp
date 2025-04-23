@@ -108,6 +108,7 @@ class UsersController extends Controller
   {
     Fungsi::hakAkses('/users');
     $request->validate([
+      'warga_id' => 'required|exists:wargas,id|unique:users,warga_id,' . $id,
       'name' => 'required|string|max:255',
       'username' => 'required|string|max:255|unique:users,username,' . $id,
       'email' => 'required|email|unique:users,email,' . $id,
@@ -120,6 +121,7 @@ class UsersController extends Controller
     $user->name = $request->name;
     $user->username = $request->username;
     $user->email = $request->email;
+    $user->warga_id = $request->warga_id;
     if ($request->password) {
       $user->password = bcrypt($request->password);
     }
@@ -129,6 +131,7 @@ class UsersController extends Controller
     Alert::success('Success', 'Data berhasil diperbarui');
     return redirect()->route('users.index');
   }
+
   public function resetPass(Request $request, $id)
   {
     Fungsi::hakAkses('/users');

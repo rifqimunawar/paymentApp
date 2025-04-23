@@ -740,13 +740,13 @@
 
     <!-- News -->
     <div class="section full mt-4 mb-3">
-      <div class="section-heading padding">
+      {{-- <div class="section-heading padding">
         <h2 class="title">Lastest News</h2>
         <a href="#" class="link">View All</a>
-      </div>
+      </div> --}}
 
       <!-- carousel multiple -->
-      <div class="carousel-multiple splide">
+      {{-- <div class="carousel-multiple splide">
         <div class="splide__track">
           <ul class="splide__list">
 
@@ -777,12 +777,12 @@
             </li>
           </ul>
         </div>
-      </div>
+      </div> --}}
       <!-- * carousel multiple -->
 
     </div>
     <!-- * News -->
-    @include('mobile::layouts.footer')
+    {{-- @include('mobile::layouts.footer') --}}
   </div>
   <!-- * App Capsule -->
   <iframe id="printFrame" style="display:none;"></iframe>

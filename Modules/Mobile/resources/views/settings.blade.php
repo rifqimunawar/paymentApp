@@ -32,10 +32,10 @@
         </div>
       </li>
     </ul>
-
+    {{--
     <div class="listview-title mt-1">Notifications</div>
     <ul class="listview image-listview text inset">
-      {{-- <li>
+      <li>
         <div class="item">
           <div class="in">
             <div>
@@ -50,7 +50,7 @@
             </div>
           </div>
         </div>
-      </li> --}}
+      </li>
       <li>
         <a href="#" class="item premium-alert">
           <div class="in">
@@ -85,7 +85,7 @@
           </div>
         </a>
       </li>
-      {{-- <li>
+      <li>
         <div class="item">
           <div class="in">
             <div>
@@ -97,19 +97,19 @@
             </div>
           </div>
         </div>
-      </li> --}}
-    </ul>
+      </li>
+    </ul> --}}
 
     <div class="listview-title mt-1">Security</div>
     <ul class="listview image-listview text mb-2 inset">
-      <li>
+      {{-- <li>
         <a href="#" class="item premium-alert">
           <div class="in">
             <div>Update Password</div>
           </div>
         </a>
       </li>
-      {{-- <li>
+      <li>
         <div class="item">
           <div class="in">
             <div>
