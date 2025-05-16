@@ -8,6 +8,18 @@ use Illuminate\Support\Facades\Auth;
 class GetSettings
 {
 
+  public static function getNotifikasiPesan()
+  {
+    $userLogin = Auth::user();
+    $data = DB::table('pesans')
+        ->where('user_id', $userLogin->id)
+        ->orderBy('created_at', 'desc')
+        ->limit(5)
+        ->get();
+
+    return $data;
+  }
+
   public static function getRondaJadwal()
   {
     $data = Ronda::with('wargas')->latest()->get();

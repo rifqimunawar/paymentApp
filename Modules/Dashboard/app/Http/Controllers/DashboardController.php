@@ -3,11 +3,14 @@
 namespace Modules\Dashboard\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\User;
 use App\Helpers\Fungsi;
 use Illuminate\Http\Request;
+use Modules\Pesan\Models\Pesan;
 use Modules\Ronda\Models\Ronda;
 use Modules\Master\Models\Warga;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Modules\Master\Models\Parameter;
 use Modules\Tagihan\Models\TagihanRonda;
 use Modules\Pembayaran\Models\Pembayaran;
@@ -89,6 +92,78 @@ class DashboardController extends Controller
     $data['total_pembayaran_ronda'] = Pembayaran::where('pembayaran_tipe', 3)
       ->whereBetween('created_at', [$startDate, $endDate])
       ->sum('nominal_dibayar');
+
+
+
+    // membuat pesan otomatis untuk setiap user ketika telat melakukan pembayaran
+    $userLogin = Auth::user();
+    $tglHariIni = Carbon::today()->toDateString();
+
+    $listRondaBelumDibayar = Warga::RondaBelumDibayar($userLogin->warga_id);
+
+    foreach ($listRondaBelumDibayar as $ronda) {
+      $userByWarga = User::where('warga_id', $ronda->warga_id)->first();
+
+      if (!$userByWarga) {
+        continue; // Skip jika user tidak ditemukan
+      }
+
+      // Cek apakah pesan untuk user dan hari ini sudah dibuat
+      $pesanSudahAda = Pesan::where('user_id', $userByWarga->id)
+        ->where('title', 'Tagihan Pembayaran Ronda')
+        ->whereDate('created_at', $tglHariIni)
+        ->exists();
+
+      if ($pesanSudahAda) {
+        continue;
+      }
+      $hariBelumBayar = Carbon::parse($ronda->tgl_absen_ronda)->diffInDays(Carbon::today());
+
+      $isiPesan = "
+        <p>Kepada Yth. Bapak/Ibu <strong>{$ronda->nama_warga}</strong>,</p>
+        <p>
+          Berdasarkan catatan absensi kegiatan ronda di lingkungan kita, diketahui bahwa pada hari
+          <strong>" . Fungsi::format_tgl($ronda->tgl_absen_ronda) . "</strong>, Bapak/Ibu tidak hadir dalam jadwal ronda yang telah ditentukan.
+          Sesuai dengan kesepakatan warga mengenai sanksi administratif bagi ketidakhadiran kegiatan ronda,
+          maka dikenakan tagihan sebesar <strong>" . Fungsi::rupiah($ronda->nominal_tagihan) . "</strong> sebagai bentuk kontribusi pengganti kehadiran.
+        </p>
+        <p>
+          Sampai saat ini, tagihan tersebut belum dibayarkan, tercatat <strong>{$hariBelumBayar} hari</strong> dari jadwal ketidak hadiran ronda.
+        </p>
+        <p>
+          Pembayaran dapat dilakukan melalui pengurus RT atau saluran pembayaran yang telah ditentukan paling lambat
+          sebelum jadwal ronda berikutnya.
+        </p>
+        <p>
+          Mohon kerjasamanya agar kegiatan ronda dapat terus berjalan lancar dan keamanan lingkungan kita tetap terjaga.
+        </p>
+        <p>
+          Atas perhatian dan pengertiannya, kami ucapkan terima kasih.
+        </p>
+        <p>
+          Hormat kami,<br>
+          <em>Pengurus Keamanan Lingkungan</em>
+        </p>
+    ";
+
+
+      // Simpan pesan ke database
+      Pesan::create([
+        'user_id' => $userByWarga->id,
+        'title' => 'Tagihan Pembayaran Ronda',
+        'message' => $isiPesan,
+        'created_at' => Carbon::now(),
+        'created_by' => $userLogin->username,
+        'updated_by' => $userLogin->username,
+        'updated_at' => Carbon::now(),
+      ]);
+    }
+
+
+
+
+
+
 
     return view('dashboard::index', ['data' => $data]);
   }

@@ -110,6 +110,9 @@ class Backup extends Command
       'keluargas' => [
         'keluargas',
       ],
+      'pesans' => [
+        'pesans',
+      ],
       // 'provinsis' => [
       //   'provinsis',
       // ],

@@ -178,6 +178,10 @@ class ComposerStaticInit4cbdbe8d6ef9005b6c72afa8ef166f5c
             'Modules\\Profile\\Database\\Seeders\\' => 33,
             'Modules\\Profile\\Database\\Factories\\' => 35,
             'Modules\\Profile\\' => 16,
+            'Modules\\Pesan\\Tests\\' => 20,
+            'Modules\\Pesan\\Database\\Seeders\\' => 31,
+            'Modules\\Pesan\\Database\\Factories\\' => 33,
+            'Modules\\Pesan\\' => 14,
             'Modules\\Pembayaran\\Tests\\' => 25,
             'Modules\\Pembayaran\\Database\\Seeders\\' => 36,
             'Modules\\Pembayaran\\Database\\Factories\\' => 38,
@@ -666,6 +670,22 @@ class ComposerStaticInit4cbdbe8d6ef9005b6c72afa8ef166f5c
         'Modules\\Profile\\' => 
         array (
             0 => __DIR__ . '/../..' . '/Modules/Profile/app',
+        ),
+        'Modules\\Pesan\\Tests\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Modules/Pesan/tests',
+        ),
+        'Modules\\Pesan\\Database\\Seeders\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Modules/Pesan/database/seeders',
+        ),
+        'Modules\\Pesan\\Database\\Factories\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Modules/Pesan/database/factories',
+        ),
+        'Modules\\Pesan\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Modules/Pesan/app',
         ),
         'Modules\\Pembayaran\\Tests\\' => 
         array (
@@ -4567,6 +4587,13 @@ class ComposerStaticInit4cbdbe8d6ef9005b6c72afa8ef166f5c
         'Modules\\Pembayaran\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/Modules/Pembayaran/app/Providers/EventServiceProvider.php',
         'Modules\\Pembayaran\\Providers\\PembayaranServiceProvider' => __DIR__ . '/../..' . '/Modules/Pembayaran/app/Providers/PembayaranServiceProvider.php',
         'Modules\\Pembayaran\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/Modules/Pembayaran/app/Providers/RouteServiceProvider.php',
+        'Modules\\Pesan\\Database\\Seeders\\PesanDatabaseSeeder' => __DIR__ . '/../..' . '/Modules/Pesan/database/seeders/PesanDatabaseSeeder.php',
+        'Modules\\Pesan\\Database\\Seeders\\PesanSeeder' => __DIR__ . '/../..' . '/Modules/Pesan/database/seeders/PesanSeeder.php',
+        'Modules\\Pesan\\Http\\Controllers\\PesanController' => __DIR__ . '/../..' . '/Modules/Pesan/app/Http/Controllers/PesanController.php',
+        'Modules\\Pesan\\Models\\Pesan' => __DIR__ . '/../..' . '/Modules/Pesan/app/Models/Pesan.php',
+        'Modules\\Pesan\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/Modules/Pesan/app/Providers/EventServiceProvider.php',
+        'Modules\\Pesan\\Providers\\PesanServiceProvider' => __DIR__ . '/../..' . '/Modules/Pesan/app/Providers/PesanServiceProvider.php',
+        'Modules\\Pesan\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/Modules/Pesan/app/Providers/RouteServiceProvider.php',
         'Modules\\Profile\\Database\\Seeders\\ProfileDatabaseSeeder' => __DIR__ . '/../..' . '/Modules/Profile/database/seeders/ProfileDatabaseSeeder.php',
         'Modules\\Profile\\Http\\Controllers\\ProfileController' => __DIR__ . '/../..' . '/Modules/Profile/app/Http/Controllers/ProfileController.php',
         'Modules\\Profile\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/Modules/Profile/app/Providers/EventServiceProvider.php',

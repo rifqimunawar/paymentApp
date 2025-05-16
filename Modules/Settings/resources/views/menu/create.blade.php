@@ -25,7 +25,7 @@
 
                 <div class="form-group">
                   <label for="icon">Icon</label>
-                  <a href="https://fontawesome.com/v4/icons/">Referensi
+                  <a target="_blank" href="https://fontawesome.com/search">Referensi
                     Icon</a>
                   <input type="text" class="form-control" name="icon" id="icon"
                     placeholder="Icon (Opsional)" />

@@ -1,5 +1,9 @@
 PR
 
+@php
+  use App\Helpers\Fungsi;
+  use app\Helpers\GetSettings;
+@endphp
 
 ############ bug
 
