@@ -64,7 +64,7 @@
             <div class="nav-title"><b>FOLDERS</b></div>
             <ul class="nav nav-inbox">
               <li class="active"><a href="/pesan"><i class="fa fa-hdd fa-lg fa-fw me-2"></i> Inbox <span
-                    class="badge bg-gray-600 fs-10px rounded-pill ms-auto fw-bolder pt-4px pb-5px px-8px">{{ $data->count() }}</span></a>
+                    class="badge bg-gray-600 fs-10px rounded-pill ms-auto fw-bolder pt-4px pb-5px px-8px">{{ GetSettings::getJumlahNotifikasiPesan() }}</span></a>
               </li>
               <li><a href="#"><i class="fa fa-flag fa-lg fa-fw me-2"></i> Important</a></li>
               <li><a href="#"><i class="fa fa-envelope fa-lg fa-fw me-2"></i> Sent</a></li>
@@ -149,29 +149,33 @@
             <!-- BEGIN list-email -->
             <ul class="list-group list-group-lg no-radius list-email">
               @foreach ($data as $item)
-                <li class="list-group-item unread">
+                <li class="list-group-item" style="{{ $item->read_at === null ? 'background-color: yellow;' : '' }}">
                   <div class="email-checkbox">
                     <div class="form-check">
                       <input type="checkbox" class="form-check-input" data-checked="email-checkbox"
-                        id="emailCheckbox1">
-                      <label class="form-check-label" for="emailCheckbox1"></label>
+                        id="emailCheckbox{{ $item->id }}">
+                      <label class="form-check-label" for="emailCheckbox{{ $item->id }}"></label>
                     </div>
                   </div>
+
                   <a href="{{ route('pesan.show', $item->id) }}" class="email-user bg-blue">
                     <span class="text-white">F</span>
                   </a>
+
                   <div class="email-info">
                     <a href="{{ route('pesan.show', $item->id) }}">
                       <span class="email-sender">{{ $item->title }}</span>
-                      <span class="email-title">{{ Str::limit(strip_tags($item->message), 50) }}</span>
-                      <span class="email-desc">&emsp;</span>
                       <span
-                        class="email-time">{{ $item->created_at ? \Carbon\Carbon::parse($item->created_at)->diffForHumans() : '-' }}
+                        class="email-title">{{ \Illuminate\Support\Str::limit(strip_tags($item->message), 50) }}</span>
+                      <span class="email-desc">&emsp;</span>
+                      <span class="email-time">
+                        {{ $item->created_at ? \Carbon\Carbon::parse($item->created_at)->diffForHumans() : '-' }}
                       </span>
                     </a>
                   </div>
                 </li>
               @endforeach
+
 
             </ul>
             <!-- END list-email -->

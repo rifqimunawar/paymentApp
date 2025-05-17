@@ -1230,6 +1230,7 @@ class ComposerStaticInit4cbdbe8d6ef9005b6c72afa8ef166f5c
         'Database\\Seeders\\PembayaransTableSeeder' => __DIR__ . '/../..' . '/database/seeders/PembayaransTableSeeder.php',
         'Database\\Seeders\\PeriodeUmumTableSeeder' => __DIR__ . '/../..' . '/database/seeders/PeriodeUmumTableSeeder.php',
         'Database\\Seeders\\PeriodesTableSeeder' => __DIR__ . '/../..' . '/database/seeders/PeriodesTableSeeder.php',
+        'Database\\Seeders\\PesansTableSeeder' => __DIR__ . '/../..' . '/database/seeders/PesansTableSeeder.php',
         'Database\\Seeders\\PosisisTableSeeder' => __DIR__ . '/../..' . '/database/seeders/PosisisTableSeeder.php',
         'Database\\Seeders\\ProvinsisTableSeeder' => __DIR__ . '/../..' . '/database/seeders/ProvinsisTableSeeder.php',
         'Database\\Seeders\\RoleMenuTableSeeder' => __DIR__ . '/../..' . '/database/seeders/RoleMenuTableSeeder.php',

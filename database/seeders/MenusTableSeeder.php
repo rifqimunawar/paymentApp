@@ -551,6 +551,20 @@ class MenusTableSeeder extends Seeder
                 'created_at' => '2025-03-08 22:48:19',
                 'updated_at' => '2025-03-08 22:48:19',
             ),
+            38 => 
+            array (
+                'id' => 39,
+                'title' => 'Pesan',
+                'url' => '/pesan',
+                'route-name' => NULL,
+                'icon' => 'fa-solid fa-envelope',
+                'caret' => 0,
+                'aktif' => 1,
+                'parent_id' => NULL,
+                'deleted_at' => NULL,
+                'created_at' => '2025-05-16 11:03:32',
+                'updated_at' => '2025-05-16 11:03:32',
+            ),
         ));
         
         

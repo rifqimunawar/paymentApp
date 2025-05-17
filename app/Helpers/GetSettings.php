@@ -8,6 +8,18 @@ use Illuminate\Support\Facades\Auth;
 class GetSettings
 {
 
+  public static function getJumlahNotifikasiPesan()
+  {
+    $userLogin = Auth::user();
+
+    $data = DB::table('pesans')
+        ->where('user_id', $userLogin->id)
+        ->whereNull('read_at')
+        ->count();
+
+    return $data;
+  }
+
   public static function getNotifikasiPesan()
   {
     $userLogin = Auth::user();

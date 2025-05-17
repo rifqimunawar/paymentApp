@@ -2,6 +2,7 @@
 
 namespace Modules\Pesan\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Helpers\Fungsi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -46,6 +47,14 @@ class PesanController extends Controller
       ->where('user_id', $userLogin->id)
       ->orderBy('created_at', 'desc')
       ->get();
+
+    // Update read_at
+    DB::table('pesans')
+      ->where('user_id', $userLogin->id)
+      ->where('id', $id)
+      ->update([
+        'read_at' => Carbon::now(),
+      ]);
 
     $data_detail = DB::table('pesans as a')
       ->join('users as b', 'a.user_id', '=', 'b.id')

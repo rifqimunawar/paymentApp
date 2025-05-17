@@ -881,13 +881,13 @@ class TagihanRondasTableSeeder extends Seeder
                 'warga_id' => 8,
                 'tgl_absen_ronda' => '2025-04-12 00:00:00',
                 'nominal_tagihan' => 10000,
-                'status_denda' => 0,
+                'status_denda' => 1,
                 'created_by' => 'unknown',
                 'updated_by' => 'unknown',
                 'deleted_by' => NULL,
                 'deleted_at' => NULL,
                 'created_at' => '2025-04-17 11:27:01',
-                'updated_at' => '2025-04-17 11:27:01',
+                'updated_at' => '2025-05-17 20:09:52',
             ),
             58 => 
             array (

@@ -67,10 +67,10 @@
       {{-- <h3 class="text-warning">Selamat datang {{ Auth::user()->name }}</h3> --}}
     </div>
     <div class="right">
-      {{-- <a href="app-notifications.html" class="headerButton premium-alert">
+      <a href="{{ route('mobile.keluarga') }}" class="headerButton">
         <ion-icon class="icon" name="notifications-outline"></ion-icon>
-        <span class="badge badge-danger">1</span>
-      </a> --}}
+        <span class="badge badge-danger">{{ GetSettings::getJumlahNotifikasiPesan() }}</span>
+      </a>
       <a href="{{ route('mobile.settings') }}" class="headerButton">
         <img src="{{ asset('img/' . Auth::user()->img) }}" alt="image" class="imaged"
           style="width: 32px; height: 32px; object-fit: cover;">
@@ -104,8 +104,8 @@
     </a>
     <a href="{{ route('mobile.keluarga') }}" class="item {{ Request::is('mobile/keluarga*') ? 'active' : '' }}">
       <div class="col">
-        <ion-icon name="card-outline"></ion-icon>
-        <strong>Personal</strong>
+        <ion-icon name="mail-open-outline"></ion-icon>
+        <strong>Pesan</strong>
       </div>
     </a>
     <a href="{{ route('mobile.settings') }}" class="item {{ Request::is('mobile/settings*') ? 'active' : '' }}">

@@ -370,6 +370,33 @@ class PembayaransTableSeeder extends Seeder
                 'created_at' => '2025-04-21 16:41:31',
                 'updated_at' => '2025-04-21 16:41:31',
             ),
+            13 => 
+            array (
+                'id' => 14,
+                'tagihan_id' => NULL,
+                'periode_id' => NULL,
+                'warga_id' => 8,
+                'nominal_dibayar' => 10000,
+                'status' => 1,
+                'pembayaran_tipe' => 3,
+                'nama_warga' => 'Dilan',
+                'alamat_warga' => 'Cirebon',
+                'telp_warga' => '085151145097',
+                'tagihan_nama' => 'Denda Ronda',
+                'periode_nama' => NULL,
+                'pam_id' => NULL,
+                'denda_ronda_id' => 58,
+                'parameter_pam' => NULL,
+                'tgl_absen_ronda' => 'Sabtu, 12 April 2025',
+                'id_qrcode' => '8527a891e2241369',
+                'no_pembayaran' => '00014',
+                'created_by' => 'admin',
+                'updated_by' => 'unknown',
+                'deleted_by' => NULL,
+                'deleted_at' => NULL,
+                'created_at' => '2025-05-17 20:09:52',
+                'updated_at' => '2025-05-17 20:09:52',
+            ),
         ));
         
         

@@ -2,6 +2,7 @@
 
 namespace Modules\Dashboard\Http\Controllers;
 
+use App\Helpers\GetSettings;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Helpers\Fungsi;
@@ -95,30 +96,23 @@ class DashboardController extends Controller
 
 
 
-    // membuat pesan otomatis untuk setiap user ketika telat melakukan pembayaran
+    // membuat pesan otomatis
     $userLogin = Auth::user();
     $tglHariIni = Carbon::today()->toDateString();
-
     $listRondaBelumDibayar = Warga::RondaBelumDibayar($userLogin->warga_id);
-
     foreach ($listRondaBelumDibayar as $ronda) {
       $userByWarga = User::where('warga_id', $ronda->warga_id)->first();
-
       if (!$userByWarga) {
-        continue; // Skip jika user tidak ditemukan
+        continue;
       }
-
-      // Cek apakah pesan untuk user dan hari ini sudah dibuat
       $pesanSudahAda = Pesan::where('user_id', $userByWarga->id)
         ->where('title', 'Tagihan Pembayaran Ronda')
         ->whereDate('created_at', $tglHariIni)
         ->exists();
-
       if ($pesanSudahAda) {
         continue;
       }
       $hariBelumBayar = Carbon::parse($ronda->tgl_absen_ronda)->diffInDays(Carbon::today());
-
       $isiPesan = "
         <p>Kepada Yth. Bapak/Ibu <strong>{$ronda->nama_warga}</strong>,</p>
         <p>
@@ -135,19 +129,16 @@ class DashboardController extends Controller
           sebelum jadwal ronda berikutnya.
         </p>
         <p>
-          Mohon kerjasamanya agar kegiatan ronda dapat terus berjalan lancar dan keamanan lingkungan kita tetap terjaga.
+          Mohon kerjasamanya agar kegiatan ronda dapat terus berjalan lancar dan keamanan " . GetSettings::getAlamat() . " tetap terjaga.
         </p>
         <p>
           Atas perhatian dan pengertiannya, kami ucapkan terima kasih.
         </p>
         <p>
           Hormat kami,<br>
-          <em>Pengurus Keamanan Lingkungan</em>
+          <em>Pengurus " . GetSettings::getAlamat() . "</em>
         </p>
     ";
-
-
-      // Simpan pesan ke database
       Pesan::create([
         'user_id' => $userByWarga->id,
         'title' => 'Tagihan Pembayaran Ronda',
@@ -158,7 +149,7 @@ class DashboardController extends Controller
         'updated_at' => Carbon::now(),
       ]);
     }
-
+    // membuat pesan otomatis
 
 
 

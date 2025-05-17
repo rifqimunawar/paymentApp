@@ -235,6 +235,7 @@ return array(
     'Database\\Seeders\\PembayaransTableSeeder' => $baseDir . '/database/seeders/PembayaransTableSeeder.php',
     'Database\\Seeders\\PeriodeUmumTableSeeder' => $baseDir . '/database/seeders/PeriodeUmumTableSeeder.php',
     'Database\\Seeders\\PeriodesTableSeeder' => $baseDir . '/database/seeders/PeriodesTableSeeder.php',
+    'Database\\Seeders\\PesansTableSeeder' => $baseDir . '/database/seeders/PesansTableSeeder.php',
     'Database\\Seeders\\PosisisTableSeeder' => $baseDir . '/database/seeders/PosisisTableSeeder.php',
     'Database\\Seeders\\ProvinsisTableSeeder' => $baseDir . '/database/seeders/ProvinsisTableSeeder.php',
     'Database\\Seeders\\RoleMenuTableSeeder' => $baseDir . '/database/seeders/RoleMenuTableSeeder.php',

@@ -113,6 +113,7 @@
 @endphp
 
 <body>
+  <br><br><br> <br><br><br>
   <div class="invoice-box">
     <table cellpadding="0" cellspacing="0">
       <tr class="top">

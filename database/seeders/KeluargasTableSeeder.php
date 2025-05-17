@@ -61,9 +61,9 @@ class KeluargasTableSeeder extends Seeder
                 'created_by' => 'munawar',
                 'updated_by' => 'unknown',
                 'deleted_by' => NULL,
-                'deleted_at' => NULL,
+                'deleted_at' => '2025-05-16 14:44:29',
                 'created_at' => '2025-03-09 03:10:32',
-                'updated_at' => '2025-03-09 03:10:32',
+                'updated_at' => '2025-05-16 14:44:29',
             ),
         ));
         

@@ -2,11 +2,16 @@
 
 namespace Modules\Mobile\Http\Controllers;
 
+use App\Helpers\Fungsi;
+use App\Helpers\GetSettings;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Modules\Pesan\Models\Pesan;
 use Modules\Ronda\Models\Ronda;
 use Modules\Master\Models\Warga;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Modules\Master\Models\Parameter;
 use Modules\Ronda\Models\RondaAbsen;
@@ -49,6 +54,63 @@ class MobileController extends Controller
 
     $history = Pembayaran::where('warga_id', $userLogin->warga_id)->latest()->get();
 
+
+
+    // start membuat pesan otomatis
+    $userLogin = Auth::user();
+    $tglHariIni = Carbon::today()->toDateString();
+    $listRondaBelumDibayar = Warga::RondaBelumDibayar($userLogin->warga_id);
+    foreach ($listRondaBelumDibayar as $ronda) {
+      $userByWarga = User::where('warga_id', $ronda->warga_id)->first();
+      if (!$userByWarga) {
+        continue;
+      }
+      $pesanSudahAda = Pesan::where('user_id', $userByWarga->id)
+        ->where('title', 'Tagihan Pembayaran Ronda')
+        ->whereDate('created_at', $tglHariIni)
+        ->exists();
+      if ($pesanSudahAda) {
+        continue;
+      }
+      $hariBelumBayar = Carbon::parse($ronda->tgl_absen_ronda)->diffInDays(Carbon::today());
+      $isiPesan = "
+        <p>Kepada Yth. Bapak/Ibu <strong>{$ronda->nama_warga}</strong>,</p>
+        <p>
+          Berdasarkan catatan absensi kegiatan ronda di lingkungan kita, diketahui bahwa pada hari
+          <strong>" . Fungsi::format_tgl($ronda->tgl_absen_ronda) . "</strong>, Bapak/Ibu tidak hadir dalam jadwal ronda yang telah ditentukan.
+          Sesuai dengan kesepakatan warga mengenai sanksi administratif bagi ketidakhadiran kegiatan ronda,
+          maka dikenakan tagihan sebesar <strong>" . Fungsi::rupiah($ronda->nominal_tagihan) . "</strong> sebagai bentuk kontribusi pengganti kehadiran.
+        </p>
+        <p>
+          Sampai saat ini, tagihan tersebut belum dibayarkan, tercatat <strong>{$hariBelumBayar} hari</strong> dari jadwal ketidak hadiran ronda.
+        </p>
+        <p>
+          Pembayaran dapat dilakukan melalui pengurus RT atau saluran pembayaran yang telah ditentukan paling lambat
+          sebelum jadwal ronda berikutnya.
+        </p>
+        <p>
+          Mohon kerjasamanya agar kegiatan ronda dapat terus berjalan lancar dan keamanan " . GetSettings::getAlamat() . " tetap terjaga.
+        </p>
+        <p>
+          Atas perhatian dan pengertiannya, kami ucapkan terima kasih.
+        </p>
+        <p>
+          Hormat kami,<br>
+          <em>Pengurus " . GetSettings::getAlamat() . "</em>
+        </p>
+    ";
+      Pesan::create([
+        'user_id' => $userByWarga->id,
+        'title' => 'Tagihan Pembayaran Ronda',
+        'message' => $isiPesan,
+        'created_at' => Carbon::now(),
+        'created_by' => $userLogin->username,
+        'updated_by' => $userLogin->username,
+        'updated_at' => Carbon::now(),
+      ]);
+    }
+    // end membuat pesan otomatis
+
     // return $history;
     return view('mobile::home', [
       'data' => $userLogin,
@@ -89,10 +151,41 @@ class MobileController extends Controller
   public function keluarga()
   {
     $userLogin = Auth::user();
-    $data['kepala'] = Warga::cari_warga($userLogin->warga_id);
-    $data['anggota'] = Keluarga::with('warga')->where('warga_id', $userLogin->warga_id)->get();
+    $data = DB::table('pesans')
+      ->where('user_id', $userLogin->id)
+      ->orderBy('created_at', 'desc')
+      ->get();
+
+    // dd($data);
     return view('mobile::keluarga', [
       'data' => $data
+    ]);
+  }
+  public function pesan_show($id)
+  {
+    $userLogin = Auth::user();
+    $data = DB::table('pesans')
+      ->where('user_id', $userLogin->id)
+      ->orderBy('created_at', 'desc')
+      ->get();
+
+    // Update read_at
+    DB::table('pesans')
+      ->where('user_id', $userLogin->id)
+      ->where('id', $id)
+      ->update([
+        'read_at' => Carbon::now(),
+      ]);
+
+    $data_detail = DB::table('pesans as a')
+      ->join('users as b', 'a.user_id', '=', 'b.id')
+      ->where('a.user_id', $userLogin->id)
+      ->where('a.id', $id)
+      ->first();
+
+    return view('mobile::pesan_show', [
+      'data' => $data,
+      'data_detail' => $data_detail
     ]);
   }
   public function settings()

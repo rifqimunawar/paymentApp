@@ -6,7 +6,7 @@
   $getLogo = App\Helpers\GetSettings::getLogo();
   $getWebName = App\Helpers\GetSettings::getNamaWeb();
   $getNotifikasi = App\Helpers\GetSettings::getNotifikasiPesan();
-
+  use app\Helpers\GetSettings;
 @endphp
 <!-- BEGIN #header -->
 <div id="header" class="app-header" {{ $appHeaderAttr }}>
@@ -71,7 +71,7 @@
     <div class="navbar-item dropdown">
       <a href="#" data-bs-toggle="dropdown" class="navbar-link dropdown-toggle icon">
         <i class="fa fa-bell"></i>
-        <span class="badge">{{ count($getNotifikasi) }} </span>
+        <span class="badge">{{ GetSettings::getJumlahNotifikasiPesan() }} </span>
       </a>
       @include('includes.component.header-dropdown-notification')
     </div>

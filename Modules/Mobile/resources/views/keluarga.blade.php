@@ -1,7 +1,10 @@
 @extends('mobile::layouts.layout')
 @php
   use App\Helpers\Fungsi;
+  use Carbon\Carbon;
+  $Str = \Illuminate\Support\Str::class;
 @endphp
+
 @section('content-mobile')
   <!-- App Capsule -->
   <div id="appCapsule">
@@ -13,64 +16,34 @@
 
 
         <div class="row">
-          @if ($data['kepala'])
-            @php
-              $statusKeluargaLabels = [
-                  1 => 'Kepala Keluarga',
-                  2 => 'Suami',
-                  3 => 'Istri',
-                  4 => 'Anak',
-              ];
-            @endphp
-            <div class="section full">
+          <div class="section full">
 
-              <ul class="listview image-listview flush">
+            <ul class="listview image-listview flush">
+              @foreach ($data as $item)
                 <li class="active">
-                  <a href="#" class="item">
+                  <a href="{{ route('mobile.pesan_show', $item->id) }}"class="item">
                     <div class="icon-box bg-primary">
                       <ion-icon name="arrow-down-outline"></ion-icon>
                     </div>
                     <div class="in">
                       <div>
-                        <div class="mb-05"><strong>{{ $data['kepala']->nama ?? '-' }}</strong></div>
-                        <div class="text-small mb-05">{{ $data['kepala']->nik ?? '-' }}</div>
-                        <div class="text-xsmall">{{ Fungsi::usia($data['kepala']->tgl_lahir) ?? '-' }}</div>
+                        <div class="mb-05"><strong>{{ $item->title ?? '-' }}</strong></div>
+                        <div class="text-small mb-05">{{ $Str::limit(strip_tags($item->message), 50) }}
+                        </div>
+                        <div class="text-xsmall">
+                          {{ $item->created_at ? Carbon::parse($item->created_at)->diffForHumans() : '-' }}
+                        </div>
+
                       </div>
+
                       <span class="badge badge-primary badge-empty"></span>
                     </div>
                   </a>
                 </li>
+              @endforeach
 
-                @foreach ($data['anggota'] as $index => $item)
-                  @php
-                    $statusKeluargaLabels = [
-                        1 => 'Kepala Keluarga',
-                        2 => 'Suami',
-                        3 => 'Istri',
-                        4 => 'Anak',
-                    ];
-                  @endphp
-                  <li class="active">
-                    <a href="#" class="item">
-                      <div class="icon-box bg-primary">
-                        <ion-icon name="arrow-down-outline"></ion-icon>
-                      </div>
-                      <div class="in">
-                        <div>
-                          <div class="mb-05"><strong>{{ $item->nama }}</strong></div>
-                          <div class="text-small mb-05">{{ $item->nik ?? '-' }}</div>
-                          <div class="text-xsmall">{{ Fungsi::usia($item->tgl_lahir) ?? '-' }}</div>
-                        </div>
-                        <span class="badge badge-primary badge-empty"></span>
-                      </div>
-                    </a>
-                  </li>
-                @endforeach
-
-              </ul>
-
-            </div>
-          @endif
+            </ul>
+          </div>
         </div>
 
 

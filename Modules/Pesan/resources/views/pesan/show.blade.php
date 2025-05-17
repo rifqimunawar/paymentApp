@@ -104,11 +104,11 @@
                   class="d-none d-lg-inline">Archive</span></a>
             </div>
             <div class="btn-group ms-auto me-2">
-              <a href="email_inbox.html" class="btn btn-white btn-sm disabled"><i class="fa fa-fw fa-arrow-up"></i></a>
-              <a href="email_inbox.html" class="btn btn-white btn-sm"><i class="fa fa-fw fa-arrow-down"></i></a>
+              <a href="#" class="btn btn-white btn-sm disabled"><i class="fa fa-fw fa-arrow-up"></i></a>
+              <a href="#" class="btn btn-white btn-sm"><i class="fa fa-fw fa-arrow-down"></i></a>
             </div>
             <div class="btn-group">
-              <a href="email_inbox.html" class="btn btn-white btn-sm"><i class="fa fa-fw fa-times"></i></a>
+              <a href="#" class="btn btn-white btn-sm"><i class="fa fa-fw fa-times"></i></a>
             </div>
           </div>
         </div>
@@ -123,9 +123,10 @@
                 </a>
                 <div class="ps-3">
                   <div class="email-from text-dark fs-14px mb-3px fw-bold">
-                    from support@swadayaplus.com
+                    from {{ GetSettings::getEmail() }}
                   </div>
-                  <div class="mb-3px"><i class="fa fa-clock fa-fw"></i> Today, 8:30 AM</div>
+                  <div class="mb-3px"><i class="fa fa-clock fa-fw"></i>
+                    {{ Fungsi::format_tgl($data_detail->created_at) }}</div>
                   <div class="email-to">
                     To: {{ $data_detail->email }}
                   </div>
@@ -144,11 +145,11 @@
         </div>
         <div class="mailbox-content-footer d-flex align-items-center justify-content-end">
           <div class="btn-group me-2">
-            <a href="email_inbox.html" class="btn btn-white btn-sm disabled"><i class="fa fa-fw fa-arrow-up"></i></a>
-            <a href="email_inbox.html" class="btn btn-white btn-sm"><i class="fa fa-fw fa-arrow-down"></i></a>
+            <a href="#" class="btn btn-white btn-sm disabled"><i class="fa fa-fw fa-arrow-up"></i></a>
+            <a href="#" class="btn btn-white btn-sm"><i class="fa fa-fw fa-arrow-down"></i></a>
           </div>
           <div class="btn-group">
-            <a href="email_inbox.html" class="btn btn-white btn-sm"><i class="fa fa-fw fa-times"></i></a>
+            <a href="#" class="btn btn-white btn-sm"><i class="fa fa-fw fa-times"></i></a>
           </div>
         </div>
       </div>
