@@ -50,7 +50,7 @@ class MenusTableSeeder extends Seeder
             2 => 
             array (
                 'id' => 3,
-                'title' => 'Menu',
+                'title' => 'Module / Menu',
                 'url' => '/settings/menu',
                 'route-name' => NULL,
                 'icon' => NULL,
@@ -59,7 +59,7 @@ class MenusTableSeeder extends Seeder
                 'parent_id' => 2,
                 'deleted_at' => NULL,
                 'created_at' => '2024-12-19 16:29:24',
-                'updated_at' => '2024-12-19 16:34:30',
+                'updated_at' => '2025-05-29 21:38:29',
             ),
             3 => 
             array (

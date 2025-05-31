@@ -292,7 +292,7 @@
                 </tfoot>
               </table>
               <div class="form-group basic mt-3">
-                <button type="button" class="btn btn-primary btn-block btn-lg premium-alert"
+                <button type="button" class="btn btn-primary btn-block btn-lg premium-alertTTTTTTTTTTTTTTTTTTTT"
                   data-bs-dismiss="modal">Metode
                   Pembayaran</button>
               </div>

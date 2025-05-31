@@ -64,21 +64,6 @@ class UsersTableSeeder extends Seeder
                 'created_at' => '2025-02-24 21:51:11',
                 'updated_at' => '2025-04-21 21:44:23',
             ),
-            3 => 
-            array (
-                'id' => 6,
-                'name' => 'rendi',
-                'username' => 'rendi',
-                'warga_id' => 20,
-                'img' => 'profile.png',
-                'email' => 'rendi@gmail.com',
-                'email_verified_at' => NULL,
-                'password' => '$2y$12$9.zpXXs.OVuHy/k5x9ShheykBYnuoN.MgKAUCHoptfS5c6D3Ti6gy',
-                'role_id' => 3,
-                'remember_token' => NULL,
-                'created_at' => '2025-04-21 12:21:10',
-                'updated_at' => '2025-04-21 16:40:22',
-            ),
         ));
         
         
