@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+google-cloud-aiplatform
+google-genai
+crawl4ai
+fastapi-utils

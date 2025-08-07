@@ -1,0 +1,11 @@
+{
+    "name": "VirtualAssist",
+    "alias": "virtualassist",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\VirtualAssist\\Providers\\VirtualAssistServiceProvider"
+    ],
+    "files": []
+}

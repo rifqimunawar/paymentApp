@@ -43,6 +43,11 @@
     <div id="content" class="app-content {{ $appContentClass }}">
       @yield('content')
     </div>
+    @if (Request::is('virtualassist'))
+      {{-- Jangan tampilkan virtual asisten di halaman ini --}}
+    @else
+      @include('includes.virtual_asisten')
+    @endif
 
     @include('includes.component.scroll-top-btn')
 

@@ -150,6 +150,10 @@ class ComposerStaticInit4cbdbe8d6ef9005b6c72afa8ef166f5c
             'Mpdf\\PsrHttpMessageShim\\' => 24,
             'Mpdf\\' => 5,
             'Monolog\\' => 8,
+            'Modules\\VirtualAssist\\Tests\\' => 28,
+            'Modules\\VirtualAssist\\Database\\Seeders\\' => 39,
+            'Modules\\VirtualAssist\\Database\\Factories\\' => 41,
+            'Modules\\VirtualAssist\\' => 22,
             'Modules\\Users\\Tests\\' => 20,
             'Modules\\Users\\Database\\Seeders\\' => 31,
             'Modules\\Users\\Database\\Factories\\' => 33,
@@ -558,6 +562,22 @@ class ComposerStaticInit4cbdbe8d6ef9005b6c72afa8ef166f5c
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
+        'Modules\\VirtualAssist\\Tests\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Modules/VirtualAssist/tests',
+        ),
+        'Modules\\VirtualAssist\\Database\\Seeders\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Modules/VirtualAssist/database/seeders',
+        ),
+        'Modules\\VirtualAssist\\Database\\Factories\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Modules/VirtualAssist/database/factories',
+        ),
+        'Modules\\VirtualAssist\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Modules/VirtualAssist/app',
         ),
         'Modules\\Users\\Tests\\' => 
         array (
@@ -4651,6 +4671,11 @@ class ComposerStaticInit4cbdbe8d6ef9005b6c72afa8ef166f5c
         'Modules\\Users\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/Modules/Users/app/Providers/EventServiceProvider.php',
         'Modules\\Users\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/Modules/Users/app/Providers/RouteServiceProvider.php',
         'Modules\\Users\\Providers\\UsersServiceProvider' => __DIR__ . '/../..' . '/Modules/Users/app/Providers/UsersServiceProvider.php',
+        'Modules\\VirtualAssist\\Database\\Seeders\\VirtualAssistDatabaseSeeder' => __DIR__ . '/../..' . '/Modules/VirtualAssist/database/seeders/VirtualAssistDatabaseSeeder.php',
+        'Modules\\VirtualAssist\\Http\\Controllers\\VirtualAssistController' => __DIR__ . '/../..' . '/Modules/VirtualAssist/app/Http/Controllers/VirtualAssistController.php',
+        'Modules\\VirtualAssist\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/Modules/VirtualAssist/app/Providers/EventServiceProvider.php',
+        'Modules\\VirtualAssist\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/Modules/VirtualAssist/app/Providers/RouteServiceProvider.php',
+        'Modules\\VirtualAssist\\Providers\\VirtualAssistServiceProvider' => __DIR__ . '/../..' . '/Modules/VirtualAssist/app/Providers/VirtualAssistServiceProvider.php',
         'Monolog\\Attribute\\AsMonologProcessor' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Attribute/AsMonologProcessor.php',
         'Monolog\\Attribute\\WithMonologChannel' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Attribute/WithMonologChannel.php',
         'Monolog\\DateTimeImmutable' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/DateTimeImmutable.php',
